@@ -1,4 +1,4 @@
-import { JsonViewer } from '@shared/components';
+import { JsonViewer } from '../../../shared/components';
 
 interface FeatureSampleProps {
   data: object;

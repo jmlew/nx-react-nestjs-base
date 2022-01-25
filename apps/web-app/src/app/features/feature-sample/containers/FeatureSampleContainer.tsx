@@ -1,8 +1,8 @@
 import { FeatureSample } from '../components';
-import { Loading } from '@shared/components';
-import { ApiRatesResponse } from '@core/api/models/api-req-res.model';
-import { useFetch } from '@core/api/hooks';
-import * as fromApiUtils from '@core/api/utils';
+import { ApiRatesResponse } from '@api-interfaces/models/api-req-res.model';
+import * as fromApiUtils from '../../../core/api/utils';
+import { useFetch } from '../../../core/api/hooks';
+import { Loading } from '../../../shared/components';
 
 interface FeatureSampleContainerProps {
   quoteCode?: string;

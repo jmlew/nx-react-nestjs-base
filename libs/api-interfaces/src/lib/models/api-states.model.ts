@@ -1,4 +1,4 @@
-import { ProgressStatus } from '../enums/api-states.enum';
+import { ProgressStatus } from '@api-interfaces/enums/api-states.enum';
 
 export interface ApiDataState {
   errorMessage: string | null;

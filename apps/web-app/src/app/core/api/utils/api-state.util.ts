@@ -1,10 +1,10 @@
+import { ProgressStatus } from '@api-interfaces/enums/api-states.enum';
+import { ApiDataState } from '@api-interfaces/models/api-states.model';
+
 /**
  * Abstracts over each API Data state by changing the API load status and assigning error
  * messages.
  */
-
-import { ApiDataState } from '../models/api-states.model';
-import { ProgressStatus } from '../enums/api-states.enum';
 
 /**
  * Initialises the use of the API data state pattern by creating a new state object.

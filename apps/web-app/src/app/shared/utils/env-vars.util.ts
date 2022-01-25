@@ -1,4 +1,4 @@
-import { EnvVar } from '@shared/enums/environment.enum';
+import { EnvVar } from '../enums/environment.enum';
 
 export function getEnvVar(envVar: EnvVar) {
   const value = process.env[envVar];
