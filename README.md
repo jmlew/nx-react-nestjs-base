@@ -1,10 +1,12 @@
-# NxReactNest
+# ReactJS + NestJS Boilerplate Web App
 
-This project was generated using [Nx](https://nx.dev).
+## Architecture
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+The app's architecture aligns with the semantics and directory structure as defined in [this guide](http://bit.ly/scaleable-apps).
 
-🔎 **Smart, Fast and Extensible Build System**
+### Monorepo
+
+The codebase is combined into a number of separate 'applications' and 'libraries' in a [NX Monorepo](https://nx.dev).
 
 ## Adding capabilities to your workspace
 
