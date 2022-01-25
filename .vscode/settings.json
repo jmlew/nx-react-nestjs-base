@@ -1,0 +1,8 @@
+{
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "apiAccessKey": "964f539def3546fcef66a7376bea5e0d",
+      "apiBase": "http://api.exchangeratesapi.io/v1/"
+    }
+  }
+}

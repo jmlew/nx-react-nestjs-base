@@ -8,6 +8,11 @@ The app's architecture aligns with the semantics and directory structure as defi
 
 The codebase is combined into a number of separate 'applications' and 'libraries' in a [NX Monorepo](https://nx.dev).
 
+### HTTP API Playground
+
+The codebase includes an HTTP Playground to test endpoint responses inside 'http-playground'.
+This uses the humao.rest-client vscode extension listed in .vscode/extensions.json with dependant global API variables defined in .vscode/settings.json 'rest-client.environmentVariables'.
+
 ## Adding capabilities to your workspace
 
 Nx supports many plugins which add capabilities for developing different types of applications and different tools.
