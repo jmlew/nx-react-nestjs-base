@@ -1,9 +1,12 @@
 # Testing API endpoints using the humao.rest-client vscode extension listed in .vscode/extensions.json
 # Api key and other global vars are defines in .vscode/settings.json "rest-client.environmentVariables"
 
-@base = AUD
-@quote = USD
+@pageIndex = 1
+@userId = 1
 
-GET {{apiBase}}/latest
-?access_key={{apiAccessKey}}
-&symbols={{base}},{{quote}}
+
+### List Users
+GET {{regressFakeApiBase}}users?page={{pageIndex}}
+
+### Single User
+GET {{regressFakeApiBase}}users/{{userId}}
