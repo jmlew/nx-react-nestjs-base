@@ -1,3 +1,5 @@
 export enum EnvVar {
   API_ACCESS_KEY = 'NX_API_ACCESS_KEY',
+  NX_IS_MOCK_API = 'NX_IS_MOCK_API',
+  NX_MOCK_API_BASE = 'NX_MOCK_API_BASE',
 }

@@ -1,13 +1,27 @@
+import axios, { AxiosInstance } from 'axios';
 import { ApiUrl } from '@api-interfaces/enums/api-config.enum';
+import { getEnvVar, isDev, isUseMockInDev } from '../../../shared/utils';
 import { EnvVar } from '../../../shared/enums/environment.enum';
-import { getEnvVar } from '../../../shared/utils/env-vars.util';
 
-export function getSampleApiBase() {
-  return `${ApiUrl.Base}${ApiUrl.Latest}?${ApiUrl.AccessKey}=${getEnvVar(
-    EnvVar.API_ACCESS_KEY
-  )}`;
+class SampleApi {
+  instance: AxiosInstance;
+
+  constructor() {
+    this.instance = this.getAxiosInstance();
+  }
+
+  private getAxiosInstance() {
+    return axios.create({
+      baseURL: this.apiBase,
+    });
+  }
+
+  get apiBase(): string {
+    const baseUrl: string = isDev() && isUseMockInDev() ? ApiUrl.MockBase : ApiUrl.Base;
+    return `${baseUrl}${ApiUrl.Latest}?${ApiUrl.AccessKey}=${getEnvVar(
+      EnvVar.API_ACCESS_KEY
+    )}`;
+  }
 }
 
-export function getSampleApiWithQuote(quoteCode: string) {
-  return `${getSampleApiBase()}&${ApiUrl.Symbols}=${quoteCode}`;
-}
+export const sampleApi = new SampleApi();
