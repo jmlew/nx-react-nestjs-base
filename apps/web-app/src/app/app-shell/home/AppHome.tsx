@@ -8,11 +8,11 @@ import * as styles from './styles';
 export function AppHome() {
   const navigate = useNavigate();
   const handleSampleClick = () => {
-    navigate('sample');
+    navigate('users');
   };
   return (
     <Box sx={styles.appHome}>
-      <h1>AppHome Component</h1>
+      <h1>Home Component</h1>
       <ButtonDefault
         label="Go to Sample Feature"
         onClick={handleSampleClick}
