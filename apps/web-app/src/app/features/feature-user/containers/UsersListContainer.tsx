@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
 
 interface UserContainerProps {
-  pageIndex?: string;
+  pageIndex: string | null;
 }
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
@@ -26,15 +26,16 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const [error, setError] = useState<AxiosError>();
 
   useEffect(() => {
+    const page: number = pageIndex == null ? 1 : parseInt(pageIndex, 10);
     userService
-      .getUsers(pageIndex)
+      .getUsers(page)
       .then((res: AxiosResponse<ApiGetUsersResponse>) => {
         setResponse(res.data);
       })
       .catch((err: AxiosError) => {
         setError(err);
       });
-  }, []);
+  }, [pageIndex]);
 
   if (response) {
     return response.data ? <UsersList data={response.data} /> : <Loading />;

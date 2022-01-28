@@ -4,6 +4,7 @@ import { UserApiUri } from '@api-interfaces/enums/api-config.enum';
 import { UserDetails } from '../components';
 import { useAxiosGet } from '../../../core/api/hooks';
 import { Loading, ErrorMessage } from '../../../shared/components';
+
 import { UserAxiosApiService, userService } from '../../../core/api/services';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useState, useEffect } from 'react';

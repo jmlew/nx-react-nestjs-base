@@ -13,12 +13,10 @@ export class UserApiService {
     return this.axios.get(`${UserApiUri.Users}/${userId}`);
   }
 
-  getUsers(pageIndex = '1'): Promise<AxiosResponse<ApiGetUsersResponse>> {
+  getUsers(pageIndex: number): Promise<AxiosResponse<ApiGetUsersResponse>> {
     const params = { [UserApiUri.PageIndex]: pageIndex };
     return this.axios.get(UserApiUri.Users, { params });
   }
 }
 
-export const userService = new UserApiService(
-  UserAxiosApiService.getInstance().axiosInstance
-);
+export const userService = new UserApiService(UserAxiosApiService.instance.axiosInstance);
