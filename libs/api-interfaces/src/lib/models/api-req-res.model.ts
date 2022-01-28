@@ -1,20 +1,23 @@
 export interface ApiResponseBase {
-  error?: ApiResponseError;
-  success: boolean;
-  timestamp: number;
+  foo?: string;
 }
 
-export interface ApiResponseError {
-  code: string;
-  message: string;
+export interface ApiGetUsersResponse extends ApiResponseBase {
+  page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+  data: User[];
 }
 
-export interface ApiRatesResponse extends ApiResponseBase {
-  base: string;
-  date: string;
-  rates: ApiRates;
+export interface ApiGetUserResponse extends ApiResponseBase {
+  data: User;
 }
 
-export interface ApiRates {
-  [code: string]: number;
+export interface User {
+  id: number;
+  email: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
 }

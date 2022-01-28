@@ -1,9 +1,9 @@
 import { JsonViewer } from '../../../shared/components';
 
-interface FeatureSampleProps {
+interface UserDetailsProps {
   data: object;
 }
 
-export function FeatureSample({ data }: FeatureSampleProps) {
+export function UserDetails({ data }: UserDetailsProps) {
   return <JsonViewer data={data} sx={{ width: '100%', flexGrow: 1 }} />;
 }

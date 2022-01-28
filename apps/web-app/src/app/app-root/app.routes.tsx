@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { AppHome } from '../app-shell/home/AppHome';
 import { AppShell } from '../app-shell/AppShell';
-import FeatureSampleRoutes from '../features/feature-sample/feature-sample.routes';
+import UsersRoutes from '../features/feature-user/feature-users.routes';
 import { Loading } from '../shared/components';
 import { PageNotFound } from '../app-shell/not-found/PageNotFound';
 
@@ -28,10 +28,10 @@ export default function AppRoutes() {
         ></Route>
         {/* Children routes are declared within AppShell @Code{ Outlet } directive */}
         <Route
-          path="/sample/*"
+          path="users/*"
           element={
             <Suspense fallback={<Loading />}>
-              <FeatureSampleRoutes />
+              <UsersRoutes />
             </Suspense>
           }
         />

@@ -1,7 +1,6 @@
-export enum ApiUrl {
-  Base = 'http://api.exchangeratesapi.io/v1/',
+export enum UserApiUri {
+  Base = 'https://reqres.in/api/',
   MockBase = 'localhost:8080/api/',
-  AccessKey = 'access_key',
-  Latest = 'latest',
-  Symbols = 'symbols',
+  Users = 'users',
+  PageIndex = 'page',
 }
