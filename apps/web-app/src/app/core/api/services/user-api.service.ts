@@ -1,39 +1,24 @@
-import axios, { AxiosInstance } from 'axios';
+import {
+  ApiGetUserResponse,
+  ApiGetUsersResponse,
+} from '@api-interfaces/models/api-req-res.model';
 import { UserApiUri } from '@api-interfaces/enums/api-config.enum';
-import { getEnvVar, isDev, isUseMockInDev } from '../../../shared/utils';
-import { EnvVar } from '../../../shared/enums/environment.enum';
+import { AxiosInstance, AxiosResponse } from 'axios';
+import { UserAxiosApiService } from './user-axios-api.service';
 
-interface AxiosApiService {
-  instance: AxiosInstance;
-  apiBase: string;
-  createAxiosInstance(): AxiosInstance;
-}
+export class UserApiService {
+  constructor(private axios: AxiosInstance) {}
 
-class UserApiService implements AxiosApiService {
-  private axiosInstance: AxiosInstance;
-
-  constructor() {
-    this.axiosInstance = this.createAxiosInstance();
+  getUser(userId: string): Promise<AxiosResponse<ApiGetUserResponse>> {
+    return this.axios.get(`${UserApiUri.Users}/${userId}`);
   }
 
-  createAxiosInstance() {
-    return axios.create({
-      baseURL: this.apiBase,
-      timeout: 2000,
-    });
-  }
-
-  get instance(): AxiosInstance {
-    return this.axiosInstance;
-  }
-
-  get apiBase(): string {
-    return isDev() && isUseMockInDev() ? UserApiUri.MockBase : UserApiUri.Base;
-  }
-
-  get apiAccessKey(): string {
-    return getEnvVar(EnvVar.API_ACCESS_KEY);
+  getUsers(pageIndex = '1'): Promise<AxiosResponse<ApiGetUsersResponse>> {
+    const params = { [UserApiUri.PageIndex]: pageIndex };
+    return this.axios.get(UserApiUri.Users, { params });
   }
 }
 
-export const userApiService = new UserApiService();
+export const userService = new UserApiService(
+  UserAxiosApiService.getInstance().axiosInstance
+);

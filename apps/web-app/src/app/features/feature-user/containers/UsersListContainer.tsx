@@ -1,24 +1,40 @@
-import { ApiGetUserResponse } from '@api-interfaces/models/api-req-res.model';
+import { ApiGetUsersResponse } from '@api-interfaces/models/api-req-res.model';
 import { UserApiUri } from '@api-interfaces/enums/api-config.enum';
 
 import { UsersList } from '../components';
 import { useAxiosGet } from '../../../core/api/hooks';
 import { Loading, ErrorMessage } from '../../../shared/components';
-import { userApiService } from '../../../core/api/services';
+import { UserAxiosApiService, userService } from '../../../core/api/services';
+import { useEffect, useState } from 'react';
+import { AxiosError, AxiosResponse } from 'axios';
 
 interface UserContainerProps {
   pageIndex?: string;
 }
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
-  const url = userApiService.apiBase + UserApiUri.Users;
-  const params = { [UserApiUri.PageIndex]: pageIndex };
-
-  const [response, error] = useAxiosGet<ApiGetUserResponse>(
-    userApiService.instance,
-    url,
+  /*
+  Example using generic useAxiosGet custom hook
+  const [response, error] = useAxiosGet<ApiGetUsersResponse>(
+    UserAxiosApiService.getInstance().axiosInstance,
+    UserApiUri.Users,
     { params }
-  );
+  ); */
+
+  // Example using the userApi service.
+  const [response, setResponse] = useState<ApiGetUsersResponse>();
+  const [error, setError] = useState<AxiosError>();
+
+  useEffect(() => {
+    userService
+      .getUsers(pageIndex)
+      .then((res: AxiosResponse<ApiGetUsersResponse>) => {
+        setResponse(res.data);
+      })
+      .catch((err: AxiosError) => {
+        setError(err);
+      });
+  }, []);
 
   if (response) {
     return response.data ? <UsersList data={response.data} /> : <Loading />;
