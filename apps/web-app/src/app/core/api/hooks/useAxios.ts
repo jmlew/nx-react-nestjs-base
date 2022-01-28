@@ -1,11 +1,10 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useState, useEffect } from 'react';
-import { sampleApi } from '../utils';
 
 export const useAxiosGet = <T>(
+  axiosInstance: AxiosInstance,
   url: string,
-  config?: AxiosRequestConfig,
-  axiosInstance: AxiosInstance = sampleApi.instance
+  config?: AxiosRequestConfig
 ): [T, AxiosError] => {
   const [response, setResponse] = useState<T>();
   const [error, setError] = useState<AxiosError>();
@@ -25,9 +24,9 @@ export const useAxiosGet = <T>(
 };
 
 export const useAxiosPost = <T>(
+  axiosInstance: AxiosInstance,
   url: string,
-  config?: AxiosRequestConfig,
-  axiosInstance: AxiosInstance = sampleApi.instance
+  config?: AxiosRequestConfig
 ): [T, AxiosError] => {
   const [response, setResponse] = useState<T>();
   const [error, setError] = useState<AxiosError>();
