@@ -12,7 +12,7 @@ export class UserAxiosApiService implements AxiosApiService {
     this.axiosInstance = this.createAxiosInstance();
   }
 
-  static getInstance(): UserAxiosApiService {
+  static get instance(): UserAxiosApiService {
     if (!UserAxiosApiService.singletonInstance) {
       UserAxiosApiService.singletonInstance = new UserAxiosApiService();
     }

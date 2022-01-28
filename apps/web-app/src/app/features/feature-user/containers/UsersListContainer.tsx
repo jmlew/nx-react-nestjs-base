@@ -9,32 +9,33 @@ import { useEffect, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
 
 interface UserContainerProps {
-  pageIndex?: string;
+  pageIndex: string | null;
 }
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
-  /*
-  Example using generic useAxiosGet custom hook
-  const [response, error] = useAxiosGet<ApiGetUsersResponse>(
-    UserAxiosApiService.getInstance().axiosInstance,
-    UserApiUri.Users,
-    { params }
-  ); */
-
   // Example using the userApi service.
   const [response, setResponse] = useState<ApiGetUsersResponse>();
   const [error, setError] = useState<AxiosError>();
 
   useEffect(() => {
+    const page: number = pageIndex == null ? 1 : parseInt(pageIndex, 10);
     userService
-      .getUsers(pageIndex)
+      .getUsers(page)
       .then((res: AxiosResponse<ApiGetUsersResponse>) => {
         setResponse(res.data);
       })
       .catch((err: AxiosError) => {
         setError(err);
       });
-  }, []);
+  }, [pageIndex]);
+
+  // Example using generic useAxiosGet custom hook
+  /* const params = { [UserApiUri.PageIndex]: pageIndex };
+  const [response, error] = useAxiosGet<ApiGetUsersResponse>(
+    UserAxiosApiService.instance.axiosInstance,
+    UserApiUri.Users,
+    { params }
+  ); */
 
   if (response) {
     return response.data ? <UsersList data={response.data} /> : <Loading />;
