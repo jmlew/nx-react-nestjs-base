@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { UserApiUri } from '@api-interfaces/enums/api-config.enum';
+import { UserApiUri } from '@api-interfaces/features/enums/user-api-config.enum';
 import { getEnvVar, isDev, isUseMockInDev } from '../../../shared/utils';
 import { EnvVar } from '../../../shared/enums/environment.enum';
 import { AxiosApiService } from '../models/axios.model';

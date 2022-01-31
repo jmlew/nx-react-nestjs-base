@@ -1,5 +1,5 @@
-import { ProgressStatus } from '@api-interfaces/enums/api-states.enum';
-import { ApiDataState } from '@api-interfaces/models/api-states.model';
+import { ProgressStatus } from '@api-interfaces/shared/enums/api-states.enum';
+import { ApiDataState } from '@api-interfaces/shared/models/api-states.model';
 
 /**
  * Abstracts over each API Data state by changing the API load status and assigning error

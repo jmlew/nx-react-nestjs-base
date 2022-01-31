@@ -1,8 +1,7 @@
-export interface ApiResponseBase {
-  foo?: string;
-}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface ResponseBase {}
 
-export interface ApiGetUsersResponse extends ApiResponseBase {
+export interface GetUsersResponse extends ResponseBase {
   page: number;
   per_page: number;
   total: number;
@@ -10,7 +9,7 @@ export interface ApiGetUsersResponse extends ApiResponseBase {
   data: User[];
 }
 
-export interface ApiGetUserResponse extends ApiResponseBase {
+export interface GetUserResponse extends ResponseBase {
   data: User;
 }
 

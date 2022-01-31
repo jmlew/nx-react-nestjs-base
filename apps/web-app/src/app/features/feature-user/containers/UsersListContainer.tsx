@@ -1,5 +1,5 @@
-import { ApiGetUsersResponse } from '@api-interfaces/models/api-req-res.model';
-import { UserApiUri } from '@api-interfaces/enums/api-config.enum';
+import { UserApiUri } from '@api-interfaces/features/enums/user-api-config.enum';
+import { GetUsersResponse } from '@api-interfaces/features/models/user-api-data.model';
 
 import { UsersList } from '../components';
 import { useAxiosGet } from '../../../core/api/hooks';
@@ -14,14 +14,14 @@ interface UserContainerProps {
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   // Example using the userApi service.
-  const [response, setResponse] = useState<ApiGetUsersResponse>();
+  const [response, setResponse] = useState<GetUsersResponse>();
   const [error, setError] = useState<AxiosError>();
 
   useEffect(() => {
     const page: number = pageIndex == null ? 1 : parseInt(pageIndex, 10);
     userService
       .getUsers(page)
-      .then((res: AxiosResponse<ApiGetUsersResponse>) => {
+      .then((res: AxiosResponse<GetUsersResponse>) => {
         setResponse(res.data);
       })
       .catch((err: AxiosError) => {
@@ -31,7 +31,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
 
   // Example using generic useAxiosGet custom hook
   /* const params = { [UserApiUri.PageIndex]: pageIndex };
-  const [response, error] = useAxiosGet<ApiGetUsersResponse>(
+  const [response, error] = useAxiosGet<GetUsersResponse>(
     UserAxiosApiService.instance.axiosInstance,
     UserApiUri.Users,
     { params }

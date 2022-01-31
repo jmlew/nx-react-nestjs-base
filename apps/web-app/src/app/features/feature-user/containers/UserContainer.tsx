@@ -1,5 +1,9 @@
-import { ApiGetUserResponse } from '@api-interfaces/models/api-req-res.model';
-import { UserApiUri } from '@api-interfaces/enums/api-config.enum';
+import { UserApiUri } from '@api-interfaces/features/enums/user-api-config.enum';
+import {
+  GetUserResponse,
+  GetUsersResponse,
+  User,
+} from '@api-interfaces/features/models/user-api-data.model';
 
 import { UserDetails } from '../components';
 import { useAxiosGet } from '../../../core/api/hooks';
@@ -15,13 +19,13 @@ interface UserContainerProps {
 
 export function UserContainer({ userId }: UserContainerProps) {
   // Example using the userApi service.
-  const [response, setResponse] = useState<ApiGetUserResponse>();
+  const [response, setResponse] = useState<GetUserResponse>();
   const [error, setError] = useState<AxiosError>();
 
   useEffect(() => {
     userService
       .getUser(userId)
-      .then((res: AxiosResponse<ApiGetUserResponse>) => {
+      .then((res: AxiosResponse<GetUserResponse>) => {
         setResponse(res.data);
       })
       .catch((err: AxiosError) => {
@@ -30,7 +34,7 @@ export function UserContainer({ userId }: UserContainerProps) {
   }, []);
 
   // Example using generic useAxiosGet custom hook
-  /* const [response, error] = useAxiosGet<ApiGetUserResponse>(
+  /* const [response, error] = useAxiosGet<GetUserResponse>(
     UserAxiosApiService.instance.axiosInstance,
     `${UserApiUri.Users}/${userId}`
   ); */
