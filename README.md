@@ -1,5 +1,11 @@
 # ReactJS + NestJS Boilerplate Web App
 
+A Base [ReactJS](https://reactjs.org) web app and [NestJS](https://docs.nestjs.com/) mock backend API server.
+
+Organised as a [Nx](https://nx.dev) monorepo with shared libraries containing common API models and utils.
+
+Provides a best practice starting point for developing scaleable ReactJS web apps.
+
 ## Architecture
 
 The app's architecture aligns with the semantics and directory structure as defined in [this guide](http://bit.ly/scaleable-apps).
@@ -12,6 +18,10 @@ The codebase is combined into a number of separate 'applications' and 'libraries
 
 The codebase includes an HTTP Playground to test endpoint responses inside 'http-playground'.
 This uses the humao.rest-client vscode extension listed in .vscode/extensions.json with dependant global API variables defined in .vscode/settings.json 'rest-client.environmentVariables'.
+
+## Recommended VSCode extensions
+
+Find a list in .vscode/extensions.json to ensure the best development experience.
 
 ## Adding capabilities to your workspace
 
@@ -36,21 +46,24 @@ Below are our core plugins:
 
 There are also many [community plugins](https://nx.dev/community) you could add.
 
-## Generate an application
+## Generate a new React application
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+Run `nx g @nrwl/react:app my-app`
 
 > You can use any of the plugins above to generate applications as well.
 
 When using Nx, you can create multiple applications and libraries in the same workspace.
 
-## Generate a library
+Libraries are shareable across libraries and applications. Their absolute paths are added
+to tsconfig.base.json and should be altered according to their usecase.
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+## Generate a shared React library
 
-> You can also use any of the plugins above to generate libraries as well.
+Run `nx g @nrwl/react:lib my-lib`
 
-Libraries are shareable across libraries and applications. They can be imported from `@nx-react-nest/mylib`.
+## Generate a framework agnostic shared library
+
+Run `nx g @nrwl/workspace:library my-lib`
 
 ## Development server
 
@@ -83,15 +96,3 @@ Run `nx graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
