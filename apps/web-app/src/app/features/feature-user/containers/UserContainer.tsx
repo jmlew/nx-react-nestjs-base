@@ -25,12 +25,8 @@ export function UserContainer({ userId }: UserContainerProps) {
   useEffect(() => {
     userService
       .getUser(userId)
-      .then((res: AxiosResponse<GetUserResponse>) => {
-        setResponse(res.data);
-      })
-      .catch((err: AxiosError) => {
-        setError(err);
-      });
+      .then((res: AxiosResponse<GetUserResponse>) => setResponse(res.data))
+      .catch((err: AxiosError) => setError(err));
   }, []);
 
   // Example using generic useAxiosGet custom hook

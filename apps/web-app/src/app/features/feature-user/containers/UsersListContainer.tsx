@@ -21,12 +21,8 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     const page: number = pageIndex == null ? 1 : parseInt(pageIndex, 10);
     userService
       .getUsers(page)
-      .then((res: AxiosResponse<GetUsersResponse>) => {
-        setResponse(res.data);
-      })
-      .catch((err: AxiosError) => {
-        setError(err);
-      });
+      .then((res: AxiosResponse<GetUsersResponse>) => setResponse(res.data))
+      .catch((err: AxiosError) => setError(err));
   }, [pageIndex]);
 
   // Example using generic useAxiosGet custom hook
