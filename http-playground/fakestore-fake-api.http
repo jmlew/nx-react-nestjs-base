@@ -1,12 +1,40 @@
 # Testing API endpoints using the humao.rest-client vscode extension listed in .vscode/extensions.json
 # Api key and other global vars are defines in .vscode/settings.json "rest-client.environmentVariables"
 
+
+# Overrride the live API with the local mock sevrer:
+@fakestoreFakeApiBase = http://localhost:8080/api/
+
 @itemsLimit = 5
-@productId = 2
+@userId = 7
 
 
-### List Products
-GET {{fakestoreFakeApiBase}}products?limit={{itemsLimit}}
+### Get All Users
+GET {{fakestoreFakeApiBase}}users?limit={{itemsLimit}}
 
-### Single Product
-GET {{fakestoreFakeApiBase}}products/{{productId}}
+### Get Single User
+GET {{fakestoreFakeApiBase}}users/{{userId}}
+
+### Create User
+POST {{fakestoreFakeApiBase}}users
+Content-Type: application/json
+
+{
+  "email": "jlewis@luxoft.com",
+  "first_name": "Jasonimoo",
+  "last_name": "Lewis",
+  "avatar": "https://reqres.in/img/faces/1-image.jpg"
+}
+
+
+### Update User
+PUT {{fakestoreFakeApiBase}}users/{{userId}}
+Content-Type: application/json
+
+{
+  "email": "lewisj@luxoft.com"
+}
+
+### Delete User
+DELETE {{fakestoreFakeApiBase}}users/{{userId}}
+

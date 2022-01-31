@@ -2,11 +2,27 @@
 # Api key and other global vars are defines in .vscode/settings.json "rest-client.environmentVariables"
 
 @pageIndex = 1
-@userId = 1
+@userId = 634
 
 
-### List Users
+### Get All Users
 GET {{regressFakeApiBase}}users?page={{pageIndex}}
 
-### Single User
+### Get Single User
 GET {{regressFakeApiBase}}users/{{userId}}
+
+### Create User
+POST {{regressFakeApiBase}}users
+
+{
+    "name": "morpheus",
+    "job": "leader"
+}
+
+### Update User
+PUT {{regressFakeApiBase}}users/{{userId}}
+
+{
+    "name": "Jasonimoo",
+    "job": "Guru"
+}

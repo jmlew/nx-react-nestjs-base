@@ -10,12 +10,14 @@ export interface EntityItem {
   id: string | number;
 }
 
-export function addToCollection<T>(item: T, items: T[]): T[] {
-  return items.includes(item) ? items : [...items, item];
+export function addToCollection<T extends EntityItem>(item: T, items: T[]): T[] {
+  return getCollectionIds(items).includes(item.id) ? items : [...items, item];
 }
 
-export function removeFromCollection<T>(item: T, items: T[]): T[] {
-  return items.includes(item) ? items.filter((element: T) => element !== item) : items;
+export function removeFromCollection<T extends EntityItem>(item: T, items: T[]): T[] {
+  return getCollectionIds(items).includes(item.id)
+    ? items.filter((element: T) => element !== item)
+    : items;
 }
 
 export function updateInCollection<T extends EntityItem>(item: T, items: T[]): T[] {
