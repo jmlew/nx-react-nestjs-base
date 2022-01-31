@@ -7,9 +7,9 @@ import {
   ApiGetUserResponse,
 } from '@api-interfaces/models/api-req-res.model';
 
-import * as usersDb from '../../../assets/db/users.json';
-import * as fromUtilsLib from '../../shared/utils';
+import * as fromUtilsLib from '@shared-utils';
 import * as fromSharedUtils from '../../shared/utils';
+import * as usersDb from '../../../assets/db/users.json';
 
 @Injectable()
 export class UserService {

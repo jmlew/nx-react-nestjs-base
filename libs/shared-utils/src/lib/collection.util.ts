@@ -1,4 +1,5 @@
-// TODO: Move utils into shared lib.
+import { isNumber } from './validate.util';
+
 // TODO: Move interfaces into shared lib.
 
 export interface EntityNumItem {
@@ -8,8 +9,6 @@ export interface EntityNumItem {
 export interface EntityItem {
   id: string | number;
 }
-
-import { isNumber } from './validate.util';
 
 export function addToCollection<T>(item: T, items: T[]): T[] {
   return items.includes(item) ? items : [...items, item];
@@ -42,7 +41,10 @@ export function removeIdsFromCollection<T extends EntityItem>(
   });
 }
 
-export function getById<T extends EntityItem>(items: T[], id: string | number): T {
+export function getById<T extends EntityItem>(
+  items: T[],
+  id: string | number
+): T | undefined {
   return items.find((item: T) => isIdMatch(id, item));
 }
 
