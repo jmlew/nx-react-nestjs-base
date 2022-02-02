@@ -16,11 +16,9 @@ import * as usersDb from '../../../assets/db/users.json';
 @Injectable()
 export class UserService {
   private usersDb: GetUsersResponse;
-  private usersList: User[];
 
   constructor() {
-    this.usersDb = usersDb;
-    this.usersList = this.usersDb.data;
+    this.usersDb = { ...usersDb };
   }
 
   getAllUsers(): Observable<GetUsersResponse> {
@@ -28,7 +26,7 @@ export class UserService {
   }
 
   getUserById(id: number): Observable<GetUserResponse> {
-    const user: User = fromUtilsLib.getById(this.usersList, id);
+    const user: User = fromUtilsLib.getById(this.usersDb.data, id);
     const response: GetUserResponse = { data: user };
     return fromSharedUtils.toStreamWithDelay(response);
   }
@@ -40,7 +38,7 @@ export class UserService {
   }
 
   updateUser(id: number, params: UserDetails): Observable<UpdateUserResponse> {
-    const current: User = fromUtilsLib.getById(this.usersList, id);
+    const current: User = fromUtilsLib.getById(this.usersDb.data, id);
     const user: UpdateUserResponse = this.normaliseEditedUser({
       ...current,
       ...params,
@@ -60,31 +58,31 @@ export class UserService {
   }
 
   doesUserExist(id: number): boolean {
-    return this.usersList.some((item: User) => fromUtilsLib.isIdMatch(id, item));
+    return this.usersDb.data.some((item: User) => fromUtilsLib.isIdMatch(id, item));
   }
 
   isUserDuplicate(user: UserDetails): boolean {
-    return this.usersList.some((item: User) => item.email === user.email);
+    return this.usersDb.data.some((item: User) => item.email === user.email);
   }
 
   private updateUserInDb(user: User) {
-    this.usersList = fromUtilsLib.updateInCollection(user, this.usersList);
+    this.usersDb.data = fromUtilsLib.updateInCollection(user, this.usersDb.data);
   }
 
   private addUserToDb(user: User) {
-    this.usersList = fromUtilsLib.addToCollection(user, this.usersList);
+    this.usersDb.data = fromUtilsLib.addToCollection(user, this.usersDb.data);
   }
 
   private removeUserFromDb(id: number) {
-    this.usersList = fromUtilsLib.removeIdFromCollection(id, this.usersList);
+    this.usersDb.data = fromUtilsLib.removeIdFromCollection(id, this.usersDb.data);
   }
 
   private removeUsersFromDb(ids: number[]) {
-    this.usersList = fromUtilsLib.removeIdsFromCollection(ids, this.usersList);
+    this.usersDb.data = fromUtilsLib.removeIdsFromCollection(ids, this.usersDb.data);
   }
 
   private normaliseNewUser(params: UserDetails): CreateUserResponse {
-    const id: number = fromUtilsLib.getNextCollectionId(this.usersList);
+    const id: number = fromUtilsLib.getNextCollectionId(this.usersDb.data);
     const createdAt: string = fromUtilsLib.getCurrentDateString();
     return { ...params, id, createdAt };
   }

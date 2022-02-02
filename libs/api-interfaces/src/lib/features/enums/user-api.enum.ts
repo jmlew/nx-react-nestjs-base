@@ -3,7 +3,17 @@ export enum UserApiUri {
   Base = 'https://reqres.in/api/',
   // Mock API is being redirected to the target defined in proxy.conf.json
   MockBase = 'api/',
-  // API endpoints and params
+  // API endpoints
   Users = 'users',
-  PageIndex = 'page',
+}
+
+export enum UserApiParam {
+  Page = 'page',
+}
+
+export enum UserParam {
+  Email = 'email',
+  FirstName = 'first_name',
+  LastName = 'last_name',
+  Avatar = 'avatar',
 }
