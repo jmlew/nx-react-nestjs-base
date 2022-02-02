@@ -3,6 +3,7 @@
   "compilerOptions": {
     "sourceMap": true,
     "declaration": false,
+    "strictFunctionTypes": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

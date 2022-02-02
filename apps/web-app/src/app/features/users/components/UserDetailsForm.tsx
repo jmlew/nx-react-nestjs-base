@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography';
 
 import { User, UserDetails } from '@api-interfaces/features/models/user-api-data.model';
 import { UserParam } from '@api-interfaces/features/enums/user-api.enum';
+import { formAutocompleteMap, formValidationSchema } from '../../../shared/constants';
+import { isFieldError } from '../../../shared/utils';
 
 interface UserDetailsProps {
   user: User;
@@ -17,6 +19,7 @@ export function UserDetailsForm({ user, onSubmit, onCancel }: UserDetailsProps) 
 
   const formik = useFormik({
     initialValues: initialValues,
+    validationSchema: formValidationSchema,
     onSubmit: handleSubmit,
   });
 
@@ -46,27 +49,26 @@ export function UserDetailsForm({ user, onSubmit, onCancel }: UserDetailsProps) 
           <Divider flexItem={true} />
           <Box>
             <TextField
-              id={UserParam.FirstName}
-              name={UserParam.FirstName}
-              value={formik.values[UserParam.FirstName]}
-              onChange={formik.handleChange}
+              {...formik.getFieldProps(UserParam.FirstName)}
+              error={isFieldError(UserParam.FirstName, formik.touched, formik.errors)}
+              helperText={formik.errors[UserParam.FirstName]}
+              autoComplete={formAutocompleteMap.get(UserParam.FirstName)}
               label="First Name"
               variant="outlined"
             />
             <TextField
-              id={UserParam.LastName}
-              name={UserParam.LastName}
-              value={formik.values[UserParam.LastName]}
-              onChange={formik.handleChange}
+              {...formik.getFieldProps(UserParam.LastName)}
+              error={isFieldError(UserParam.LastName, formik.touched, formik.errors)}
+              helperText={formik.errors[UserParam.LastName]}
+              autoComplete={formAutocompleteMap.get(UserParam.LastName)}
               label="Last Name"
               variant="outlined"
             />
             <TextField
-              id={UserParam.Email}
-              name={UserParam.Email}
-              value={formik.values[UserParam.Email]}
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
+              {...formik.getFieldProps(UserParam.Email)}
+              error={isFieldError(UserParam.Email, formik.touched, formik.errors)}
+              helperText={formik.errors[UserParam.Email]}
+              autoComplete={formAutocompleteMap.get(UserParam.Email)}
               label="Email"
               variant="outlined"
             />

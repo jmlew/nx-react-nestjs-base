@@ -17,3 +17,8 @@ export enum UserParam {
   LastName = 'last_name',
   Avatar = 'avatar',
 }
+
+export enum UserRegisterParam {
+  Password = 'password',
+  PasswordConfirm = 'password_confirm',
+}
