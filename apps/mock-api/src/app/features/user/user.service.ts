@@ -9,8 +9,8 @@ import {
   UserDetails,
 } from '@api-interfaces/features/models/user-api-data.model';
 
+import { toStreamWithDelay } from '../../shared/utils';
 import * as fromUtilsLib from '@shared-utils';
-import * as fromSharedUtils from '../../shared/utils';
 import * as usersDb from '../../../assets/db/users.json';
 
 @Injectable()
@@ -22,19 +22,19 @@ export class UserService {
   }
 
   getAllUsers(): Observable<GetUsersResponse> {
-    return fromSharedUtils.toStreamWithDelay(this.usersDb);
+    return toStreamWithDelay(this.usersDb);
   }
 
   getUserById(id: number): Observable<GetUserResponse> {
     const user: User = fromUtilsLib.getById(this.usersDb.data, id);
     const response: GetUserResponse = { data: user };
-    return fromSharedUtils.toStreamWithDelay(response);
+    return toStreamWithDelay(response);
   }
 
   createUser(params: UserDetails): Observable<CreateUserResponse> {
     const user: CreateUserResponse = this.normaliseNewUser(params);
     this.addUserToDb(user);
-    return fromSharedUtils.toStreamWithDelay(user);
+    return toStreamWithDelay(user);
   }
 
   updateUser(id: number, params: UserDetails): Observable<UpdateUserResponse> {
@@ -44,25 +44,27 @@ export class UserService {
       ...params,
     });
     this.updateUserInDb(user);
-    return fromSharedUtils.toStreamWithDelay(user);
+    return toStreamWithDelay(user);
   }
 
   deleteUser(id: number): Observable<number> {
     this.removeUserFromDb(id);
-    return fromSharedUtils.toStreamWithDelay(id);
+    return toStreamWithDelay(id);
   }
 
   deleteUsers(ids: number[]): Observable<number[]> {
     this.removeUsersFromDb(ids);
-    return fromSharedUtils.toStreamWithDelay(ids);
+    return toStreamWithDelay(ids);
   }
 
   doesUserExist(id: number): boolean {
     return this.usersDb.data.some((item: User) => fromUtilsLib.isIdMatch(id, item));
   }
 
-  isUserDuplicate(user: UserDetails): boolean {
-    return this.usersDb.data.some((item: User) => item.email === user.email);
+  isUserDuplicate(user: UserDetails, ignoreUserId: number = null): boolean {
+    return this.usersDb.data
+      .filter((item: User) => ignoreUserId === null || item.id !== ignoreUserId)
+      .some((item: User) => item.email === user.email);
   }
 
   private updateUserInDb(user: User) {
@@ -83,12 +85,14 @@ export class UserService {
 
   private normaliseNewUser(params: UserDetails): CreateUserResponse {
     const id: number = fromUtilsLib.getNextCollectionId(this.usersDb.data);
-    const createdAt: string = fromUtilsLib.getCurrentDateString();
+    // const createdAt: string = fromUtilsLib.getCurrentDateString();
+    const createdAt = 'somedate';
     return { ...params, id, createdAt };
   }
 
   private normaliseEditedUser(user: User) {
-    const updatedAt: string = fromUtilsLib.getCurrentDateString();
+    // const updatedAt: string = fromUtilsLib.getCurrentDateString();
+    const updatedAt = 'somedate';
     return { ...user, updatedAt };
   }
 }

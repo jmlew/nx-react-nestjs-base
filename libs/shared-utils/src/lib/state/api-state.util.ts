@@ -12,6 +12,7 @@ import { ApiDataState } from '@api-interfaces/shared/models/api-states.model';
 export function onApiStateInit(): ApiDataState {
   const state: ApiDataState = {
     loadStatus: ProgressStatus.Idle,
+    updateStatus: ProgressStatus.Idle,
     errorMessage: null,
   };
   return state;
@@ -50,6 +51,33 @@ export function onApiStateLoadFailed(
   };
 }
 
+export function onApiStateUpdate(state: ApiDataState): ApiDataState {
+  return {
+    ...state,
+    updateStatus: ProgressStatus.Pending,
+    errorMessage: null,
+  };
+}
+
+export function onApiStateUpdateComplete(state: ApiDataState): ApiDataState {
+  return {
+    ...state,
+    updateStatus: ProgressStatus.Completed,
+    errorMessage: null,
+  };
+}
+
+export function onApiStateUpdateFailed(
+  state: ApiDataState,
+  errorMessage: string
+): ApiDataState {
+  return {
+    ...state,
+    updateStatus: ProgressStatus.Failed,
+    errorMessage,
+  };
+}
+
 /**
  * The following version are mutable and make inline edits to the state object, instead
  * of returning a new state, and as such should be used with the RTK createReducer
@@ -74,12 +102,34 @@ export function onApiStateLoadFailedMutable(
   state.errorMessage = errorMessage;
 }
 
+export function onApiStateUpdateMutable(state: ApiDataState): void {
+  state.updateStatus = ProgressStatus.Pending;
+  state.errorMessage = null;
+}
+
+export function onApiStateUpdateCompleteMutable(state: ApiDataState): void {
+  state.updateStatus = ProgressStatus.Completed;
+  state.errorMessage = null;
+}
+
+export function onApiStateUpdateFailedMutable(
+  state: ApiDataState,
+  errorMessage: string
+): void {
+  state.updateStatus = ProgressStatus.Failed;
+  state.errorMessage = errorMessage;
+}
+
 /**
  * Getters for the ful state and each state property.
  */
 
 export function getApiStateLoadStatus(state: ApiDataState): ProgressStatus {
   return state.loadStatus;
+}
+
+export function getApiStateUpdateStatus(state: ApiDataState): ProgressStatus {
+  return state.updateStatus;
 }
 
 export function getApiStateErrorMessage(state: ApiDataState): string | null {

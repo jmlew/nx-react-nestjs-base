@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-export function getCurrentDate(): Date {
+/* export function getCurrentDate(): Date {
   return moment().toDate();
 }
 
@@ -19,3 +19,4 @@ export function dateToStringUtc(date: Date | string, format = undefined): string
 export function isDateValid(date: Date | string): boolean {
   return moment(date).isValid();
 }
+ */

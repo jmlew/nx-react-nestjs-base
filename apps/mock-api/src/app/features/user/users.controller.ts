@@ -59,6 +59,9 @@ export class UserController {
     if (!this.userService.doesUserExist(Number(id))) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
+    if (this.userService.isUserDuplicate(params, Number(id))) {
+      throw new BadRequestException(ErrorMessage.DuplicateEmail);
+    }
     return this.userService.updateUser(Number(id), params);
   }
 

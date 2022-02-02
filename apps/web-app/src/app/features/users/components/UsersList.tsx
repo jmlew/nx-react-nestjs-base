@@ -36,7 +36,7 @@ export function UsersList({ users, onEditUser }: UsersListProps) {
   return (
     <List>
       {users.map((user: User) => (
-        <UsersListItem user={user} onEdit={() => handleSelectUser(user)} />
+        <UsersListItem key={user.id} user={user} onEdit={() => handleSelectUser(user)} />
       ))}
     </List>
   );
@@ -45,7 +45,6 @@ export function UsersList({ users, onEditUser }: UsersListProps) {
 function UsersListItem({ user, onEdit }: UserItemProps) {
   return (
     <ListItem
-      key={user.id}
       divider={false}
       secondaryAction={
         <IconButton edge="end" aria-label="edit" onClick={onEdit}>

@@ -1,13 +1,19 @@
-import { UserApiUri, UserApiParam } from '@api-interfaces/features/enums/user-api.enum';
-import { GetUsersResponse } from '@api-interfaces/features/models/user-api-data.model';
-
-import { UsersList } from '../components';
-import { useAxiosGet } from '../../../core/api/hooks';
-import { Loading, ErrorMessage } from '../../../shared/components';
-import { UserAxiosApiService, userService } from '../../../core/api/services';
 import { useEffect, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+import {
+  GetUsersResponse,
+  User,
+} from '@api-interfaces/features/models/user-api-data.model';
+import { ApiDataState } from '@api-interfaces/shared/models/api-states.model';
+import { ProgressStatus } from '@api-interfaces/shared/enums/api-states.enum';
+import * as fromSharedUtils from '@shared-utils';
+
+import { Loading, ErrorMessage } from '../../../shared/components';
+import { userService } from '../../../core/api/services';
+import { getErrorMessage } from '../../../core/api/utils';
+import { UsersList } from '../components';
 
 interface UserContainerProps {
   pageIndex: string | null;
@@ -16,36 +22,47 @@ interface UserContainerProps {
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
 
-  // Example using generic useAxiosGet custom hook
-  /* const params = { [UserApiParam.Page]: pageIndex };
-  const [response, error] = useAxiosGet<GetUsersResponse>(
-    UserAxiosApiService.instance.axiosInstance,
-    UserApiUri.Users,
-    { params }
-  ); */
-
-  // Example using the userApi service.
-  const [response, setResponse] = useState<GetUsersResponse>();
-  const [error, setError] = useState<AxiosError>();
+  const [apiState, setApiState] = useState<ApiDataState>(
+    fromSharedUtils.onApiStateInit()
+  );
+  const [usersData, setUsersData] = useState<User[]>();
 
   useEffect(() => {
+    if (apiState.loadStatus === ProgressStatus.Idle) {
+      handleGetUsers();
+    }
+  }, [apiState]);
+
+  function handleGetUsers() {
     const page: number = pageIndex == null ? 1 : parseInt(pageIndex, 10);
     userService
       .getUsers(page)
-      .then((res: AxiosResponse<GetUsersResponse>) => setResponse(res.data))
-      .catch((err: AxiosError) => setError(err));
-  }, [pageIndex]);
+      .then((res: AxiosResponse<GetUsersResponse>) => {
+        setUsersData(res.data.data);
+        setApiState(fromSharedUtils.onApiStateLoadComplete(apiState));
+      })
+      .catch((error: AxiosError) =>
+        setApiState(
+          fromSharedUtils.onApiStateLoadFailed(apiState, getErrorMessage(error))
+        )
+      );
+  }
 
   function handleEditUser(userId: number) {
     navigate(`${userId}`);
   }
 
-  if (response) {
-    return response.data ? (
-      <UsersList users={response.data} onEditUser={handleEditUser} />
-    ) : (
-      <Loading />
-    );
+  if (apiState.loadStatus === ProgressStatus.Pending) {
+    return <Loading />;
   }
-  return error ? <ErrorMessage message={error.message} /> : <Loading />;
+
+  if (apiState.loadStatus === ProgressStatus.Failed) {
+    return <ErrorMessage message={apiState.errorMessage!} />;
+  }
+
+  return usersData ? (
+    <UsersList users={usersData} onEditUser={handleEditUser} />
+  ) : (
+    <Loading />
+  );
 }
