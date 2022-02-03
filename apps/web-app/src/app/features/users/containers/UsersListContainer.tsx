@@ -12,7 +12,7 @@ import * as fromSharedUtils from '@shared-utils';
 
 import { Loading, ErrorMessage } from '../../../shared/components';
 import { userService } from '../../../core/api/services';
-import { getErrorMessage } from '../../../core/api/utils';
+import { getApiErrorMessage } from '../../../core/api/utils';
 import { UsersList } from '../components';
 
 interface UserContainerProps {
@@ -43,7 +43,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
       })
       .catch((error: AxiosError) =>
         setApiState(
-          fromSharedUtils.onApiStateLoadFailed(apiState, getErrorMessage(error))
+          fromSharedUtils.onApiStateLoadFailed(apiState, getApiErrorMessage(error))
         )
       );
   }

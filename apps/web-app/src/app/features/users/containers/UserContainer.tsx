@@ -13,9 +13,11 @@ import {
 import * as fromSharedUtils from '@shared-utils';
 
 import { Loading, ErrorMessage } from '../../../shared/components';
-import { userService } from '../../../core/api/services';
-import { getErrorMessage } from '../../../core/api/utils';
+import { UserAxiosApiService, userService } from '../../../core/api/services';
+import { getApiErrorMessage } from '../../../core/api/utils';
 import { UserDetailsForm } from '../components';
+import { useAxiosGet } from '../../../core/api/hooks';
+import { UserApiUri } from '@api-interfaces/features/enums/user-api.enum';
 
 interface UserContainerProps {
   userId: string;
@@ -23,6 +25,12 @@ interface UserContainerProps {
 
 export function UserContainer({ userId }: UserContainerProps) {
   const navigate = useNavigate();
+
+  // Example using generic useAxiosGet custom hook
+  /* const [response, error] = useAxiosGet<GetUserResponse>(
+    new UserAxiosApiService().axiosInstance,
+    `${UserApiUri.Users}/${userId}`
+  ); */
 
   const [apiState, setApiState] = useState<ApiDataState>(
     fromSharedUtils.onApiStateInit()
@@ -50,9 +58,7 @@ export function UserContainer({ userId }: UserContainerProps) {
         setApiState(fromSharedUtils.onApiStateLoadComplete(apiState));
       })
       .catch((error: AxiosError) =>
-        setApiState(
-          fromSharedUtils.onApiStateLoadFailed(apiState, getErrorMessage(error))
-        )
+        setApiState(fromSharedUtils.onApiStateLoadFailed(apiState, error.message))
       );
   }
 
@@ -64,9 +70,7 @@ export function UserContainer({ userId }: UserContainerProps) {
         setApiState(fromSharedUtils.onApiStateUpdateComplete(apiState))
       )
       .catch((error: AxiosError) =>
-        setApiState(
-          fromSharedUtils.onApiStateUpdateFailed(apiState, getErrorMessage(error))
-        )
+        setApiState(fromSharedUtils.onApiStateUpdateFailed(apiState, error.message))
       );
   }
 

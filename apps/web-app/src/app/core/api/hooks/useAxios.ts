@@ -2,7 +2,7 @@ import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'ax
 import { useState, useEffect } from 'react';
 
 export const useAxiosGet = <T>(
-  axiosInstance: AxiosInstance,
+  axios: AxiosInstance,
   url: string,
   config?: AxiosRequestConfig
 ): [T, AxiosError] => {
@@ -10,7 +10,7 @@ export const useAxiosGet = <T>(
   const [error, setError] = useState<AxiosError>();
 
   useEffect(() => {
-    axiosInstance
+    axios
       .get(url, config)
       .then((res: AxiosResponse<T>) => {
         setResponse(res.data);
@@ -24,7 +24,7 @@ export const useAxiosGet = <T>(
 };
 
 export const useAxiosPost = <T>(
-  axiosInstance: AxiosInstance,
+  axios: AxiosInstance,
   url: string,
   config?: AxiosRequestConfig
 ): [T, AxiosError] => {
@@ -32,7 +32,7 @@ export const useAxiosPost = <T>(
   const [error, setError] = useState<AxiosError>();
 
   useEffect(() => {
-    axiosInstance
+    axios
       .post(url, config)
       .then((res: AxiosResponse<T>) => {
         setResponse(res.data);
