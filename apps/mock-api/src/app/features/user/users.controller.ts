@@ -36,11 +36,11 @@ export class UserController {
   }
 
   @Get(':id')
-  getUser(@Param('id') id: string): Observable<GetUserResponse> {
-    if (!this.userService.doesUserExist(Number(id))) {
+  getUser(@Param('id') id: number): Observable<GetUserResponse> {
+    if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    return this.userService.getUserById(Number(id));
+    return this.userService.getUserById(id);
   }
 
   @Post()
@@ -53,28 +53,28 @@ export class UserController {
 
   @Put(':id')
   updateUser(
-    @Param('id') id: string,
+    @Param('id') id: number,
     @Body() params: User
   ): Observable<UpdateUserResponse> {
-    if (!this.userService.doesUserExist(Number(id))) {
+    if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    if (this.userService.isUserDuplicate(params, Number(id))) {
+    if (this.userService.isUserDuplicate(params, id)) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
-    return this.userService.updateUser(Number(id), params);
+    return this.userService.updateUser(id, params);
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: string): Observable<number> {
-    if (!this.userService.doesUserExist(Number(id))) {
+  deleteUser(@Param('id') id: number): Observable<number> {
+    if (!this.userService.doesUserExist(id)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    return this.userService.deleteUser(Number(id));
+    return this.userService.deleteUser(id);
   }
 
   @Delete()
-  deleteUsers(@Body() ids: string[]): Observable<number[]> {
-    return this.userService.deleteUsers(ids.map((id: string) => Number(id)));
+  deleteUsers(@Body() ids: number[]): Observable<number[]> {
+    return this.userService.deleteUsers(ids.map((id: number) => id));
   }
 }

@@ -17,7 +17,7 @@ export class UserApiService {
     this.addInterceptors();
   }
 
-  getUser(userId: string): Promise<AxiosResponse<GetUserResponse>> {
+  getUser(userId: number): Promise<AxiosResponse<GetUserResponse>> {
     return this.axios.get<GetUserResponse>(`${UserApiUri.Users}/${userId}`);
   }
 
@@ -27,10 +27,14 @@ export class UserApiService {
   }
 
   updateUser(
-    userId: string,
+    userId: number,
     values: UserDetails
   ): Promise<AxiosResponse<UpdateUserResponse>> {
     return this.axios.put<UpdateUserResponse>(`${UserApiUri.Users}/${userId}`, values);
+  }
+
+  deleteUser(userId: number): Promise<AxiosResponse<number>> {
+    return this.axios.delete<number>(`${UserApiUri.Users}/${userId}`);
   }
 
   /**

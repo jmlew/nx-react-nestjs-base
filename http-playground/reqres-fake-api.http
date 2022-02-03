@@ -2,7 +2,9 @@
 # Api key and other global vars are defines in .vscode/settings.json "rest-client.environmentVariables"
 
 @pageIndex = 1
-@userId = 634
+@userId = 1
+
+@regressFakeApiBase = http://localhost:3333/api/
 
 
 ### Get All Users
@@ -26,3 +28,6 @@ PUT {{regressFakeApiBase}}users/{{userId}}
     "name": "Jasonimoo",
     "job": "Guru"
 }
+
+### Delete User
+DELETE {{regressFakeApiBase}}users/{{userId}}

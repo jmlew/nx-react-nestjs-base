@@ -5,7 +5,8 @@ import { UsersListContainer } from '../containers';
 
 export function UsersView() {
   const [searchParams] = useSearchParams();
-  const pageIndex = searchParams.get('page');
+  const page: string | null = searchParams.get('page');
+  const pageIndex: number = page == null ? 1 : parseInt(page, 10);
 
   return (
     <UsersListScreen>

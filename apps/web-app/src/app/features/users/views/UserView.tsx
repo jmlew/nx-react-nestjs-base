@@ -4,9 +4,11 @@ import { UserContainer } from '../containers';
 
 export function UserView() {
   const { userId } = useParams();
-  return userId == null ? (
-    <ErrorMessage message="No user ID"></ErrorMessage>
-  ) : (
-    <UserContainer userId={userId} />
-  );
+
+  if (userId == null) {
+    return <ErrorMessage message="No user ID"></ErrorMessage>;
+  } else {
+    const id: number = parseInt(userId, 10);
+    return <UserContainer userId={id} />;
+  }
 }

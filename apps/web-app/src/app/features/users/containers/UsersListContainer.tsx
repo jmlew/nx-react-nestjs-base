@@ -16,7 +16,7 @@ import { getApiErrorMessage } from '../../../core/api/utils';
 import { UsersList } from '../components';
 
 interface UserContainerProps {
-  pageIndex: string | null;
+  pageIndex: number;
 }
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
@@ -27,24 +27,37 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   );
   const [usersData, setUsersData] = useState<User[]>();
 
+  const { loadStatus } = apiState;
+
   useEffect(() => {
     if (apiState.loadStatus === ProgressStatus.Idle) {
       handleGetUsers();
     }
-  }, [apiState]);
+  }, [loadStatus]);
 
   function handleGetUsers() {
-    const page: number = pageIndex == null ? 1 : parseInt(pageIndex, 10);
+    setApiState(fromSharedUtils.onApiStateLoad(apiState));
     userService
-      .getUsers(page)
+      .getUsers(pageIndex)
       .then((res: AxiosResponse<GetUsersResponse>) => {
         setUsersData(res.data.data);
         setApiState(fromSharedUtils.onApiStateLoadComplete(apiState));
       })
       .catch((error: AxiosError) =>
-        setApiState(
-          fromSharedUtils.onApiStateLoadFailed(apiState, getApiErrorMessage(error))
-        )
+        setApiState(fromSharedUtils.onApiStateLoadFailed(apiState, error.message))
+      );
+  }
+
+  function handleDeleteUser(userId: number) {
+    setApiState(fromSharedUtils.onApiStateUpdate(apiState));
+    userService
+      .deleteUser(userId)
+      .then((res: AxiosResponse<number>) => {
+        // TODO: Reset load status via shared utils method.
+        setApiState(fromSharedUtils.onApiStateInit());
+      })
+      .catch((error: AxiosError) =>
+        setApiState(fromSharedUtils.onApiStateUpdateFailed(apiState, error.message))
       );
   }
 
@@ -61,7 +74,11 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   }
 
   return usersData ? (
-    <UsersList users={usersData} onEditUser={handleEditUser} />
+    <UsersList
+      users={usersData}
+      onEditUser={handleEditUser}
+      onDeleteUser={handleDeleteUser}
+    />
   ) : (
     <Loading />
   );

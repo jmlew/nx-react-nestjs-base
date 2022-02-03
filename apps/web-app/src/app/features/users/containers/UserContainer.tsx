@@ -20,7 +20,7 @@ import { useAxiosGet } from '../../../core/api/hooks';
 import { UserApiUri } from '@api-interfaces/features/enums/user-api.enum';
 
 interface UserContainerProps {
-  userId: string;
+  userId: number;
 }
 
 export function UserContainer({ userId }: UserContainerProps) {
@@ -49,7 +49,7 @@ export function UserContainer({ userId }: UserContainerProps) {
     navigate(`/users`);
   }
 
-  function handleGetUser(userId: string) {
+  function handleGetUser(userId: number) {
     setApiState(fromSharedUtils.onApiStateLoad(apiState));
     userService
       .getUser(userId)
