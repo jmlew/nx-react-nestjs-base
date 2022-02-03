@@ -5,18 +5,10 @@ import { EnvVar } from '../../../shared/enums/environment.enum';
 import { AxiosApiService } from '../models/axios.model';
 
 export class UserAxiosApiService implements AxiosApiService {
-  private static singletonInstance: UserAxiosApiService;
   axiosInstance: AxiosInstance;
 
-  private constructor() {
+  constructor() {
     this.axiosInstance = this.createAxiosInstance();
-  }
-
-  static get instance(): UserAxiosApiService {
-    if (!UserAxiosApiService.singletonInstance) {
-      UserAxiosApiService.singletonInstance = new UserAxiosApiService();
-    }
-    return this.singletonInstance;
   }
 
   createAxiosInstance() {

@@ -1,3 +1,4 @@
+import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import {
   GetUserResponse,
   GetUsersResponse,
@@ -5,11 +6,16 @@ import {
   UserDetails,
 } from '@api-interfaces/features/models/user-api-data.model';
 import { UserApiUri, UserApiParam } from '@api-interfaces/features/enums/user-api.enum';
-import { AxiosInstance, AxiosResponse } from 'axios';
+
 import { UserAxiosApiService } from './user-axios-api.service';
+import { InterceptorsHandler } from '../models/axios.model';
+import { AxiosApiInterceptorsService } from './axios-api-interceptors.service';
+import { getApiErrorMessage, normaliseApiErrorMessage } from '../utils';
 
 export class UserApiService {
-  constructor(private axios: AxiosInstance) {}
+  constructor(private axios: AxiosInstance) {
+    this.addInterceptors();
+  }
 
   getUser(userId: string): Promise<AxiosResponse<GetUserResponse>> {
     return this.axios.get<GetUserResponse>(`${UserApiUri.Users}/${userId}`);
@@ -26,6 +32,26 @@ export class UserApiService {
   ): Promise<AxiosResponse<UpdateUserResponse>> {
     return this.axios.put<UpdateUserResponse>(`${UserApiUri.Users}/${userId}`, values);
   }
-}
 
-export const userService = new UserApiService(UserAxiosApiService.instance.axiosInstance);
+  /**
+   * Adds custom API interceptor callbacks to all CRUD methods within this service.
+   */
+  private addInterceptors() {
+    const handlers: InterceptorsHandler = {
+      onInterceptResponseError: (error: AxiosError) => {
+        // Replace the default error message with the most useful AxiosError value.
+        normaliseApiErrorMessage(error);
+      },
+      // onInterceptRequestError: (error: AxiosError) => {},
+      // onInterceptResponse: (config: AxiosResponse) => {},
+      // onInterceptRequest: (config: AxiosRequestConfig) => {},
+    };
+
+    const interceptors: AxiosApiInterceptorsService = new AxiosApiInterceptorsService(
+      this.axios
+    );
+    interceptors.addHandlers(handlers);
+  }
+}
+const axiosService: UserAxiosApiService = new UserAxiosApiService();
+export const userService: UserApiService = new UserApiService(axiosService.axiosInstance);
