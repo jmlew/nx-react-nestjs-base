@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import {
   CreateUserResponse,
   GetUserResponse,
@@ -9,7 +8,6 @@ import {
   UserDetails,
 } from '@api-interfaces/features/models/user-api-data.model';
 
-import { toStreamWithDelay } from '../../shared/utils';
 import * as fromUtilsLib from '@shared-utils';
 import * as usersDb from '../../../assets/db/users.json';
 
@@ -18,43 +16,47 @@ export class UserService {
   private usersDb: GetUsersResponse;
 
   constructor() {
+    this.initData();
+  }
+
+  initData() {
     this.usersDb = { ...usersDb };
   }
 
-  getAllUsers(): Observable<GetUsersResponse> {
-    return toStreamWithDelay(this.usersDb);
+  getAllUsers(): GetUsersResponse {
+    return this.usersDb;
   }
 
-  getUserById(id: number): Observable<GetUserResponse> {
+  getUserById(id: number): GetUserResponse {
     const user: User = fromUtilsLib.getById(this.usersDb.data, id);
     const response: GetUserResponse = { data: user };
-    return toStreamWithDelay(response);
+    return response;
   }
 
-  createUser(params: UserDetails): Observable<CreateUserResponse> {
+  createUser(params: UserDetails): CreateUserResponse {
     const user: CreateUserResponse = this.normaliseNewUser(params);
     this.addUserToDb(user);
-    return toStreamWithDelay(user);
+    return user;
   }
 
-  updateUser(id: number, params: UserDetails): Observable<UpdateUserResponse> {
+  updateUser(id: number, params: UserDetails): UpdateUserResponse {
     const current: User = fromUtilsLib.getById(this.usersDb.data, id);
     const user: UpdateUserResponse = this.normaliseEditedUser({
       ...current,
       ...params,
     });
     this.updateUserInDb(user);
-    return toStreamWithDelay(user);
+    return user;
   }
 
-  deleteUser(id: number): Observable<number> {
+  deleteUser(id: number): number {
     this.removeUserFromDb(id);
-    return toStreamWithDelay(id);
+    return id;
   }
 
-  deleteUsers(ids: number[]): Observable<number[]> {
+  deleteUsers(ids: number[]): number[] {
     this.removeUsersFromDb(ids);
-    return toStreamWithDelay(ids);
+    return ids;
   }
 
   doesUserExist(id: number): boolean {

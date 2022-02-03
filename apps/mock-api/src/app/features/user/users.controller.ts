@@ -19,6 +19,7 @@ import {
   UserDetails,
 } from '@api-interfaces/features/models/user-api-data.model';
 
+import { toStreamWithDelay } from '../../shared/utils';
 import { UserService } from './user.service';
 
 enum ErrorMessage {
@@ -30,17 +31,24 @@ enum ErrorMessage {
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Get('reset')
+  getResetDb(): string {
+    this.userService.initData();
+    return 'Mock API Users DB has been reset.';
+  }
+
   @Get()
   getUsers(): Observable<GetUsersResponse> {
-    return this.userService.getAllUsers();
+    return this.toStream(this.userService.getAllUsers());
   }
 
   @Get(':id')
-  getUser(@Param('id') id: number): Observable<GetUserResponse> {
-    if (!this.userService.doesUserExist(id)) {
+  getUser(@Param('id') id: string): Observable<GetUserResponse> {
+    const userId: number = parseInt(id, 10);
+    if (!this.userService.doesUserExist(userId)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    return this.userService.getUserById(id);
+    return this.toStream(this.userService.getUserById(userId));
   }
 
   @Post()
@@ -48,33 +56,40 @@ export class UserController {
     if (this.userService.isUserDuplicate(params)) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
-    return this.userService.createUser(params);
+    return this.toStream(this.userService.createUser(params));
   }
 
   @Put(':id')
   updateUser(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() params: User
   ): Observable<UpdateUserResponse> {
-    if (!this.userService.doesUserExist(id)) {
+    const userId: number = parseInt(id, 10);
+    if (!this.userService.doesUserExist(userId)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    if (this.userService.isUserDuplicate(params, id)) {
+    if (this.userService.isUserDuplicate(params, userId)) {
       throw new BadRequestException(ErrorMessage.DuplicateEmail);
     }
-    return this.userService.updateUser(id, params);
+    return this.toStream(this.userService.updateUser(userId, params));
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: number): Observable<number> {
-    if (!this.userService.doesUserExist(id)) {
+  deleteUser(@Param('id') id: string): Observable<number> {
+    const userId: number = parseInt(id, 10);
+    if (!this.userService.doesUserExist(userId)) {
       throw new BadRequestException(ErrorMessage.NoUserMatch);
     }
-    return this.userService.deleteUser(id);
+    return this.toStream(this.userService.deleteUser(userId));
   }
 
   @Delete()
-  deleteUsers(@Body() ids: number[]): Observable<number[]> {
-    return this.userService.deleteUsers(ids.map((id: number) => id));
+  deleteUsers(@Body() ids: string[]): Observable<number[]> {
+    const userIds: number[] = ids.map((id: string) => parseInt(id, 10));
+    return this.toStream(this.userService.deleteUsers(userIds));
+  }
+
+  private toStream<T>(data: T, delay = 500) {
+    return toStreamWithDelay(data, delay);
   }
 }

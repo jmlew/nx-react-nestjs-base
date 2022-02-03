@@ -2,8 +2,9 @@ import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'ax
 
 export interface AxiosApiService {
   baseUrl: string;
-  axiosInstance: AxiosInstance;
+  instance: AxiosInstance;
   createAxiosInstance(): AxiosInstance;
+  abortController(): void;
 }
 
 export interface InterceptorsHandler {

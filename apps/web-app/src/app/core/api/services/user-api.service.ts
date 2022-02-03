@@ -1,4 +1,4 @@
-import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import {
   GetUserResponse,
   GetUsersResponse,
@@ -8,12 +8,15 @@ import {
 import { UserApiUri, UserApiParam } from '@api-interfaces/features/enums/user-api.enum';
 
 import { UserAxiosApiService } from './user-axios-api.service';
-import { InterceptorsHandler } from '../models/axios.model';
+import { AxiosApiService, InterceptorsHandler } from '../models/axios.model';
 import { AxiosApiInterceptorsService } from './axios-api-interceptors.service';
-import { getApiErrorMessage, normaliseApiErrorMessage } from '../utils';
+import { normaliseApiErrorMessage } from '../utils';
 
 export class UserApiService {
-  constructor(private axios: AxiosInstance) {
+  private axios: AxiosInstance;
+
+  constructor(private axiosApiService: AxiosApiService) {
+    this.axios = axiosApiService.instance;
     this.addInterceptors();
   }
 
@@ -37,6 +40,10 @@ export class UserApiService {
     return this.axios.delete<number>(`${UserApiUri.Users}/${userId}`);
   }
 
+  abort() {
+    this.axiosApiService.abortController();
+  }
+
   /**
    * Adds custom API interceptor callbacks to all CRUD methods within this service.
    */
@@ -58,4 +65,4 @@ export class UserApiService {
   }
 }
 const axiosService: UserAxiosApiService = new UserAxiosApiService();
-export const userService: UserApiService = new UserApiService(axiosService.axiosInstance);
+export const userService: UserApiService = new UserApiService(axiosService);

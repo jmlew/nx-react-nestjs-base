@@ -1,7 +1,7 @@
-import { ProgressStatus } from '../enums/api-states.enum';
+import { ApiStatus, ApiRequest } from '../enums/api-states.enum';
 
-export interface ApiDataState {
-  errorMessage: string | null;
-  loadStatus: ProgressStatus;
-  updateStatus: ProgressStatus;
+export interface ApiState {
+  status: ApiStatus;
+  request: ApiRequest;
+  error: string | null;
 }
