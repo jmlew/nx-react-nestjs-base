@@ -7,7 +7,8 @@
     "serve:web": "nx run web-app:serve",
     "serve:api": "nx run mock-api:serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "format": "prettier --ignore-path .gitignore --write ."
   },
   "private": true,
   "dependencies": {

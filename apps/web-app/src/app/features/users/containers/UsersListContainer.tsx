@@ -20,7 +20,6 @@ interface UserContainerProps {
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
-
   const [apiState, setApiState] = useState<ApiState>(ApiStateManager.onInit());
   const [usersData, setUsersData] = useState<User[]>();
 
@@ -31,7 +30,9 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     }
 
     // Abort all API calls upon unmounting.
-    // return () => userService.abort();
+    return () => {
+      // userService.abort();
+    };
   }, [apiState]);
 
   function handleGetUsers() {

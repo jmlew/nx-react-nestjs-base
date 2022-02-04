@@ -1,0 +1,9 @@
+tabWidth: 2
+useTabs: false
+semi: true
+printWidth: 90
+bracketSpacing: true
+arrowParens: always
+trailingComma: 'es5'
+singleQuote: true
+jsxSingleQuote: false

@@ -36,7 +36,9 @@ export function UserContainer({ userId }: UserContainerProps) {
     }
 
     // Abort all API calls upon unmounting.
-    // return () => userService.abort();
+    return () => {
+      // userService.abort();
+    };
   }, [apiState]);
 
   function handleGetUser(userId: number) {
