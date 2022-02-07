@@ -14,7 +14,7 @@ export class ApiStateManager {
     };
   }
 
-  static onPending(request: ApiRequest = ApiRequest.Read): ApiState {
+  static onPending(request: ApiRequest): ApiState {
     return {
       request,
       status: ApiStatus.Pending,
@@ -22,7 +22,7 @@ export class ApiStateManager {
     };
   }
 
-  static onCompleted(request: ApiRequest = ApiRequest.Read): ApiState {
+  static onCompleted(request: ApiRequest): ApiState {
     return {
       request,
       status: ApiStatus.Completed,
@@ -30,7 +30,7 @@ export class ApiStateManager {
     };
   }
 
-  static onFailed(error: string, request: ApiRequest = ApiRequest.Read): ApiState {
+  static onFailed(error: string, request: ApiRequest): ApiState {
     return {
       request,
       status: ApiStatus.Failed,
@@ -38,7 +38,7 @@ export class ApiStateManager {
     };
   }
 
-  static onCancelled(request: ApiRequest = ApiRequest.Read): ApiState {
+  static onCancelled(request: ApiRequest): ApiState {
     return {
       request,
       status: ApiStatus.Cancelled,
@@ -51,35 +51,25 @@ export class ApiStateManager {
    * Useful for the RTK createReducer functions which require mutating the current state.
    */
 
-  static onPendingMutable(state: ApiState, request: ApiRequest = ApiRequest.Read): void {
+  static onPendingMutable(state: ApiState, request: ApiRequest): void {
     state.status = ApiStatus.Pending;
     state.request = request;
     state.error = null;
   }
 
-  static onCompletedMutable(
-    state: ApiState,
-    request: ApiRequest = ApiRequest.Read
-  ): void {
+  static onCompletedMutable(state: ApiState, request: ApiRequest): void {
     state.status = ApiStatus.Completed;
     state.request = request;
     state.error = null;
   }
 
-  static onFailedMutable(
-    state: ApiState,
-    error: string,
-    request: ApiRequest = ApiRequest.Read
-  ): void {
+  static onFailedMutable(state: ApiState, error: string, request: ApiRequest): void {
     state.status = ApiStatus.Failed;
     state.request = request;
     state.error = error;
   }
 
-  static onCancelledMutable(
-    state: ApiState,
-    request: ApiRequest = ApiRequest.Read
-  ): void {
+  static onCancelledMutable(state: ApiState, request: ApiRequest): void {
     state.status = ApiStatus.Cancelled;
     state.request = request;
     state.error = null;

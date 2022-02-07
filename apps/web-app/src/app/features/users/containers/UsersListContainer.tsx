@@ -34,16 +34,17 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   }, []);
 
   function handleGetUsers() {
-    setApiState(ApiStateManager.onPending());
+    const request: ApiRequest = ApiRequest.Read;
+    setApiState(ApiStateManager.onPending(request));
     userService
       .getUsers(pageIndex)
       .then((res: AxiosResponse<GetUsersResponse>) => {
         setUsersData(res.data.data);
-        setApiState(ApiStateManager.onCompleted());
+        setApiState(ApiStateManager.onCompleted(request));
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        setApiState(ApiStateManager.onFailed(message));
+        setApiState(ApiStateManager.onFailed(message, request));
         setAlert({ isShown: true, message });
       });
   }

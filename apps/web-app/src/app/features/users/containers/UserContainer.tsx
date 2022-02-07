@@ -44,14 +44,17 @@ export function UserContainer({ userId }: UserContainerProps) {
   }, [apiState]);
 
   function handleGetUser(userId: number) {
-    setApiState(ApiStateManager.onPending());
+    const request: ApiRequest = ApiRequest.Read;
+    setApiState(ApiStateManager.onPending(request));
     userService
       .getUser(userId)
       .then((res: AxiosResponse<GetUserResponse>) => {
         setUserData(res.data.data);
-        setApiState(ApiStateManager.onCompleted());
+        setApiState(ApiStateManager.onCompleted(request));
       })
-      .catch((error: AxiosError) => setApiState(ApiStateManager.onFailed(error.message)));
+      .catch((error: AxiosError) =>
+        setApiState(ApiStateManager.onFailed(error.message, request))
+      );
   }
 
   function handleUpdateUser(values: UserDetails) {
