@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -23,12 +23,12 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const [apiState, setApiState] = useState<ApiState>(ApiStateManager.onInit());
   const [usersData, setUsersData] = useState<User[]>();
 
+  // Handle changes in status for API load and delete requests.
   useEffect(() => {
-    // Handle changes in status for API load and delete requests.
-    if (ApiStateManager.isRead(apiState) && ApiStateManager.isIdle(apiState)) {
+    if (ApiStateManager.isIdle(apiState)) {
       handleGetUsers();
     }
-  }, [apiState]);
+  }, []);
 
   function handleGetUsers() {
     setApiState(ApiStateManager.onPending());
@@ -38,14 +38,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
         setUsersData(res.data.data);
         setApiState(ApiStateManager.onCompleted());
       })
-      .catch((error: AxiosError) => {
-        if (axios.isCancel(error)) {
-          console.log('Request canceled', error.message);
-        } else {
-          // handle error
-          setApiState(ApiStateManager.onFailed(error.message));
-        }
-      });
+      .catch((error: AxiosError) => setApiState(ApiStateManager.onFailed(error.message)));
   }
 
   function handleDeleteUser(userId: number) {

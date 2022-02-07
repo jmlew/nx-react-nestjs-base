@@ -9,7 +9,7 @@ export class ApiStateManager {
   static onInit(): ApiState {
     return {
       status: ApiStatus.Idle,
-      request: ApiRequest.Read,
+      request: null,
       error: null,
     };
   }
@@ -121,7 +121,7 @@ export class ApiStateManager {
     return state.status;
   }
 
-  static getRequest(state: ApiState): ApiRequest {
+  static getRequest(state: ApiState): ApiRequest | null {
     return state.request;
   }
 
