@@ -1,5 +1,6 @@
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import {
+  CreateUserResponse,
   GetUserResponse,
   GetUsersResponse,
   UpdateUserResponse,
@@ -8,7 +9,7 @@ import {
 import { UserApiUri, UserApiParam } from '@api-interfaces/features/enums/user-api.enum';
 
 import { UserAxiosApiService } from './user-axios-api.service';
-import { AxiosApiService, InterceptorsHandler } from '../models/axios.model';
+import { AxiosApiService, InterceptorsHandlers } from '../models/axios.model';
 import { AxiosApiInterceptorsService } from './axios-api-interceptors.service';
 import { normaliseApiErrorMessage } from '../utils';
 
@@ -36,6 +37,10 @@ export class UserApiService {
     return this.axios.put<UpdateUserResponse>(`${UserApiUri.Users}/${userId}`, values);
   }
 
+  createUser(values: UserDetails): Promise<AxiosResponse<CreateUserResponse>> {
+    return this.axios.post<CreateUserResponse>(UserApiUri.Users, values);
+  }
+
   deleteUser(userId: number): Promise<AxiosResponse<number>> {
     return this.axios.delete<number>(`${UserApiUri.Users}/${userId}`);
   }
@@ -48,7 +53,7 @@ export class UserApiService {
    * Adds custom API interceptor callbacks to all CRUD methods within this service.
    */
   private addInterceptors() {
-    const handlers: InterceptorsHandler = {
+    const handlers: InterceptorsHandlers = {
       onInterceptResponseError: (error: AxiosError) => {
         // Replace the default error message with the most useful AxiosError value.
         normaliseApiErrorMessage(error);

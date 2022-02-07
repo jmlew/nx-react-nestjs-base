@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ButtonDefault } from '../../shared/components';
@@ -10,6 +11,7 @@ export function AppHome() {
   const handleSampleClick = () => {
     navigate('users');
   };
+
   return (
     <Box sx={styles.appHome}>
       <h1>Home Component</h1>

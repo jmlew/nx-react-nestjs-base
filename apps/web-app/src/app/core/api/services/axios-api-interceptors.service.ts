@@ -1,13 +1,13 @@
 import { AxiosRequestConfig, AxiosError, AxiosResponse, AxiosInstance } from 'axios';
-import { InterceptorsHandler } from '../models/axios.model';
+import { InterceptorsHandlers } from '../models/axios.model';
 
 export class AxiosApiInterceptorsService {
-  private interceptorsHandler: InterceptorsHandler;
+  private handlers: InterceptorsHandlers;
 
   constructor(private axiosInstance: AxiosInstance) {}
 
-  addHandlers(handler: InterceptorsHandler) {
-    this.interceptorsHandler = handler;
+  addHandlers(handlers: InterceptorsHandlers) {
+    this.handlers = handlers;
     this.axiosInstance.interceptors.request.use(
       this.interceptRequest.bind(this),
       this.interceptRequestError.bind(this)
@@ -22,8 +22,8 @@ export class AxiosApiInterceptorsService {
    * Adds interceptor logic prior to request being sent.
    */
   private interceptRequest(config: AxiosRequestConfig): AxiosRequestConfig {
-    if (this.interceptorsHandler.onInterceptRequest) {
-      this.interceptorsHandler.onInterceptRequest(config);
+    if (this.handlers.onInterceptRequest) {
+      this.handlers.onInterceptRequest(config);
     }
     return config;
   }
@@ -32,8 +32,8 @@ export class AxiosApiInterceptorsService {
    * Adds interceptor logic prior to request error being handled.
    */
   private interceptRequestError(error: AxiosError): Promise<AxiosError> {
-    if (this.interceptorsHandler.onInterceptRequestError) {
-      this.interceptorsHandler.onInterceptRequestError(error);
+    if (this.handlers.onInterceptRequestError) {
+      this.handlers.onInterceptRequestError(error);
     }
     return Promise.reject(error);
   }
@@ -42,8 +42,8 @@ export class AxiosApiInterceptorsService {
    * Adds interceptor logic prior to response being handled.
    */
   private interceptResponse(response: AxiosResponse): AxiosResponse {
-    if (this.interceptorsHandler.onInterceptResponse) {
-      this.interceptorsHandler.onInterceptResponse(response);
+    if (this.handlers.onInterceptResponse) {
+      this.handlers.onInterceptResponse(response);
     }
     return response;
   }
@@ -52,8 +52,8 @@ export class AxiosApiInterceptorsService {
    * Adds interceptor logic prior to response error being handled.
    */
   private interceptResponseError(error: AxiosError): Promise<AxiosError> {
-    if (this.interceptorsHandler.onInterceptResponseError) {
-      this.interceptorsHandler.onInterceptResponseError(error);
+    if (this.handlers.onInterceptResponseError) {
+      this.handlers.onInterceptResponseError(error);
     }
     return Promise.reject(error);
   }

@@ -7,7 +7,7 @@ export interface AxiosApiService {
   abortController(): void;
 }
 
-export interface InterceptorsHandler {
+export interface InterceptorsHandlers {
   onInterceptRequest?: (config: AxiosRequestConfig) => void;
   onInterceptRequestError?: (error: AxiosError) => void;
   onInterceptResponse?: (config: AxiosResponse) => void;

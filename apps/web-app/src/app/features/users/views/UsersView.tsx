@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { Box, Typography, Card, CardContent } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import { Box, Typography, Card, CardContent, Fab } from '@mui/material';
+import { Add } from '@mui/icons-material';
+import { Link, useSearchParams } from 'react-router-dom';
 import { UsersListContainer } from '../containers';
 
 export function UsersView() {
@@ -9,21 +10,29 @@ export function UsersView() {
   const pageIndex: number = page == null ? 1 : parseInt(page, 10);
 
   return (
-    <UsersListScreen>
-      <UsersListContainer pageIndex={pageIndex} />
-    </UsersListScreen>
-  );
-}
-
-const UsersListScreen: FC = ({ children }) => {
-  return (
     <Box sx={{ width: 400 }}>
-      <Typography gutterBottom variant="h4">
-        Users
-      </Typography>
+      <Header />
       <Card>
-        <CardContent>{children}</CardContent>
+        <CardContent>
+          <UsersListContainer pageIndex={pageIndex} />
+        </CardContent>
       </Card>
     </Box>
   );
-};
+}
+
+const Header = () => (
+  <Box
+    sx={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      mb: 2,
+    }}
+  >
+    <Typography variant="h4">Users</Typography>
+    <Fab component={Link} to="new" size="medium" color="primary" aria-label="new user">
+      <Add />
+    </Fab>
+  </Box>
+);

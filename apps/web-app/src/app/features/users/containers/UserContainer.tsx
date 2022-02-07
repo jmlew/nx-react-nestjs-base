@@ -1,10 +1,11 @@
-import { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ApiState } from '@api-interfaces/shared/models/api-states.model';
 import { ApiRequest } from '@api-interfaces/shared/enums/api-states.enum';
 import {
+  CreateUserResponse,
   GetUserResponse,
   UpdateUserResponse,
   User,
@@ -17,7 +18,7 @@ import { userService } from '../../../core/api/services';
 import { UserDetailsForm } from '../components';
 
 interface UserContainerProps {
-  userId: number;
+  userId?: number;
 }
 
 export function UserContainer({ userId }: UserContainerProps) {
@@ -27,18 +28,20 @@ export function UserContainer({ userId }: UserContainerProps) {
 
   useEffect(() => {
     // Handle changes in status for API load and update requests.
-    if (ApiStateManager.isReadReq(apiState) && ApiStateManager.isIdle(apiState)) {
-      handleGetUser(userId);
+    if (ApiStateManager.isIdle(apiState)) {
+      if (userId == null) {
+        // Create new user.
+      } else {
+        // Edit existing user.
+        if (ApiStateManager.isRead(apiState)) {
+          handleGetUser(userId!);
+        }
+      }
     }
 
-    if (ApiStateManager.isUpdateReq(apiState) && ApiStateManager.isCompleted(apiState)) {
+    if (ApiStateManager.isUpdate(apiState) && ApiStateManager.isCompleted(apiState)) {
       goToList();
     }
-
-    // Abort all API calls upon unmounting.
-    return () => {
-      // userService.abort();
-    };
   }, [apiState]);
 
   function handleGetUser(userId: number) {
@@ -49,15 +52,35 @@ export function UserContainer({ userId }: UserContainerProps) {
         setUserData(res.data.data);
         setApiState(ApiStateManager.onCompleted());
       })
-      .catch((error: AxiosError) => setApiState(ApiStateManager.onFailed(error.message)));
+      .catch((error: AxiosError) => {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error.message);
+        } else {
+          // handle error
+          setApiState(ApiStateManager.onFailed(error.message));
+        }
+      });
   }
 
   function handleUpdateUser(values: UserDetails) {
     const request: ApiRequest = ApiRequest.Update;
     setApiState(ApiStateManager.onPending(request));
     userService
-      .updateUser(userId, values)
+      .updateUser(userId!, values)
       .then((res: AxiosResponse<UpdateUserResponse>) =>
+        setApiState(ApiStateManager.onCompleted(request))
+      )
+      .catch((error: AxiosError) =>
+        setApiState(ApiStateManager.onFailed(error.message, request))
+      );
+  }
+
+  function handleCreateUser(values: UserDetails) {
+    const request: ApiRequest = ApiRequest.Update;
+    setApiState(ApiStateManager.onPending(request));
+    userService
+      .createUser(values)
+      .then((res: AxiosResponse<CreateUserResponse>) =>
         setApiState(ApiStateManager.onCompleted(request))
       )
       .catch((error: AxiosError) =>
@@ -69,7 +92,7 @@ export function UserContainer({ userId }: UserContainerProps) {
     navigate(`/users`);
   }
 
-  if (ApiStateManager.isReadReq(apiState) && ApiStateManager.isPending(apiState)) {
+  if (ApiStateManager.isRead(apiState) && ApiStateManager.isPending(apiState)) {
     return <Loading />;
   } else {
     return (
@@ -78,12 +101,15 @@ export function UserContainer({ userId }: UserContainerProps) {
         {ApiStateManager.isFailed(apiState) && (
           <ErrorMessage message={ApiStateManager.getError(apiState)!} />
         )}
-        {userData != null && (
+        {userId != null && userData != null && (
           <UserDetailsForm
             user={userData}
             onSubmit={handleUpdateUser}
             onCancel={goToList}
           />
+        )}
+        {userId == null && (
+          <UserDetailsForm onSubmit={handleCreateUser} onCancel={goToList} />
         )}
       </>
     );

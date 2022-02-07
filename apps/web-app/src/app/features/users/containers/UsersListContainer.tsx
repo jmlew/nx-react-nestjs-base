@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -25,14 +25,9 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
 
   useEffect(() => {
     // Handle changes in status for API load and delete requests.
-    if (ApiStateManager.isReadReq(apiState) && ApiStateManager.isIdle(apiState)) {
+    if (ApiStateManager.isRead(apiState) && ApiStateManager.isIdle(apiState)) {
       handleGetUsers();
     }
-
-    // Abort all API calls upon unmounting.
-    return () => {
-      // userService.abort();
-    };
   }, [apiState]);
 
   function handleGetUsers() {
@@ -43,7 +38,14 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
         setUsersData(res.data.data);
         setApiState(ApiStateManager.onCompleted());
       })
-      .catch((error: AxiosError) => setApiState(ApiStateManager.onFailed(error.message)));
+      .catch((error: AxiosError) => {
+        if (axios.isCancel(error)) {
+          console.log('Request canceled', error.message);
+        } else {
+          // handle error
+          setApiState(ApiStateManager.onFailed(error.message));
+        }
+      });
   }
 
   function handleDeleteUser(userId: number) {
