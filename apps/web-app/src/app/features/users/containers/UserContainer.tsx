@@ -18,6 +18,7 @@ import { userService } from '../../../core/api/services';
 import { UserDetailsForm } from '../components';
 import { useAlert } from '../../../core/alert/context';
 import { AlertType } from '../../../core/alert/enums/alert.enum';
+import { getUserFormInitialValues } from '../utils';
 
 interface UserContainerProps {
   userId?: number;
@@ -28,10 +29,11 @@ export function UserContainer({ userId }: UserContainerProps) {
   const [apiState, setApiState] = useState<ApiState>(ApiStateManager.onInit());
   const [userData, setUserData] = useState<User>();
   const { setAlert } = useAlert();
+  const isNewUser: boolean = userId == null;
 
   // Handle changes in status for API load and update requests.
   useEffect(() => {
-    if (ApiStateManager.isIdle(apiState) && userId != null) {
+    if (ApiStateManager.isIdle(apiState) && !isNewUser) {
       handleGetUser(userId!);
     }
 
@@ -107,15 +109,21 @@ export function UserContainer({ userId }: UserContainerProps) {
       {ApiStateManager.isRead(apiState) && ApiStateManager.isFailed(apiState) && (
         <ErrorMessage message={ApiStateManager.getError(apiState)!} />
       )}
-      {userId == null && (
-        <UserDetailsForm onSubmit={handleCreateUser} onCancel={goToList} />
-      )}
-      {userId != null && userData != null && (
+      {isNewUser ? (
         <UserDetailsForm
-          user={userData}
-          onSubmit={handleUpdateUser}
+          onSubmit={handleCreateUser}
           onCancel={goToList}
+          initialValues={getUserFormInitialValues()}
         />
+      ) : (
+        userData != null && (
+          <UserDetailsForm
+            user={userData}
+            onSubmit={handleUpdateUser}
+            onCancel={goToList}
+            initialValues={getUserFormInitialValues(userData)}
+          />
+        )
       )}
     </>
   );
