@@ -20,7 +20,7 @@ import {
 } from '@api-interfaces/features/models/user-api-data.model';
 
 import { toStreamWithDelay } from '../../shared/utils';
-import { UserService } from './user.service';
+import { UsersService } from './users.service';
 
 enum ErrorMessage {
   NoUserMatch = 'User does not exist in the Mock DB.',
@@ -28,8 +28,8 @@ enum ErrorMessage {
 }
 
 @Controller('users')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+export class UsersController {
+  constructor(private readonly userService: UsersService) {}
 
   @Get('reset')
   getResetDb(): string {

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { ErrorMessage } from '../../../shared/components';
 import { UserContainer } from '../containers';
 
-export function UserView() {
+export function EditUserView() {
   const { userId } = useParams();
 
   if (userId == null) {

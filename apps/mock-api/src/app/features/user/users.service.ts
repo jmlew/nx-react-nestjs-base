@@ -12,7 +12,7 @@ import * as fromUtilsLib from '@shared-utils';
 import * as usersDb from '../../../assets/db/users.json';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   private usersDb: GetUsersResponse;
 
   constructor() {

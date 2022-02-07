@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { Box, Typography, Card, CardContent } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import { Box, Typography, Card, CardContent, Fab } from '@mui/material';
+import { Add } from '@mui/icons-material';
+import { Link, useSearchParams } from 'react-router-dom';
 import { UsersListContainer } from '../containers';
 
 export function UsersView() {
@@ -18,9 +19,25 @@ export function UsersView() {
 const UsersListScreen: FC = ({ children }) => {
   return (
     <Box sx={{ width: 400 }}>
-      <Typography gutterBottom variant="h4">
-        Users
-      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 2,
+        }}
+      >
+        <Typography variant="h4">Users</Typography>
+        <Fab
+          component={Link}
+          to="new"
+          size="medium"
+          color="primary"
+          aria-label="new user"
+        >
+          <Add />
+        </Fab>
+      </Box>
       <Card>
         <CardContent>{children}</CardContent>
       </Card>

@@ -9,16 +9,27 @@ import { isFieldError } from '../../../shared/utils';
 import { userFormAutocompleteMap, userFormValidationSchema } from '../constants';
 
 interface UserDetailsProps {
-  user: User;
+  user?: User;
   onSubmit: (values: UserDetails) => void;
   onCancel: () => void;
 }
 
-export function UserDetailsForm({ user, onSubmit, onCancel }: UserDetailsProps) {
-  const { id: remove, ...initialValues } = user;
+function getInitialValues(user?: User): UserDetails {
+  if (user == null) {
+    return {
+      first_name: '',
+      last_name: '',
+      email: '',
+    };
+  } else {
+    const { id: remove, ...initialValues } = user;
+    return initialValues;
+  }
+}
 
+export function UserDetailsForm({ user, onSubmit, onCancel }: UserDetailsProps) {
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues: getInitialValues(user),
     validationSchema: userFormValidationSchema,
     onSubmit: (values: UserDetails) => {
       onSubmit(values);
@@ -36,7 +47,7 @@ export function UserDetailsForm({ user, onSubmit, onCancel }: UserDetailsProps) 
       <Card sx={{ width: 800 }}>
         <CardContent>
           <Typography gutterBottom variant="h4">
-            User {user.id} Details
+            {user == null ? 'New User' : `Edit User ${user.id}`}
           </Typography>
           <Divider flexItem={true} />
           <Box>
