@@ -101,19 +101,19 @@ export class ApiStateManager {
     return state.status === ApiStatus.Failed;
   }
 
-  static isCreate(state: ApiState): boolean {
+  static isCreateReq(state: ApiState): boolean {
     return state.request === ApiRequest.Create;
   }
 
-  static isRead(state: ApiState): boolean {
+  static isReadReq(state: ApiState): boolean {
     return state.request === ApiRequest.Read;
   }
 
-  static isUpdate(state: ApiState): boolean {
+  static isUpdateReq(state: ApiState): boolean {
     return state.request === ApiRequest.Update;
   }
 
-  static isDelete(state: ApiState): boolean {
+  static isDeleteReq(state: ApiState): boolean {
     return state.request === ApiRequest.Delete;
   }
 
@@ -121,7 +121,7 @@ export class ApiStateManager {
     return state.status;
   }
 
-  static getRequest(state: ApiState): ApiRequest {
+  static getRequest(state: ApiState): ApiRequest | null {
     return state.request;
   }
 

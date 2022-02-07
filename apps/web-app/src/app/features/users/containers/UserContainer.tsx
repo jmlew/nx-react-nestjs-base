@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,20 +26,16 @@ export function UserContainer({ userId }: UserContainerProps) {
   const [apiState, setApiState] = useState<ApiState>(ApiStateManager.onInit());
   const [userData, setUserData] = useState<User>();
 
+  // Handle changes in status for API load and update requests.
   useEffect(() => {
-    // Handle changes in status for API load and update requests.
-    if (ApiStateManager.isIdle(apiState)) {
-      if (userId == null) {
-        // Create new user.
-      } else {
-        // Edit existing user.
-        if (ApiStateManager.isRead(apiState)) {
-          handleGetUser(userId!);
-        }
-      }
+    if (ApiStateManager.isIdle(apiState) && userId != null) {
+      handleGetUser(userId!);
     }
 
-    if (ApiStateManager.isUpdate(apiState) && ApiStateManager.isCompleted(apiState)) {
+    if (
+      ApiStateManager.isCompleted(apiState) &&
+      (ApiStateManager.isUpdate(apiState) || ApiStateManager.isCreate(apiState))
+    ) {
       goToList();
     }
   }, [apiState]);
@@ -52,14 +48,7 @@ export function UserContainer({ userId }: UserContainerProps) {
         setUserData(res.data.data);
         setApiState(ApiStateManager.onCompleted());
       })
-      .catch((error: AxiosError) => {
-        if (axios.isCancel(error)) {
-          console.log('Request canceled', error.message);
-        } else {
-          // handle error
-          setApiState(ApiStateManager.onFailed(error.message));
-        }
-      });
+      .catch((error: AxiosError) => setApiState(ApiStateManager.onFailed(error.message)));
   }
 
   function handleUpdateUser(values: UserDetails) {
@@ -76,7 +65,7 @@ export function UserContainer({ userId }: UserContainerProps) {
   }
 
   function handleCreateUser(values: UserDetails) {
-    const request: ApiRequest = ApiRequest.Update;
+    const request: ApiRequest = ApiRequest.Create;
     setApiState(ApiStateManager.onPending(request));
     userService
       .createUser(values)
@@ -101,15 +90,16 @@ export function UserContainer({ userId }: UserContainerProps) {
         {ApiStateManager.isFailed(apiState) && (
           <ErrorMessage message={ApiStateManager.getError(apiState)!} />
         )}
-        {userId != null && userData != null && (
-          <UserDetailsForm
-            user={userData}
-            onSubmit={handleUpdateUser}
-            onCancel={goToList}
-          />
-        )}
-        {userId == null && (
+        {userId == null ? (
           <UserDetailsForm onSubmit={handleCreateUser} onCancel={goToList} />
+        ) : (
+          userData != null && (
+            <UserDetailsForm
+              user={userData}
+              onSubmit={handleUpdateUser}
+              onCancel={goToList}
+            />
+          )
         )}
       </>
     );
