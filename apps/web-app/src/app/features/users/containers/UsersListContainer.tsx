@@ -13,6 +13,8 @@ import { ApiStateManager } from '@shared-utils';
 import { Loading, ErrorMessage } from '../../../shared/components';
 import { userService } from '../../../core/api/services';
 import { UsersList } from '../components';
+import { useAlert } from '../../../core/alert/context';
+import { AlertType } from '../../../core/alert/enums/alert.enum';
 
 interface UserContainerProps {
   pageIndex: number;
@@ -22,6 +24,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
   const [apiState, setApiState] = useState<ApiState>(ApiStateManager.onInit());
   const [usersData, setUsersData] = useState<User[]>();
+  const { setAlert } = useAlert();
 
   // Handle changes in status for API load and delete requests.
   useEffect(() => {
@@ -38,7 +41,11 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
         setUsersData(res.data.data);
         setApiState(ApiStateManager.onCompleted());
       })
-      .catch((error: AxiosError) => setApiState(ApiStateManager.onFailed(error.message)));
+      .catch((error: AxiosError) => {
+        const { message } = error;
+        setApiState(ApiStateManager.onFailed(message));
+        setAlert({ isShown: true, message });
+      });
   }
 
   function handleDeleteUser(userId: number) {
@@ -47,11 +54,18 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     userService
       .deleteUser(userId)
       .then((res: AxiosResponse<number>) => {
+        setAlert({
+          isShown: true,
+          message: `User ${userId} has been deleted`,
+          type: AlertType.Success,
+        });
         handleGetUsers();
       })
-      .catch((error: AxiosError) =>
-        setApiState(ApiStateManager.onFailed(error.message, request))
-      );
+      .catch((error: AxiosError) => {
+        const { message } = error;
+        setApiState(ApiStateManager.onFailed(message, request));
+        setAlert({ isShown: true, message });
+      });
   }
 
   function handleEditUser(userId: number) {

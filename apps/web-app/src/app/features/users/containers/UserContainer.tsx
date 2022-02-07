@@ -16,6 +16,8 @@ import { ApiStateManager } from '@shared-utils';
 import { Loading, ErrorMessage } from '../../../shared/components';
 import { userService } from '../../../core/api/services';
 import { UserDetailsForm } from '../components';
+import { useAlert } from '../../../core/alert/context';
+import { AlertType } from '../../../core/alert/enums/alert.enum';
 
 interface UserContainerProps {
   userId?: number;
@@ -25,6 +27,7 @@ export function UserContainer({ userId }: UserContainerProps) {
   const navigate = useNavigate();
   const [apiState, setApiState] = useState<ApiState>(ApiStateManager.onInit());
   const [userData, setUserData] = useState<User>();
+  const { setAlert } = useAlert();
 
   // Handle changes in status for API load and update requests.
   useEffect(() => {
@@ -56,12 +59,19 @@ export function UserContainer({ userId }: UserContainerProps) {
     setApiState(ApiStateManager.onPending(request));
     userService
       .updateUser(userId!, values)
-      .then((res: AxiosResponse<UpdateUserResponse>) =>
-        setApiState(ApiStateManager.onCompleted(request))
-      )
-      .catch((error: AxiosError) =>
-        setApiState(ApiStateManager.onFailed(error.message, request))
-      );
+      .then((res: AxiosResponse<UpdateUserResponse>) => {
+        setApiState(ApiStateManager.onCompleted(request));
+        setAlert({
+          isShown: true,
+          message: `User ${userId} has been updated`,
+          type: AlertType.Success,
+        });
+      })
+      .catch((error: AxiosError) => {
+        const { message } = error;
+        setApiState(ApiStateManager.onFailed(message, request));
+        setAlert({ isShown: true, message });
+      });
   }
 
   function handleCreateUser(values: UserDetails) {
@@ -69,39 +79,41 @@ export function UserContainer({ userId }: UserContainerProps) {
     setApiState(ApiStateManager.onPending(request));
     userService
       .createUser(values)
-      .then((res: AxiosResponse<CreateUserResponse>) =>
-        setApiState(ApiStateManager.onCompleted(request))
-      )
-      .catch((error: AxiosError) =>
-        setApiState(ApiStateManager.onFailed(error.message, request))
-      );
+      .then((res: AxiosResponse<CreateUserResponse>) => {
+        setApiState(ApiStateManager.onCompleted(request));
+        setAlert({
+          isShown: true,
+          message: `User ${values.first_name} ${values.last_name} has been created`,
+          type: AlertType.Success,
+        });
+      })
+      .catch((error: AxiosError) => {
+        const { message } = error;
+        setApiState(ApiStateManager.onFailed(message, request));
+        setAlert({ isShown: true, message });
+      });
   }
 
   function goToList() {
     navigate(`/users`);
   }
 
-  if (ApiStateManager.isRead(apiState) && ApiStateManager.isPending(apiState)) {
-    return <Loading />;
-  } else {
-    return (
-      <>
-        {ApiStateManager.isPending(apiState) && <Loading />}
-        {ApiStateManager.isFailed(apiState) && (
-          <ErrorMessage message={ApiStateManager.getError(apiState)!} />
-        )}
-        {userId == null ? (
-          <UserDetailsForm onSubmit={handleCreateUser} onCancel={goToList} />
-        ) : (
-          userData != null && (
-            <UserDetailsForm
-              user={userData}
-              onSubmit={handleUpdateUser}
-              onCancel={goToList}
-            />
-          )
-        )}
-      </>
-    );
-  }
+  return (
+    <>
+      {ApiStateManager.isPending(apiState) && <Loading />}
+      {ApiStateManager.isRead(apiState) && ApiStateManager.isFailed(apiState) && (
+        <ErrorMessage message={ApiStateManager.getError(apiState)!} />
+      )}
+      {userId == null && (
+        <UserDetailsForm onSubmit={handleCreateUser} onCancel={goToList} />
+      )}
+      {userId != null && userData != null && (
+        <UserDetailsForm
+          user={userData}
+          onSubmit={handleUpdateUser}
+          onCancel={goToList}
+        />
+      )}
+    </>
+  );
 }

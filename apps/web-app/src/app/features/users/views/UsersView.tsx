@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { Box, Typography, Card, CardContent, Fab } from '@mui/material';
 import { Add } from '@mui/icons-material';
 import { Link, useSearchParams } from 'react-router-dom';
