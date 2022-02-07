@@ -9,7 +9,7 @@ export class ApiStateManager {
   static onInit(): ApiState {
     return {
       status: ApiStatus.Idle,
-      request: ApiRequest.Read,
+      request: null,
       error: null,
     };
   }
@@ -101,19 +101,19 @@ export class ApiStateManager {
     return state.status === ApiStatus.Failed;
   }
 
-  static isCreateReq(state: ApiState): boolean {
+  static isCreate(state: ApiState): boolean {
     return state.request === ApiRequest.Create;
   }
 
-  static isReadReq(state: ApiState): boolean {
+  static isRead(state: ApiState): boolean {
     return state.request === ApiRequest.Read;
   }
 
-  static isUpdateReq(state: ApiState): boolean {
+  static isUpdate(state: ApiState): boolean {
     return state.request === ApiRequest.Update;
   }
 
-  static isDeleteReq(state: ApiState): boolean {
+  static isDelete(state: ApiState): boolean {
     return state.request === ApiRequest.Delete;
   }
 
