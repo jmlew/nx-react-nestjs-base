@@ -23,6 +23,12 @@ export const registerFormValidationSchema = Yup.object({
     .oneOf([Yup.ref(UserRegisterParam.Password)], FormValidationError.PasswordMatch),
 });
 
+export const userFormLabelMap: Map<UserParam, string> = new Map([
+  [UserParam.Email, 'Email'],
+  [UserParam.FirstName, 'First Name'],
+  [UserParam.LastName, 'Last Name'],
+]);
+
 export const userFormAutocompleteMap: Map<UserParam, string> = new Map([
   [UserParam.Email, 'email'],
   [UserParam.FirstName, 'given-name'],
