@@ -1,22 +1,21 @@
-import * as moment from 'moment';
+import { DateTime } from 'luxon';
 
-/* export function getCurrentDate(): Date {
-  return moment().toDate();
+export function getUtcDateTime(): DateTime {
+  return DateTime.now().toUTC();
 }
 
-export function getCurrentDateString(): string {
-  return dateToString(getCurrentDate());
+export function getLocalDateTime(): DateTime {
+  return DateTime.now();
 }
 
-export function dateToString(date: Date, format = undefined): string {
-  return moment(date).format(format);
+export function getUtcDate(): Date {
+  return getUtcDateTime().toJSDate();
 }
 
-export function dateToStringUtc(date: Date | string, format = undefined): string {
-  return moment(date).format(format);
+export function getLocalDate(): Date {
+  return getLocalDateTime().toJSDate();
 }
 
-export function isDateValid(date: Date | string): boolean {
-  return moment(date).isValid();
+export function getUtcDateToIso(): string {
+  return DateTime.now().toISO();
 }
- */

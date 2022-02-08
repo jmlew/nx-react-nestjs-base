@@ -2,7 +2,7 @@
 # Api key and other global vars are defines in .vscode/settings.json "rest-client.environmentVariables"
 
 @pageIndex = 1
-@userId = 1
+@userId = 2
 
 @regressFakeApiBase = http://localhost:3333/api/
 

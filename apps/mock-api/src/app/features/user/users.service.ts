@@ -87,14 +87,12 @@ export class UsersService {
 
   private normaliseNewUser(params: UserDetails): CreateUserResponse {
     const id: number = fromUtilsLib.getNextCollectionId(this.usersDb.data);
-    // const createdAt: string = fromUtilsLib.getCurrentDateString();
-    const createdAt = 'somedate';
+    const createdAt: string = fromUtilsLib.getUtcDateToIso();
     return { ...params, id, createdAt };
   }
 
   private normaliseEditedUser(user: User) {
-    // const updatedAt: string = fromUtilsLib.getCurrentDateString();
-    const updatedAt = 'somedate';
+    const updatedAt: string = fromUtilsLib.getUtcDateToIso();
     return { ...user, updatedAt };
   }
 }
