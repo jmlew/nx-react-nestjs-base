@@ -1,6 +1,9 @@
 import Box from '@mui/material/Box';
+import { ThemeProvider } from '@mui/material/styles';
 import { Outlet } from 'react-router-dom';
+
 import { AlertProvider } from '../core/alert/containers';
+import { uiTheme } from '../styles';
 
 import { AppContent } from './content/AppContent';
 import { AppFooter } from './footer/AppFooter';
@@ -14,14 +17,16 @@ export const stylesWrapper = {
 
 export function AppShell() {
   return (
-    <Box sx={stylesWrapper}>
-      <Appheader />
-      <AppContent>
-        <AlertProvider>
-          <Outlet />
-        </AlertProvider>
-      </AppContent>
-      <AppFooter />
-    </Box>
+    <ThemeProvider theme={uiTheme}>
+      <Box sx={stylesWrapper}>
+        <Appheader />
+        <AppContent>
+          <AlertProvider>
+            <Outlet />
+          </AlertProvider>
+        </AppContent>
+        <AppFooter />
+      </Box>
+    </ThemeProvider>
   );
 }
