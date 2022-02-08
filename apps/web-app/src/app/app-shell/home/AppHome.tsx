@@ -1,8 +1,6 @@
 import Box from '@mui/material/Box';
-import { useEffect } from 'react';
+import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
-import { ButtonDefault } from '../../shared/components';
 
 import * as styles from './styles';
 
@@ -15,11 +13,9 @@ export function AppHome() {
   return (
     <Box sx={styles.appHome}>
       <h1>Home Component</h1>
-      <ButtonDefault
-        label="Go to Sample Feature"
-        onClick={handleSampleClick}
-        sx={styles.homeButton}
-      />
+      <Button variant="contained" onClick={handleSampleClick}>
+        Go to Sample Feature
+      </Button>
     </Box>
   );
 }

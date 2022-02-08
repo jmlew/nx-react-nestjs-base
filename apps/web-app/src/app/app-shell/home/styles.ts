@@ -4,7 +4,3 @@ export const appHome = {
   justifyContent: 'center',
   margin: '1rem',
 } as const;
-
-export const homeButton = {
-  margin: 5,
-};

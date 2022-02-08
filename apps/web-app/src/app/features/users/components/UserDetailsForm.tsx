@@ -1,13 +1,5 @@
 import { useFormik } from 'formik';
-import {
-  Card,
-  CardContent,
-  CardActions,
-  Button,
-  TextField,
-  Box,
-  Grid,
-} from '@mui/material';
+import { Card, CardContent, CardActions, Button, TextField, Grid } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
@@ -87,9 +79,11 @@ export function UserDetailsForm({
           </Grid>
           <Divider flexItem={true} />
         </CardContent>
-        <CardActions sx={{ justifyContent: 'flex-end' }}>
+        <CardActions sx={{ justifyContent: 'flex-end', mr: 3, mb: 2 }}>
           <Button onClick={onCancel}>Cancel</Button>
-          <Button type="submit">Submit</Button>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
         </CardActions>
       </form>
     </Card>
