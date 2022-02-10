@@ -37,4 +37,3 @@ Content-Type: application/json
 
 ### Delete User
 DELETE {{fakestoreFakeApiBase}}users/{{userId}}
-

@@ -6,9 +6,8 @@ import {
   GetUsersResponse,
   User,
 } from '@api-interfaces/features/models/user-api-data.model';
-import { ApiState } from '@api-interfaces/shared/models/api-states.model';
-import { ApiRequest } from '@api-interfaces/shared/enums/api-states.enum';
-import { ApiStateManager } from '@shared-utils';
+import { ApiRequestMethod } from '@api-interfaces/shared/enums/api-states.enum';
+import { useApiStateManager } from '@shared-utils';
 
 import { Loading, ErrorMessage } from '../../../shared/components';
 import { userService } from '../../../core/api/services';
@@ -22,36 +21,36 @@ interface UserContainerProps {
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
-  const [apiState, setApiState] = useState<ApiState>(ApiStateManager.onInit());
+  const { stateManager } = useApiStateManager();
   const [usersData, setUsersData] = useState<User[]>();
   const { setAlert } = useAlert();
 
   // Handle changes in status for API load and delete requests.
   useEffect(() => {
-    if (ApiStateManager.isIdle(apiState)) {
+    if (stateManager.isInit()) {
       handleGetUsers();
     }
   }, []);
 
   function handleGetUsers() {
-    const request: ApiRequest = ApiRequest.Read;
-    setApiState(ApiStateManager.onPending(request));
+    const request: ApiRequestMethod = ApiRequestMethod.Read;
+    stateManager.onPending(request);
     userService
       .getUsers(pageIndex)
       .then((res: AxiosResponse<GetUsersResponse>) => {
         setUsersData(res.data.data);
-        setApiState(ApiStateManager.onCompleted(request));
+        stateManager.onCompleted(request);
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        setApiState(ApiStateManager.onFailed(message, request));
+        stateManager.onFailed(message, request);
         setAlert({ isShown: true, message });
       });
   }
 
   function handleDeleteUser(userId: number) {
-    const request: ApiRequest = ApiRequest.Delete;
-    setApiState(ApiStateManager.onPending(request));
+    const request: ApiRequestMethod = ApiRequestMethod.Delete;
+    stateManager.onPending(request);
     userService
       .deleteUser(userId)
       .then((res: AxiosResponse<number>) => {
@@ -64,7 +63,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        setApiState(ApiStateManager.onFailed(message, request));
+        stateManager.onFailed(message, request);
         setAlert({ isShown: true, message });
       });
   }
@@ -73,14 +72,12 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     navigate(`${userId}`);
   }
 
-  if (ApiStateManager.isPending(apiState)) {
+  if (stateManager.isPending()) {
     return <Loading />;
   } else {
     return (
       <>
-        {ApiStateManager.isFailed(apiState) && (
-          <ErrorMessage message={ApiStateManager.getError(apiState)!} />
-        )}
+        {stateManager.isFailed() && <ErrorMessage message={stateManager.getError()!} />}
         {usersData != null && (
           <UsersList
             users={usersData}

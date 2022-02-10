@@ -2,7 +2,7 @@
  * State flags to provide progress status.
  */
 export enum ApiStatus {
-  Idle = 'Idle', // process not started yet
+  Init = 'Init', // process not started yet
   Pending = 'Pending', // currently in progress
   Completed = 'Completed', // process completed
   Cancelled = 'Cancelled', // aborted due to cancelation
@@ -12,7 +12,7 @@ export enum ApiStatus {
 /**
  * HTTP CRUD request methods.
  */
-export enum ApiRequest {
+export enum ApiRequestMethod {
   Create = 'Create',
   Read = 'Read',
   Update = 'Update',

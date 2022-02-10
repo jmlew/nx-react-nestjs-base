@@ -1,7 +1,7 @@
-import { ApiStatus, ApiRequest } from '../enums/api-states.enum';
+import { ApiStatus, ApiRequestMethod } from '../enums/api-states.enum';
 
 export interface ApiState {
   status: ApiStatus;
-  request: ApiRequest | null;
+  request: ApiRequestMethod | null;
   error: string | null;
 }

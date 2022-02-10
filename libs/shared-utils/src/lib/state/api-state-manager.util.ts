@@ -1,4 +1,7 @@
-import { ApiRequest, ApiStatus } from '@api-interfaces/shared/enums/api-states.enum';
+import {
+  ApiRequestMethod,
+  ApiStatus,
+} from '@api-interfaces/shared/enums/api-states.enum';
 import { ApiState } from '@api-interfaces/shared/models/api-states.model';
 
 /**
@@ -8,13 +11,13 @@ import { ApiState } from '@api-interfaces/shared/models/api-states.model';
 export class ApiStateManager {
   static onInit(): ApiState {
     return {
-      status: ApiStatus.Idle,
+      status: ApiStatus.Init,
       request: null,
       error: null,
     };
   }
 
-  static onPending(request: ApiRequest): ApiState {
+  static onPending(request: ApiRequestMethod): ApiState {
     return {
       request,
       status: ApiStatus.Pending,
@@ -22,7 +25,7 @@ export class ApiStateManager {
     };
   }
 
-  static onCompleted(request: ApiRequest): ApiState {
+  static onCompleted(request: ApiRequestMethod): ApiState {
     return {
       request,
       status: ApiStatus.Completed,
@@ -30,7 +33,7 @@ export class ApiStateManager {
     };
   }
 
-  static onFailed(error: string, request: ApiRequest): ApiState {
+  static onFailed(error: string, request: ApiRequestMethod): ApiState {
     return {
       request,
       status: ApiStatus.Failed,
@@ -38,7 +41,7 @@ export class ApiStateManager {
     };
   }
 
-  static onCancelled(request: ApiRequest): ApiState {
+  static onCancelled(request: ApiRequestMethod): ApiState {
     return {
       request,
       status: ApiStatus.Cancelled,
@@ -51,36 +54,40 @@ export class ApiStateManager {
    * Useful for the RTK createReducer functions which require mutating the current state.
    */
 
-  static onPendingMutable(state: ApiState, request: ApiRequest): void {
+  static onPendingMutable(state: ApiState, request: ApiRequestMethod): void {
     state.status = ApiStatus.Pending;
     state.request = request;
     state.error = null;
   }
 
-  static onCompletedMutable(state: ApiState, request: ApiRequest): void {
+  static onCompletedMutable(state: ApiState, request: ApiRequestMethod): void {
     state.status = ApiStatus.Completed;
     state.request = request;
     state.error = null;
   }
 
-  static onFailedMutable(state: ApiState, error: string, request: ApiRequest): void {
+  static onFailedMutable(
+    state: ApiState,
+    error: string,
+    request: ApiRequestMethod
+  ): void {
     state.status = ApiStatus.Failed;
     state.request = request;
     state.error = error;
   }
 
-  static onCancelledMutable(state: ApiState, request: ApiRequest): void {
+  static onCancelledMutable(state: ApiState, request: ApiRequestMethod): void {
     state.status = ApiStatus.Cancelled;
     state.request = request;
     state.error = null;
   }
 
-  static isPending(state: ApiState): boolean {
-    return state.status === ApiStatus.Pending;
+  static isInit(state: ApiState): boolean {
+    return state.status === ApiStatus.Init;
   }
 
-  static isIdle(state: ApiState): boolean {
-    return state.status === ApiStatus.Idle;
+  static isPending(state: ApiState): boolean {
+    return state.status === ApiStatus.Pending;
   }
 
   static isCompleted(state: ApiState): boolean {
@@ -92,26 +99,26 @@ export class ApiStateManager {
   }
 
   static isCreate(state: ApiState): boolean {
-    return state.request === ApiRequest.Create;
+    return state.request === ApiRequestMethod.Create;
   }
 
   static isRead(state: ApiState): boolean {
-    return state.request === ApiRequest.Read;
+    return state.request === ApiRequestMethod.Read;
   }
 
   static isUpdate(state: ApiState): boolean {
-    return state.request === ApiRequest.Update;
+    return state.request === ApiRequestMethod.Update;
   }
 
   static isDelete(state: ApiState): boolean {
-    return state.request === ApiRequest.Delete;
+    return state.request === ApiRequestMethod.Delete;
   }
 
   static getStatus(state: ApiState): ApiStatus {
     return state.status;
   }
 
-  static getRequest(state: ApiState): ApiRequest | null {
+  static getRequest(state: ApiState): ApiRequestMethod | null {
     return state.request;
   }
 

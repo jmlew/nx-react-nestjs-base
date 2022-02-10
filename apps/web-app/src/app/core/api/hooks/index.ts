@@ -1,2 +1,2 @@
-export * from './useFetch';
-export * from './useAxios';
+export * from './useFetch.hook';
+export * from './useAxios.hook';
