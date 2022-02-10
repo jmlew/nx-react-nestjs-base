@@ -1,8 +1,5 @@
 import * as Yup from 'yup';
-import {
-  UserRegisterParam,
-  UserParam,
-} from '@api-interfaces/features/enums/user-api.enum';
+import { UserRegisterParam, UserParam } from '@api-configs/features/enums/user-api.enum';
 import { FormValidationError } from '../../../shared/enums/form.enum';
 
 export const userFormValidationSchema = Yup.object({

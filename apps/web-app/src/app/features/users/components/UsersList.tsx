@@ -8,7 +8,7 @@ import {
   ListItemText,
 } from '@mui/material';
 
-import { User } from '@api-interfaces/features/models/user-api-data.model';
+import { User } from '@api-configs/features/models/user-api-data.model';
 
 interface UsersListProps {
   users: User[];

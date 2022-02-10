@@ -2,14 +2,14 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ApiRequestMethod } from '@api-interfaces/shared/enums/api-states.enum';
+import { ApiRequestMethod } from '@api-configs/shared/enums/api-states.enum';
 import {
   CreateUserResponse,
   GetUserResponse,
   UpdateUserResponse,
   User,
   UserDetails,
-} from '@api-interfaces/features/models/user-api-data.model';
+} from '@api-configs/features/models/user-api-data.model';
 import { useApiStateManager } from '@shared-utils';
 
 import { Loading, ErrorMessage } from '../../../shared/components';

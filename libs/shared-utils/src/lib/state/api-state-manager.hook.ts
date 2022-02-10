@@ -1,12 +1,9 @@
 import { useState } from 'react';
 
-import { ApiState } from '@api-interfaces/shared/models/api-states.model';
+import { ApiState } from '@api-configs/shared/models/api-states.model';
 
 import { ApiStateManager } from './api-state-manager.util';
-import {
-  ApiRequestMethod,
-  ApiStatus,
-} from '@api-interfaces/shared/enums/api-states.enum';
+import { ApiRequestMethod, ApiStatus } from '@api-configs/shared/enums/api-states.enum';
 
 // Convenience methods.
 export const {

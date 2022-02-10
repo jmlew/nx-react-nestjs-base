@@ -17,7 +17,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@api-interfaces/*": ["libs/api-interfaces/src/lib/*"],
+      "@api-configs/*": ["libs/api-configs/src/lib/*"],
       "@shared-utils": ["libs/shared-utils/src/index.ts"]
     }
   },

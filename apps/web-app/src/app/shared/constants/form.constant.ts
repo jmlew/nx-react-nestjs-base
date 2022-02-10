@@ -1,7 +1,4 @@
-import {
-  UserRegisterParam,
-  UserParam,
-} from '@api-interfaces/features/enums/user-api.enum';
+import { UserRegisterParam, UserParam } from '@api-configs/features/enums/user-api.enum';
 import * as Yup from 'yup';
 
 import { UserFormField } from '../models/form.model';

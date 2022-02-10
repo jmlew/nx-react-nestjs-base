@@ -17,7 +17,7 @@ import {
   UpdateUserResponse,
   User,
   UserDetails,
-} from '@api-interfaces/features/models/user-api-data.model';
+} from '@api-configs/features/models/user-api-data.model';
 
 import { toStreamWithDelay } from '../../shared/utils';
 import { UsersService } from './users.service';

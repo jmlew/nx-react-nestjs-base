@@ -1,20 +1,20 @@
 {
-  "root": "libs/api-interfaces",
-  "sourceRoot": "libs/api-interfaces/src",
+  "root": "libs/api-configs",
+  "sourceRoot": "libs/api-configs/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+        "lintFilePatterns": ["libs/api-configs/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api-interfaces"],
+      "outputs": ["coverage/libs/api-configs"],
       "options": {
-        "jestConfig": "libs/api-interfaces/jest.config.js",
+        "jestConfig": "libs/api-configs/jest.config.js",
         "passWithNoTests": true
       }
     }

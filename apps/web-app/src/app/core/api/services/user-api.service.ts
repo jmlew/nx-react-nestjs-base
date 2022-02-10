@@ -5,8 +5,8 @@ import {
   GetUsersResponse,
   UpdateUserResponse,
   UserDetails,
-} from '@api-interfaces/features/models/user-api-data.model';
-import { UserApiUri, UserApiParam } from '@api-interfaces/features/enums/user-api.enum';
+} from '@api-configs/features/models/user-api-data.model';
+import { UserApiUri, UserApiParam } from '@api-configs/features/enums/user-api.enum';
 
 import { UserAxiosApiService } from './user-axios-api.service';
 import { AxiosApiService, InterceptorsHandlers } from '../models/axios.model';

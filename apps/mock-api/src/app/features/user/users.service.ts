@@ -6,7 +6,7 @@ import {
   UpdateUserResponse,
   User,
   UserDetails,
-} from '@api-interfaces/features/models/user-api-data.model';
+} from '@api-configs/features/models/user-api-data.model';
 
 import * as fromUtilsLib from '@shared-utils';
 import * as usersDb from '../../../assets/db/users.json';

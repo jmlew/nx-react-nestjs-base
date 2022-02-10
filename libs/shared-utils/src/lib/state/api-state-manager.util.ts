@@ -1,8 +1,5 @@
-import {
-  ApiRequestMethod,
-  ApiStatus,
-} from '@api-interfaces/shared/enums/api-states.enum';
-import { ApiState } from '@api-interfaces/shared/models/api-states.model';
+import { ApiRequestMethod, ApiStatus } from '@api-configs/shared/enums/api-states.enum';
+import { ApiState } from '@api-configs/shared/models/api-states.model';
 
 /**
  * State manager which returns a new ApiState object based on certain API states.

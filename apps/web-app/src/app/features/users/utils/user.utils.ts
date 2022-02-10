@@ -1,4 +1,4 @@
-import { User, UserDetails } from '@api-interfaces/features/models/user-api-data.model';
+import { User, UserDetails } from '@api-configs/features/models/user-api-data.model';
 
 export function getUserFormInitialValues(user?: User): UserDetails {
   if (user == null) {
