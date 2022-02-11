@@ -1,7 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
+
 import { UserApiUri } from '@api-configs/features/enums/user-api.enum';
-import { getEnvVar, isDev, isUseMockInDev } from '../../../shared/utils';
+
 import { EnvVar } from '../../../shared/enums/environment.enum';
+import { getEnvVar, isDev, isUseMockInDev } from '../../../shared/utils';
 import { AxiosApiService } from '../models/axios.model';
 
 export class UserAxiosApiService implements AxiosApiService {

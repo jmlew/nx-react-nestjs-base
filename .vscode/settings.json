@@ -1,4 +1,5 @@
 {
+  "sort-imports.default-sort-style": "module-scoped",
   "rest-client.environmentVariables": {
     "$shared": {
       "regressFakeApiBase": "https://reqres.in/api/",

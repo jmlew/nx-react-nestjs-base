@@ -1,5 +1,6 @@
 import { SnackbarOrigin } from '@mui/material';
-import { AlertType, AlertAlign } from '../enums/alert.enum';
+
+import { AlertAlign, AlertType } from '../enums/alert.enum';
 
 export function getAlignmentByType(type: AlertType): SnackbarOrigin {
   switch (type) {

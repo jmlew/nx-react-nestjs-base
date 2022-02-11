@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
-import { Card, CardContent, CardActions, Button, TextField, Grid } from '@mui/material';
+
+import { UserParam } from '@api-configs/features/enums/user-api.enum';
+import { User, UserDetails } from '@api-configs/features/models/user-api-data.model';
+import { Button, Card, CardActions, CardContent, Grid, TextField } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-
-import { User, UserDetails } from '@api-configs/features/models/user-api-data.model';
-import { UserParam } from '@api-configs/features/enums/user-api.enum';
 
 import { isFieldError } from '../../../shared/utils';
 import {

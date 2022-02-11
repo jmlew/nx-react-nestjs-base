@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
 import { AxiosError, AxiosResponse } from 'axios';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { GetUsersResponse, User } from '@api-configs/features/models/user-api-data.model';
 import { ApiRequestMethod } from '@api-configs/shared/enums/api-states.enum';
 import { useApiStateManager } from '@shared-utils';
 
-import { Loading, ErrorMessage } from '../../../shared/components';
-import { userService } from '../../../core/api/services';
-import { UsersList } from '../components';
 import { useAlert } from '../../../core/alert/context';
 import { AlertType } from '../../../core/alert/enums/alert.enum';
+import { userService } from '../../../core/api/services';
+import { ErrorMessage, Loading } from '../../../shared/components';
+import { UsersList } from '../components';
 
 interface UserContainerProps {
   pageIndex: number;

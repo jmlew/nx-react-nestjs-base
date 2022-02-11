@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import Box from '@mui/material/Box';
 
 import * as styles from './styles';

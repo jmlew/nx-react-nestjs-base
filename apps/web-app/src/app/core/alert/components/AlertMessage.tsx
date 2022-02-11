@@ -1,5 +1,7 @@
-import { Alert, Snackbar, SnackbarCloseReason, SnackbarOrigin } from '@mui/material';
 import { SyntheticEvent } from 'react';
+
+import { Alert, Snackbar, SnackbarCloseReason, SnackbarOrigin } from '@mui/material';
+
 import { AlertAlign, AlertType } from '../enums/alert.enum';
 import { getAlignment, getAlignmentByType } from '../utils';
 

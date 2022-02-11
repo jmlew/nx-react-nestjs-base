@@ -1,4 +1,6 @@
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+
+import { UserApiParam, UserApiUri } from '@api-configs/features/enums/user-api.enum';
 import {
   CreateUserResponse,
   GetUserResponse,
@@ -6,12 +8,11 @@ import {
   UpdateUserResponse,
   UserDetails,
 } from '@api-configs/features/models/user-api-data.model';
-import { UserApiUri, UserApiParam } from '@api-configs/features/enums/user-api.enum';
 
-import { UserAxiosApiService } from './user-axios-api.service';
 import { AxiosApiService, InterceptorsHandlers } from '../models/axios.model';
-import { AxiosApiInterceptorsService } from './axios-api-interceptors.service';
 import { normaliseApiErrorMessage } from '../utils';
+import { AxiosApiInterceptorsService } from './axios-api-interceptors.service';
+import { UserAxiosApiService } from './user-axios-api.service';
 
 export class UserApiService {
   private axios: AxiosInstance;

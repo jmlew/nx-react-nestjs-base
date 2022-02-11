@@ -1,5 +1,5 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useAxiosGet = <T>(
   axios: AxiosInstance,

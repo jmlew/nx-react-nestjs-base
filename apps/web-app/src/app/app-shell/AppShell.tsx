@@ -1,10 +1,10 @@
+import { Outlet } from 'react-router-dom';
+
 import Box from '@mui/material/Box';
 import { ThemeProvider } from '@mui/material/styles';
-import { Outlet } from 'react-router-dom';
 
 import { AlertProvider } from '../core/alert/containers';
 import { uiTheme } from '../styles';
-
 import { AppContent } from './content/AppContent';
 import { AppFooter } from './footer/AppFooter';
 import { Appheader } from './header/AppHeader';

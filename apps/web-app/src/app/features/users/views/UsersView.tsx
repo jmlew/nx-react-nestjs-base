@@ -1,6 +1,8 @@
-import { Box, Typography, Card, CardContent, Fab } from '@mui/material';
-import { Add } from '@mui/icons-material';
 import { Link, useSearchParams } from 'react-router-dom';
+
+import { Add } from '@mui/icons-material';
+import { Box, Card, CardContent, Fab, Typography } from '@mui/material';
+
 import { UsersListContainer } from '../containers';
 
 export function UsersView() {

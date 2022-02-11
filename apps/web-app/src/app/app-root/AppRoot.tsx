@@ -1,4 +1,5 @@
 import { BrowserRouter as Router } from 'react-router-dom';
+
 import CssBaseline from '@mui/material/CssBaseline';
 
 import AppRoutes from './app.routes';

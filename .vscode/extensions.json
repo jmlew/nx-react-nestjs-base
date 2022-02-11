@@ -1,9 +1,10 @@
 {
   "recommendations": [
-    "nrwl.angular-console",
-    "esbenp.prettier-vscode",
-    "firsttris.vscode-jest-runner",
     "dbaeumer.vscode-eslint",
-    "humao.rest-client"
+    "esbenp.prettier-vscode",
+    "amatiasq.sort-imports",
+    "firsttris.vscode-jest-runner",
+    "humao.rest-client",
+    "nrwl.angular-console"
   ]
 }

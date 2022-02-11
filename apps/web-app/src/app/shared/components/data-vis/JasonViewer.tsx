@@ -1,7 +1,7 @@
-import { SxProps } from '@mui/system';
-import Box from '@mui/material/Box';
-
 import ReactJson from 'react-json-view';
+
+import Box from '@mui/material/Box';
+import { SxProps } from '@mui/system';
 
 interface JsonViewerProps {
   data: object;
