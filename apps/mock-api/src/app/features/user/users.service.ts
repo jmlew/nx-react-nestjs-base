@@ -11,6 +11,11 @@ import {
 import * as fromUtilsLib from '@shared-utils';
 import * as usersDb from '../../../assets/db/users.json';
 
+/*
+TODO: Store DB data items as entities object and implement EntitiesService and remove
+collection utils which rely on DB being stored as array.
+*/
+
 @Injectable()
 export class UsersService {
   private usersDb: GetUsersResponse;
