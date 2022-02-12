@@ -30,8 +30,8 @@ export interface EntityAdapter<T> {
   createEntities(items: T[], selectId: keyof T): Entity<T>;
   addOne(item: T, entities: Entity<T>): Entity<T>;
   addMany(items: T[], entities: Entity<T>): Entity<T>;
-  removeOne(key: string, entities: Entity<T>): Entity<T>;
-  removeOne(key: number, entities: Entity<T>): Entity<T>;
+  removeOne(id: string | number, entities: Entity<T>): Entity<T>;
+  removeMany(ids: (string | number)[], entities: Entity<T>): Entity<T>;
   updateOne(update: Update<T>, entities: Entity<T>): Entity<T>;
   upsertOne(item: T, entities: Entity<T>): Entity<T>;
 }
@@ -64,6 +64,13 @@ export class EntitiesService<T> implements EntityAdapter<T>, EntitySelectors<T> 
   removeOne(id: string | number, entities: Entity<T>): Entity<T> {
     const { [id as string]: removed, ...remaining } = entities;
     return remaining;
+  }
+
+  removeMany(ids: (string | number)[], entities: Entity<T>): Entity<T> {
+    return ids.reduce(
+      (entities: Entity<T>, id: string | number) => this.removeOne(id, entities),
+      entities
+    );
   }
 
   updateOne(update: Update<T>, entities: Entity<T>): Entity<T> {

@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common';
 import {
   CreateUserResponse,
   GetUserResponse,
@@ -7,33 +6,39 @@ import {
   User,
   UserDetails,
 } from '@api-configs/features/models/user-api-data.model';
-
+import { Injectable } from '@nestjs/common';
 import * as fromUtilsLib from '@shared-utils';
+import { EntitiesService, Entity } from '@shared-utils';
+
 import * as usersDb from '../../../assets/db/users.json';
 
-/*
-TODO: Store DB data items as entities object and implement EntitiesService and remove
-collection utils which rely on DB being stored as array.
-*/
+type UserEntities = Entity<User>;
 
 @Injectable()
 export class UsersService {
   private usersDb: GetUsersResponse;
+  private entityService: EntitiesService<User>;
+  private userEntities: UserEntities;
+  private primaryId: keyof User = 'id';
 
   constructor() {
+    this.entityService = new EntitiesService(this.primaryId);
     this.initData();
   }
 
   initData() {
     this.usersDb = { ...usersDb };
+    const data: User[] = this.usersDb.data;
+    this.userEntities = this.entityService.createEntities(data);
   }
 
   getAllUsers(): GetUsersResponse {
-    return this.usersDb;
+    const users: User[] = this.entityService.selectAll(this.userEntities);
+    return { ...this.usersDb, data: users };
   }
 
   getUserById(id: number): GetUserResponse {
-    const user: User = fromUtilsLib.getById(this.usersDb.data, id);
+    const user: User = this.userEntities[id];
     const response: GetUserResponse = { data: user };
     return response;
   }
@@ -45,13 +50,8 @@ export class UsersService {
   }
 
   updateUser(id: number, params: UserDetails): UpdateUserResponse {
-    const current: User = fromUtilsLib.getById(this.usersDb.data, id);
-    const user: UpdateUserResponse = this.normaliseEditedUser({
-      ...current,
-      ...params,
-    });
-    this.updateUserInDb(user);
-    return user;
+    this.updateUserInDb(id, this.normaliseEditedUser(params));
+    return this.userEntities[id] as UpdateUserResponse;
   }
 
   deleteUser(id: number): number {
@@ -65,39 +65,43 @@ export class UsersService {
   }
 
   doesUserExist(id: number): boolean {
-    return this.usersDb.data.some((item: User) => fromUtilsLib.isIdMatch(id, item));
+    return this.userEntities[id] !== undefined;
   }
 
   isUserDuplicate(user: UserDetails, ignoreUserId: number = null): boolean {
-    return this.usersDb.data
+    const users: User[] = this.entityService.selectAll(this.userEntities);
+    return users
       .filter((item: User) => ignoreUserId === null || item.id !== ignoreUserId)
       .some((item: User) => item.email === user.email);
   }
 
-  private updateUserInDb(user: User) {
-    this.usersDb.data = fromUtilsLib.updateInCollection(user, this.usersDb.data);
+  private updateUserInDb(id: number, changes: Partial<User>) {
+    this.userEntities = this.entityService.updateOne({ id, changes }, this.userEntities);
   }
 
   private addUserToDb(user: User) {
-    this.usersDb.data = fromUtilsLib.addToCollection(user, this.usersDb.data);
+    this.userEntities = this.entityService.addOne(user, this.userEntities);
   }
 
   private removeUserFromDb(id: number) {
-    this.usersDb.data = fromUtilsLib.removeIdFromCollection(id, this.usersDb.data);
+    this.userEntities = this.entityService.removeOne(id, this.userEntities);
   }
 
   private removeUsersFromDb(ids: number[]) {
-    this.usersDb.data = fromUtilsLib.removeIdsFromCollection(ids, this.usersDb.data);
+    this.userEntities = this.entityService.removeMany(ids, this.userEntities);
   }
 
   private normaliseNewUser(params: UserDetails): CreateUserResponse {
-    const id: number = fromUtilsLib.getNextCollectionId(this.usersDb.data);
-    const createdAt: string = fromUtilsLib.getUtcDateToIso();
-    return { ...params, id, createdAt };
+    const ids: number[] = this.entityService.selectIds(this.userEntities) as number[];
+    const id: number = Math.max(...ids) + 1;
+    return { ...params, id, createdAt: this.timestamp() };
   }
 
-  private normaliseEditedUser(user: User) {
-    const updatedAt: string = fromUtilsLib.getUtcDateToIso();
-    return { ...user, updatedAt };
+  private normaliseEditedUser(user: Partial<User>) {
+    return { ...user, updatedAt: this.timestamp() };
+  }
+
+  private timestamp(): string {
+    return fromUtilsLib.getUtcDateToIso();
   }
 }
