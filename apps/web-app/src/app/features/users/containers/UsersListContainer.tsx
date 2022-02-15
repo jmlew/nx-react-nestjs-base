@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { GetUsersResponse, User } from '@api-configs/features/models/user-api-data.model';
 import { ApiRequestMethod } from '@api-configs/shared/enums/api-states.enum';
-import { useApiStateManager } from '@shared-utils';
+import { objectsSortOnKey, useApiStateManager } from '@shared-utils';
 
 import { useAlert } from '../../../core/alert/context';
 import { AlertType } from '../../../core/alert/enums/alert.enum';
@@ -47,7 +47,8 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     userService
       .getUsers(pageIndex)
       .then((res: AxiosResponse<GetUsersResponse>) => {
-        setUsersData(res.data.data);
+        const items: User[] = objectsSortOnKey(res.data.data, 'first_name');
+        setUsersData(items);
         onCompleted(request);
       })
       .catch((error: AxiosError) => {
