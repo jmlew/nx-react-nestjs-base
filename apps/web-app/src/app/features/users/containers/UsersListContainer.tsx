@@ -18,36 +18,48 @@ interface UserContainerProps {
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
-  const { stateManager } = useApiStateManager();
   const [usersData, setUsersData] = useState<User[]>();
   const { setAlert } = useAlert();
+  const { stateManager } = useApiStateManager();
+  const {
+    getError,
+    isCompleted,
+    isFailed,
+    isInit,
+    isPending,
+    onCompleted,
+    onFailed,
+    onPending,
+    wasPending,
+    wasCompleted,
+  } = stateManager;
 
   // Handle changes in status for API load and delete requests.
   useEffect(() => {
-    if (stateManager.isInit()) {
+    if (isInit()) {
       handleGetUsers();
     }
   }, []);
 
   function handleGetUsers() {
     const request: ApiRequestMethod = ApiRequestMethod.Read;
-    stateManager.onPending(request);
+    onPending(request);
     userService
       .getUsers(pageIndex)
       .then((res: AxiosResponse<GetUsersResponse>) => {
         setUsersData(res.data.data);
-        stateManager.onCompleted(request);
+        onCompleted(request);
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        stateManager.onFailed(message, request);
+        onFailed(message, request);
         setAlert({ isShown: true, message });
       });
   }
 
   function handleDeleteUser(userId: number) {
     const request: ApiRequestMethod = ApiRequestMethod.Delete;
-    stateManager.onPending(request);
+    onPending(request);
     userService
       .deleteUser(userId)
       .then((res: AxiosResponse<number>) => {
@@ -60,7 +72,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
       })
       .catch((error: AxiosError) => {
         const { message } = error;
-        stateManager.onFailed(message, request);
+        onFailed(message, request);
         setAlert({ isShown: true, message });
       });
   }
@@ -69,13 +81,15 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
     navigate(`${userId}`);
   }
 
-  if (stateManager.isPending()) {
+  const isDataReady: boolean = isCompleted() && (wasPending() || wasCompleted());
+
+  if (isPending()) {
     return <Loading />;
   } else {
     return (
       <>
-        {stateManager.isFailed() && <ErrorMessage message={stateManager.getError()!} />}
-        {usersData != null && (
+        {isFailed() && <ErrorMessage message={getError()!} />}
+        {isDataReady && usersData != null && (
           <UsersList
             users={usersData}
             onEditUser={handleEditUser}
