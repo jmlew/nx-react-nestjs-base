@@ -1,5 +1,4 @@
-import { User } from '@api-configs/features/models/user-api-data.model';
-import { Delete, Edit } from '@mui/icons-material';
+import { Edit, Delete } from '@mui/icons-material';
 import {
   Avatar,
   IconButton,
@@ -8,6 +7,8 @@ import {
   ListItemAvatar,
   ListItemText,
 } from '@mui/material';
+
+import { User } from '@api-configs/features/models/user-api-data.model';
 
 interface UsersListProps {
   users: User[];

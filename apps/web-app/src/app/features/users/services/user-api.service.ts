@@ -9,9 +9,12 @@ import {
   UserDetails,
 } from '@api-configs/features/models/user-api-data.model';
 
-import { AxiosApiService, InterceptorsHandlers } from '../models/axios.model';
-import { normaliseApiErrorMessage } from '../utils';
-import { AxiosApiInterceptorsService } from './axios-api-interceptors.service';
+import {
+  AxiosApiService,
+  InterceptorsHandlers,
+} from '../../../core/api/models/axios.model';
+import { AxiosApiInterceptorsService } from '../../../core/api/services';
+import { normaliseApiErrorMessage } from '../../../core/api/utils';
 import { UserAxiosApiService } from './user-axios-api.service';
 
 export class UserApiService {

@@ -1,15 +1,18 @@
 import { useParams } from 'react-router-dom';
 
 import { ErrorMessage } from '../../../shared/components';
-import { UserContainer } from '../containers';
+import { LoadUserContainer, UpdateUserContainer } from '../containers';
 
-export function EditUserView() {
+export function UpdateUserView() {
   const { userId } = useParams();
 
   if (userId == null) {
     return <ErrorMessage message="No user ID"></ErrorMessage>;
   } else {
-    const id: number = parseInt(userId, 10);
-    return <UserContainer userId={id} />;
+    return (
+      <LoadUserContainer userId={parseInt(userId, 10)}>
+        <UpdateUserContainer />
+      </LoadUserContainer>
+    );
   }
 }

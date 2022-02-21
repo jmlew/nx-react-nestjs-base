@@ -8,9 +8,9 @@ import { objectsSortOnKey, useApiStateManager } from '@shared-utils';
 
 import { useAlert } from '../../../core/alert/context';
 import { AlertType } from '../../../core/alert/enums/alert.enum';
-import { userService } from '../../../core/api/services';
 import { ErrorMessage, Loading } from '../../../shared/components';
 import { UsersList } from '../components';
+import { userService } from '../services';
 
 interface UserContainerProps {
   pageIndex: number;

@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 
-import { UsersView, EditUserView, NewUserView } from './views';
+import { CreateUserView, UpdateUserView, UsersView } from './views';
 
 export default function UsersRoutes() {
   return (
     <Routes>
       <Route path="" element={<UsersView />} />
-      <Route path=":userId" element={<EditUserView />} />
-      <Route path="/new" element={<NewUserView />} />
+      <Route path=":userId" element={<UpdateUserView />} />
+      <Route path="/new" element={<CreateUserView />} />
     </Routes>
   );
 }
