@@ -8,7 +8,7 @@ import {
   UpdateUserResponse,
   UserDetails,
 } from '@api-configs/features/models/user-api-data.model';
-import { ApiRequestMethod } from '@api-configs/shared/enums/api.enum';
+import { ApiRequestMethod } from '@api-configs/shared/enums/api-state.enum';
 import { MemoryStore } from '@custom-types';
 
 import { InterceptorsHandlers } from '../../../core/api/models/axios.model';

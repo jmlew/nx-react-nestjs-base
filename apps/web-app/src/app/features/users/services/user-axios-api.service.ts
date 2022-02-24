@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { IAxiosCacheAdapterOptions, ISetupCache, setupCache } from 'axios-cache-adapter';
 
 import { UserApiUri } from '@api-configs/features/enums/user-api.enum';
-import { ApiRequestMethod } from '@api-configs/shared/enums/api.enum';
+import { ApiRequestMethod } from '@api-configs/shared/enums/api-state.enum';
 import { MemoryStore } from '@custom-types';
 
 import { AxiosApiService } from '../../../core/api/models/axios.model';

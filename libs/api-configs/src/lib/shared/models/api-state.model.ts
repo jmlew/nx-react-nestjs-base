@@ -1,4 +1,4 @@
-import { ApiRequestType, ApiStatus } from '../enums/api.enum';
+import { ApiRequestType, ApiStatus } from '../enums/api-state.enum';
 
 export interface ApiState {
   status: ApiStatus;

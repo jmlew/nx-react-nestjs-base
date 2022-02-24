@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { ApiRequestType, ApiStatus } from '@api-configs/shared/enums/api.enum';
-import { ApiState } from '@api-configs/shared/models/api.model';
+import { ApiRequestType, ApiStatus } from '@api-configs/shared/enums/api-state.enum';
+import { ApiState } from '@api-configs/shared/models/api-state.model';
 
 import { ApiStateManager } from './api-state-manager.util';
 import { usePrevious } from './use-previous.hook';

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { GetUsersResponse, User } from '@api-configs/features/models/user-api-data.model';
-import { ApiRequestType } from '@api-configs/shared/enums/api.enum';
+import { ApiRequestType } from '@api-configs/shared/enums/api-state.enum';
 import { objectsSortOnKey, useApiStateManager } from '@shared-utils';
 
 import { useAlert } from '../../../core/alert/context';

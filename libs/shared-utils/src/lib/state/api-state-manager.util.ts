@@ -1,5 +1,5 @@
-import { ApiRequestType, ApiStatus } from '@api-configs/shared/enums/api.enum';
-import { ApiState } from '@api-configs/shared/models/api.model';
+import { ApiRequestType, ApiStatus } from '@api-configs/shared/enums/api-state.enum';
+import { ApiState } from '@api-configs/shared/models/api-state.model';
 
 /**
  * State manager which returns a new ApiState object based on certain API states.
