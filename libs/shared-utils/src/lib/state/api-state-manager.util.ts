@@ -1,5 +1,5 @@
-import { ApiRequestMethod, ApiStatus } from '@api-configs/shared/enums/api-states.enum';
-import { ApiState } from '@api-configs/shared/models/api-states.model';
+import { ApiRequestType, ApiStatus } from '@api-configs/shared/enums/api.enum';
+import { ApiState } from '@api-configs/shared/models/api.model';
 
 /**
  * State manager which returns a new ApiState object based on certain API states.
@@ -14,7 +14,7 @@ export class ApiStateManager {
     };
   }
 
-  static onPending(request: ApiRequestMethod): ApiState {
+  static onPending(request: ApiRequestType): ApiState {
     return {
       request,
       status: ApiStatus.Pending,
@@ -22,7 +22,7 @@ export class ApiStateManager {
     };
   }
 
-  static onCompleted(request: ApiRequestMethod): ApiState {
+  static onCompleted(request: ApiRequestType): ApiState {
     return {
       request,
       status: ApiStatus.Completed,
@@ -30,7 +30,7 @@ export class ApiStateManager {
     };
   }
 
-  static onFailed(error: string, request: ApiRequestMethod): ApiState {
+  static onFailed(error: string, request: ApiRequestType): ApiState {
     return {
       request,
       status: ApiStatus.Failed,
@@ -38,7 +38,7 @@ export class ApiStateManager {
     };
   }
 
-  static onCancelled(request: ApiRequestMethod): ApiState {
+  static onCancelled(request: ApiRequestType): ApiState {
     return {
       request,
       status: ApiStatus.Cancelled,
@@ -51,29 +51,25 @@ export class ApiStateManager {
    * Useful for the RTK createReducer functions which require mutating the current state.
    */
 
-  static onPendingMutable(state: ApiState, request: ApiRequestMethod): void {
+  static onPendingMutable(state: ApiState, request: ApiRequestType): void {
     state.status = ApiStatus.Pending;
     state.request = request;
     state.error = null;
   }
 
-  static onCompletedMutable(state: ApiState, request: ApiRequestMethod): void {
+  static onCompletedMutable(state: ApiState, request: ApiRequestType): void {
     state.status = ApiStatus.Completed;
     state.request = request;
     state.error = null;
   }
 
-  static onFailedMutable(
-    state: ApiState,
-    error: string,
-    request: ApiRequestMethod
-  ): void {
+  static onFailedMutable(state: ApiState, error: string, request: ApiRequestType): void {
     state.status = ApiStatus.Failed;
     state.request = request;
     state.error = error;
   }
 
-  static onCancelledMutable(state: ApiState, request: ApiRequestMethod): void {
+  static onCancelledMutable(state: ApiState, request: ApiRequestType): void {
     state.status = ApiStatus.Cancelled;
     state.request = request;
     state.error = null;
@@ -96,26 +92,26 @@ export class ApiStateManager {
   }
 
   static isCreate(state: ApiState): boolean {
-    return state.request === ApiRequestMethod.Create;
+    return state.request === ApiRequestType.Create;
   }
 
   static isRead(state: ApiState): boolean {
-    return state.request === ApiRequestMethod.Read;
+    return state.request === ApiRequestType.Read;
   }
 
   static isUpdate(state: ApiState): boolean {
-    return state.request === ApiRequestMethod.Update;
+    return state.request === ApiRequestType.Update;
   }
 
   static isDelete(state: ApiState): boolean {
-    return state.request === ApiRequestMethod.Delete;
+    return state.request === ApiRequestType.Delete;
   }
 
   static getStatus(state: ApiState): ApiStatus {
     return state.status;
   }
 
-  static getRequest(state: ApiState): ApiRequestMethod | null {
+  static getRequest(state: ApiState): ApiRequestType | null {
     return state.request;
   }
 

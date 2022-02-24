@@ -1,7 +1,5 @@
 import { isNumber } from './validate.util';
 
-// TODO: Move interfaces into shared lib.
-
 export interface EntityNumItem {
   id: number;
 }

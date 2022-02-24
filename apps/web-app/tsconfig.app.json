@@ -8,6 +8,7 @@
     "../../node_modules/@nrwl/react/typings/cssmodule.d.ts",
     "../../node_modules/@nrwl/react/typings/image.d.ts"
   ],
+  "paths": {},
   "exclude": [
     "**/*.spec.ts",
     "**/*.test.ts",

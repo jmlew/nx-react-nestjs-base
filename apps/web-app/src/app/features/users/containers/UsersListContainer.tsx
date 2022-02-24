@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { GetUsersResponse, User } from '@api-configs/features/models/user-api-data.model';
-import { ApiRequestMethod } from '@api-configs/shared/enums/api-states.enum';
+import { ApiRequestType } from '@api-configs/shared/enums/api.enum';
 import { objectsSortOnKey, useApiStateManager } from '@shared-utils';
 
 import { useAlert } from '../../../core/alert/context';
@@ -42,7 +42,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   }, []);
 
   function handleGetUsers() {
-    const request: ApiRequestMethod = ApiRequestMethod.Read;
+    const request: ApiRequestType = ApiRequestType.Read;
     onPending(request);
     userService
       .getUsers(pageIndex)
@@ -59,7 +59,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   }
 
   function handleDeleteUser(userId: number) {
-    const request: ApiRequestMethod = ApiRequestMethod.Delete;
+    const request: ApiRequestType = ApiRequestType.Delete;
     onPending(request);
     userService
       .deleteUser(userId)

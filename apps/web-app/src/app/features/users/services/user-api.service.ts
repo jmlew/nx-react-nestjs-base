@@ -1,4 +1,4 @@
-import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import { UserApiParam, UserApiUri } from '@api-configs/features/enums/user-api.enum';
 import {
@@ -8,20 +8,28 @@ import {
   UpdateUserResponse,
   UserDetails,
 } from '@api-configs/features/models/user-api-data.model';
+import { ApiRequestMethod } from '@api-configs/shared/enums/api.enum';
+import { MemoryStore } from '@custom-types';
 
-import {
-  AxiosApiService,
-  InterceptorsHandlers,
-} from '../../../core/api/models/axios.model';
+import { InterceptorsHandlers } from '../../../core/api/models/axios.model';
 import { AxiosApiInterceptorsService } from '../../../core/api/services';
 import { normaliseApiErrorMessage } from '../../../core/api/utils';
 import { UserAxiosApiService } from './user-axios-api.service';
 
+interface CacheEntry {
+  all: boolean;
+  user: {
+    [id: number]: boolean;
+  };
+}
+
 export class UserApiService {
   private axios: AxiosInstance;
+  private staleCacheEntry: CacheEntry;
 
-  constructor(private axiosApiService: AxiosApiService) {
+  constructor(private axiosApiService: UserAxiosApiService) {
     this.axios = axiosApiService.instance;
+    this.staleCacheEntry = { all: false, user: {} };
     this.addInterceptors();
   }
 
@@ -49,22 +57,90 @@ export class UserApiService {
     return this.axios.delete<number>(`${UserApiUri.Users}/${userId}`);
   }
 
-  abort() {
-    this.axiosApiService.abortController();
+  get cacheStore(): MemoryStore {
+    return this.axiosApiService.cacheStore;
   }
 
   /**
-   * Adds custom API interceptor callbacks to all CRUD methods within this service.
+   * Sets the cache entry for a given user ID to stale. The request for getting all items
+   * is set to stale when any individual item is set to stale.
+   */
+  setUserCacheToStale(userId: number) {
+    this.staleCacheEntry.user[userId] = true;
+    this.staleCacheEntry.all = true;
+  }
+
+  /**
+   * Clears stale cache entries on get requests for items which have stale data.
+   * Cache entries are cleared for items with request URLs matching the cache store's
+   * keys.
+   */
+  private clearStaleCashEntries(config: AxiosRequestConfig, url: string) {
+    if (url === UserApiUri.Users) {
+      if (this.staleCacheEntry.all === true) {
+        config.clearCacheEntry = true;
+        this.staleCacheEntry.all = false;
+      }
+    } else {
+      const userId: number | null = this.findCacheUserIdFromUrl(url);
+      if (userId != null && this.staleCacheEntry.user[userId] === true) {
+        config.clearCacheEntry = true;
+        this.staleCacheEntry.user[userId] = false;
+      }
+    }
+  }
+
+  /**
+   * Finds the user ID from the URL of a request to determine if a given item exists in
+   * the stale cache collection.
+   */
+  private findCacheUserIdFromUrl(url: string): number | null {
+    const userId: string | undefined = Object.keys(this.staleCacheEntry.user).find(
+      (id: string) => `${UserApiUri.Users}/${id}` === url
+    );
+    return userId ? Number(userId) : null;
+  }
+
+  /**
+   * Applies custom API interceptor callbacks to the Axios instance for all CRUD methods
+   * within this service.
    */
   private addInterceptors() {
     const handlers: InterceptorsHandlers = {
+      // Clear stale cache entries on GET requests for items which have stale data.
+      onInterceptRequest: (config: AxiosRequestConfig) => {
+        const { method, url } = config;
+        if (method === ApiRequestMethod.Get && url != null) {
+          this.clearStaleCashEntries(config, url);
+        }
+      },
+      // Ensure the IDs of mutated entries are flagged as having stale data.
+      onInterceptResponse: (res: AxiosResponse) => {
+        const { config, data } = res;
+        switch (config.method) {
+          case ApiRequestMethod.Get:
+            res.request.fromCache && console.log('GET from cache', this.cacheStore);
+            break;
+          case ApiRequestMethod.Post:
+            this.setUserCacheToStale(data.id);
+            break;
+          case ApiRequestMethod.Put:
+            this.setUserCacheToStale(data.id);
+            break;
+          case ApiRequestMethod.Delete:
+            this.setUserCacheToStale(data);
+            break;
+          case ApiRequestMethod.Patch:
+            break;
+          default:
+            break;
+        }
+      },
       onInterceptResponseError: (error: AxiosError) => {
         // Replace the default error message with the most useful AxiosError value.
         normaliseApiErrorMessage(error);
       },
       // onInterceptRequestError: (error: AxiosError) => {},
-      // onInterceptResponse: (config: AxiosResponse) => {},
-      // onInterceptRequest: (config: AxiosRequestConfig) => {},
     };
 
     const interceptors: AxiosApiInterceptorsService = new AxiosApiInterceptorsService(

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { GetUserResponse, User } from '@api-configs/features/models/user-api-data.model';
-import { ApiRequestMethod } from '@api-configs/shared/enums/api-states.enum';
+import { ApiRequestType } from '@api-configs/shared/enums/api.enum';
 import { Button } from '@mui/material';
 import { useApiStateManager } from '@shared-utils';
 
@@ -38,7 +38,7 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
   }, []);
 
   function handleGetUser(userId: number) {
-    const request: ApiRequestMethod = ApiRequestMethod.Read;
+    const request: ApiRequestType = ApiRequestType.Read;
     onPending(request);
     userService
       .getUser(userId)

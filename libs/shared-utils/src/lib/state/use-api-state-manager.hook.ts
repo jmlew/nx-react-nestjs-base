@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { ApiRequestMethod, ApiStatus } from '@api-configs/shared/enums/api-states.enum';
-import { ApiState } from '@api-configs/shared/models/api-states.model';
+import { ApiRequestType, ApiStatus } from '@api-configs/shared/enums/api.enum';
+import { ApiState } from '@api-configs/shared/models/api.model';
 
 import { ApiStateManager } from './api-state-manager.util';
 import { usePrevious } from './use-previous.hook';
@@ -32,14 +32,14 @@ export const {
 
 export interface ApiStateManagerMutable {
   onInit(): void;
-  onPending(request: ApiRequestMethod): void;
-  onCompleted(request: ApiRequestMethod): void;
-  onFailed(error: string, request: ApiRequestMethod): void;
-  onCancelled(request: ApiRequestMethod): void;
-  onPendingMutable?(request: ApiRequestMethod): void;
-  onCompletedMutable?(request: ApiRequestMethod): void;
-  onFailedMutable?(error: string, request: ApiRequestMethod): void;
-  onCancelledMutable?(request: ApiRequestMethod): void;
+  onPending(request: ApiRequestType): void;
+  onCompleted(request: ApiRequestType): void;
+  onFailed(error: string, request: ApiRequestType): void;
+  onCancelled(request: ApiRequestType): void;
+  onPendingMutable?(request: ApiRequestType): void;
+  onCompletedMutable?(request: ApiRequestType): void;
+  onFailedMutable?(error: string, request: ApiRequestType): void;
+  onCancelledMutable?(request: ApiRequestType): void;
   isInit(): boolean;
   isPending(): boolean;
   isCompleted(): boolean;
@@ -58,7 +58,7 @@ export interface ApiStateManagerMutable {
   wasDelete(): boolean;
   getStatus(): ApiStatus;
   getPrevStatus(): ApiStatus;
-  getRequest(): ApiRequestMethod | null;
+  getRequest(): ApiRequestType | null;
   getError(): string | null;
 }
 
@@ -72,10 +72,10 @@ export function useApiStateManager(): {
   const stateManager: ApiStateManagerMutable = {
     // Setters to mutate the current API status based on a given request type.
     onInit: (): void => setApiState(onInit()),
-    onPending: (request: ApiRequestMethod): void => setApiState(onPending(request)),
-    onCompleted: (request: ApiRequestMethod): void => setApiState(onCompleted(request)),
-    onCancelled: (request: ApiRequestMethod): void => setApiState(onCancelled(request)),
-    onFailed: (error: string, request: ApiRequestMethod): void =>
+    onPending: (request: ApiRequestType): void => setApiState(onPending(request)),
+    onCompleted: (request: ApiRequestType): void => setApiState(onCompleted(request)),
+    onCancelled: (request: ApiRequestType): void => setApiState(onCancelled(request)),
+    onFailed: (error: string, request: ApiRequestType): void =>
       setApiState(onFailed(error, request)),
 
     // Getters to return the current API status.
@@ -102,7 +102,7 @@ export function useApiStateManager(): {
     getStatus: (): ApiStatus => getStatus(apiState),
     getPrevStatus: (): ApiStatus =>
       prevApiState != null ? getStatus(prevApiState) : ApiStatus.Init,
-    getRequest: (): ApiRequestMethod | null => getRequest(apiState),
+    getRequest: (): ApiRequestType | null => getRequest(apiState),
     getError: (): string | null => getError(apiState),
   };
 

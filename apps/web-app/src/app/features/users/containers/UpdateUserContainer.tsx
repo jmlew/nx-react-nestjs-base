@@ -1,9 +1,12 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { UserDetails } from '@api-configs/features/models/user-api-data.model';
-import { ApiRequestMethod } from '@api-configs/shared/enums/api-states.enum';
+import {
+  UpdateUserResponse,
+  UserDetails,
+} from '@api-configs/features/models/user-api-data.model';
+import { ApiRequestType } from '@api-configs/shared/enums/api.enum';
 import { useApiStateManager } from '@shared-utils';
 
 import { useAlert } from '../../../core/alert/context';
@@ -30,11 +33,11 @@ export function UpdateUserContainer() {
   }, [apiState]);
 
   function handleUpdateUser(values: UserDetails) {
-    const request: ApiRequestMethod = ApiRequestMethod.Update;
+    const request: ApiRequestType = ApiRequestType.Update;
     onPending(request);
     userService
       .updateUser(userId, values)
-      .then(() => {
+      .then((res: AxiosResponse<UpdateUserResponse>) => {
         onCompleted(request);
         setAlert({
           isShown: true,

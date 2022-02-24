@@ -4,7 +4,6 @@ export interface AxiosApiService {
   baseUrl: string;
   instance: AxiosInstance;
   createAxiosInstance(): AxiosInstance;
-  abortController(): void;
 }
 
 export interface InterceptorsHandlers {

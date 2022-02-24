@@ -18,7 +18,8 @@
     "baseUrl": ".",
     "paths": {
       "@api-configs/*": ["libs/api-configs/src/lib/*"],
-      "@shared-utils": ["libs/shared-utils/src/index.ts"]
+      "@shared-utils": ["libs/shared-utils/src/index.ts"],
+      "@custom-types": ["./types/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
