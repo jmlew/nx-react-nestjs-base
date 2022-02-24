@@ -12,16 +12,24 @@ The app's architecture aligns with the semantics and directory structure as defi
 
 ### Monorepo
 
-The codebase is combined into a number of separate 'applications' and 'libraries' in a [NX Monorepo](https://nx.dev).
+The codebase is combined into a number of separate 'applications' (apps) and 'libraries' (libs) in a [NX Monorepo](https://nx.dev).
+
+## Features
+
+### HTTP API request handling
+
+The Web App (apps/web-app) uses [axios](https://github.com/axios/axios) to abstract common functionality around handling HTTP requests through the sample feature Axios API Service (UserAxiosApiService) class which is injected into the sample feature API Service (UserApiService) class to handle Axios configurations and common functionality.
+
+Simple caching is included via the [axios-cache-adapter](https://github.com/RasCarlito/axios-cache-adapter) library and customised cache invalidation functionality is defined in UserAxiosApiService, applied via custom HTTP interceptors which are managed by the injected shared Axios interceptor service (AxiosApiInterceptorsService).
+
+### HTTP request state management
+
+A custom state manager class (ApiStateManager) provides an easy to use technique for updating and retrieving the current state of HTTP requests for use in containers which interact with APIs.
 
 ### HTTP API Playground
 
 The codebase includes an HTTP Playground to test endpoint responses inside 'http-playground'.
 This uses the humao.rest-client vscode extension listed in .vscode/extensions.json with dependant global API variables defined in .vscode/settings.json 'rest-client.environmentVariables'.
-
-## Recommended VSCode extensions
-
-Find a list in .vscode/extensions.json to ensure the best development experience.
 
 ## Adding capabilities to your workspace
 
@@ -57,21 +65,13 @@ When using Nx, you can create multiple applications and libraries in the same wo
 Libraries are shareable across libraries and applications. Their absolute paths are added
 to tsconfig.base.json and should be altered according to their usecase.
 
-## Generate a shared React library
-
-Run `nx g @nrwl/react:lib my-lib`
-
 ## Generate a framework agnostic shared library
 
 Run `nx g @nrwl/workspace:library my-lib`
 
-## Development server
+## Generate a shared library for React-specific components
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
+Run `nx g @nrwl/react:lib my-lib`
 
 ## Build
 
@@ -96,3 +96,7 @@ Run `nx graph` to see a diagram of the dependencies of your projects.
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## Recommended VSCode extensions
+
+Find a list in .vscode/extensions.json to ensure the best development experience.
