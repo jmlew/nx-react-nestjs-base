@@ -12,7 +12,7 @@ import { useApiStateManager } from '@shared-utils';
 import { useAlert } from '../../../core/alert/context';
 import { AlertType } from '../../../core/alert/enums/alert.enum';
 import { Loading } from '../../../shared/components';
-import { UserDetailsForm } from '../components';
+import { UserDetailsFormFormik } from '../components';
 import { useUserContext } from '../context';
 import { userService } from '../services';
 import { getUserFormInitialValues } from '../utils';
@@ -23,7 +23,6 @@ export function UpdateUserContainer() {
   const { apiState, stateManager } = useApiStateManager();
   const { isCompleted, isPending, onCompleted, onFailed, onPending } = stateManager;
   const { user } = useUserContext();
-  const userId: number = user.id;
 
   // Handle changes in status for API load and update requests.
   useEffect(() => {
@@ -33,6 +32,7 @@ export function UpdateUserContainer() {
   }, [apiState]);
 
   function handleUpdateUser(values: UserDetails) {
+    const userId: number = user.id;
     const request: ApiRequestType = ApiRequestType.Update;
     onPending(request);
     userService
@@ -60,7 +60,7 @@ export function UpdateUserContainer() {
     <>
       {isPending() && <Loading />}
       {
-        <UserDetailsForm
+        <UserDetailsFormFormik
           user={user}
           onSubmit={handleUpdateUser}
           onCancel={goToList}

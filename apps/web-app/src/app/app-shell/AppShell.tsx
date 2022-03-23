@@ -9,16 +9,19 @@ import { AppContent } from './content/AppContent';
 import { AppFooter } from './footer/AppFooter';
 import { Appheader } from './header/AppHeader';
 
-export const stylesWrapper = {
-  display: 'flex',
-  flexDirection: 'column',
-  minHeight: '100vh',
-} as const;
+export const styles = {
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+    backgroundColor: '#fafafa',
+  },
+};
 
 export function AppShell() {
   return (
     <ThemeProvider theme={uiTheme}>
-      <Box sx={stylesWrapper}>
+      <Box sx={styles.root}>
         <Appheader />
         <AppContent>
           <AlertProvider>

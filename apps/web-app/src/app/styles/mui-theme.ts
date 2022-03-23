@@ -1,6 +1,6 @@
 import { Theme } from '@emotion/react';
 import { createTheme } from '@mui/material';
-import { ThemeOptions } from '@mui/material/styles';
+import { Palette, ThemeOptions } from '@mui/material/styles';
 
 export const themeOptions: ThemeOptions = {
   palette: {
@@ -15,6 +15,13 @@ export const themeOptions: ThemeOptions = {
       dark: '#c77800',
     },
   },
+  // Refer to the loaded font weights in src/main.tsx.
+  typography: (palette: Palette) => ({
+    fontWeightLight: '300',
+    fontWeightRegular: '400',
+    fontWeightMedium: '500',
+    fontWeightBold: '700',
+  }),
 };
 
 export const uiTheme: Theme = createTheme(themeOptions);

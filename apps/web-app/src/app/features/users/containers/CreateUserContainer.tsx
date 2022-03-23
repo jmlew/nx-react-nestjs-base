@@ -12,7 +12,7 @@ import { useApiStateManager } from '@shared-utils';
 import { useAlert } from '../../../core/alert/context';
 import { AlertType } from '../../../core/alert/enums/alert.enum';
 import { Loading } from '../../../shared/components';
-import { UserDetailsForm } from '../components';
+import { UserDetailsFormDataDrivenForms, UserDetailsFormFormik } from '../components';
 import { userService } from '../services';
 import { getUserFormInitialValues } from '../utils';
 
@@ -56,7 +56,7 @@ export function CreateUserContainer() {
   return (
     <>
       {isPending() && <Loading />}
-      <UserDetailsForm
+      <UserDetailsFormDataDrivenForms
         onSubmit={handleCreateUser}
         onCancel={goToList}
         initialValues={getUserFormInitialValues()}
