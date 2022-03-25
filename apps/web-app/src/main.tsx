@@ -1,8 +1,8 @@
-// Import MUI default Roboto font: https://mui.com/components/typography/#general
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+// Import MUI default Inter font: https://mui.com/components/typography/#general
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/700.css';
 
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';

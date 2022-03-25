@@ -17,6 +17,7 @@ export const themeOptions: ThemeOptions = {
   },
   // Refer to the loaded font weights in src/main.tsx.
   typography: (palette: Palette) => ({
+    fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
     fontWeightLight: '300',
     fontWeightRegular: '400',
     fontWeightMedium: '500',
