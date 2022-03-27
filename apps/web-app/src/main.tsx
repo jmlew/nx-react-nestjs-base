@@ -7,11 +7,11 @@ import '@fontsource/inter/700.css';
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom';
 
-import AppRoot from './app/app-root/AppRoot';
+import App from './app/app-root/App';
 
 ReactDOM.render(
   <StrictMode>
-    <AppRoot />
+    <App />
   </StrictMode>,
   document.getElementById('root')
 );

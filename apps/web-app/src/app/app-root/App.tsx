@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import AppRoutes from './app.routes';
 
-function AppRoot() {
+function App() {
   return (
     <CssBaseline>
       <Router>
@@ -14,4 +14,4 @@ function AppRoot() {
   );
 }
 
-export default AppRoot;
+export default App;
