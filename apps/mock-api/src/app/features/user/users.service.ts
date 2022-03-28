@@ -1,3 +1,5 @@
+import * as fromUtilsLib from '@example-app/shared/util';
+import { EntitiesService, Entity } from '@example-app/shared/util';
 import {
   CreateUserResponse,
   GetUserResponse,
@@ -5,9 +7,7 @@ import {
   UpdateUserResponse,
   User,
   UserDetails,
-} from '@api-configs/features/models/user-api-data.model';
-import * as fromUtilsLib from '@example-app/shared/util';
-import { EntitiesService, Entity } from '@example-app/shared/util';
+} from '@example-app/users/data-access';
 import { Injectable } from '@nestjs/common';
 
 import * as usersDb from '../../../assets/db/users.json';

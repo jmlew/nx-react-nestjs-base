@@ -3,11 +3,11 @@ import { ApiRequestType } from 'libs/shared/data-access/src/lib/enums/api-state.
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { GetUsersResponse, User } from '@api-configs/features/models/user-api-data.model';
 import { AlertType, useAlert } from '@example-app/alert/feature';
 import { useApiStateManager } from '@example-app/shared/data-access';
 import { ErrorMessage, Loading } from '@example-app/shared/ui';
 import { objectsSortOnKey } from '@example-app/shared/util';
+import { GetUsersResponse, User } from '@example-app/users/data-access';
 
 import { UsersList } from '../components';
 import { userService } from '../services';

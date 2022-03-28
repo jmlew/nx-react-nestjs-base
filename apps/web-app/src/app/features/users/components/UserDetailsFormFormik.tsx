@@ -1,8 +1,8 @@
 import { useFormik } from 'formik';
 
-import { UserParam } from '@api-configs/features/enums/user-api.enum';
-import { User, UserDetails } from '@api-configs/features/models/user-api-data.model';
 import { isFieldError } from '@example-app/form/feature';
+import { UserParam } from '@example-app/users/data-access';
+import { User, UserDetails } from '@example-app/users/data-access';
 import {
   Button,
   Card,

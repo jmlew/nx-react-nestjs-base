@@ -3,13 +3,10 @@ import { ApiRequestType } from 'libs/shared/data-access/src/lib/enums/api-state.
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  CreateUserResponse,
-  UserDetails,
-} from '@api-configs/features/models/user-api-data.model';
 import { AlertType, useAlert } from '@example-app/alert/feature';
 import { useApiStateManager } from '@example-app/shared/data-access';
 import { Loading } from '@example-app/shared/ui';
+import { CreateUserResponse, UserDetails } from '@example-app/users/data-access';
 
 import { UserDetailsFormDataDrivenForms, UserDetailsFormFormik } from '../components';
 import { userService } from '../services';

@@ -1,13 +1,13 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { IAxiosCacheAdapterOptions, ISetupCache, setupCache } from 'axios-cache-adapter';
 
-import { UserApiUri } from '@api-configs/features/enums/user-api.enum';
 import { MemoryStore } from '@custom-types';
 import {
   ApiRequestMethod,
   AxiosApiService,
   EnvVar,
 } from '@example-app/shared/data-access';
+import { UserApiUri } from '@example-app/users/data-access';
 
 import { getEnvVar, isDev, isUseMockInDev } from '../../../utils/env-vars.util';
 

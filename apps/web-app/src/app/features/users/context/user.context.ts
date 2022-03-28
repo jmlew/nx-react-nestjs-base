@@ -1,6 +1,6 @@
 import { Context, createContext, useContext } from 'react';
 
-import { User } from '@api-configs/features/models/user-api-data.model';
+import { User } from '@example-app/users/data-access';
 
 export interface UserContextValue {
   user: User;

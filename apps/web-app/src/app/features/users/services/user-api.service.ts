@@ -1,13 +1,5 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { UserApiParam, UserApiUri } from '@api-configs/features/enums/user-api.enum';
-import {
-  CreateUserResponse,
-  GetUserResponse,
-  GetUsersResponse,
-  UpdateUserResponse,
-  UserDetails,
-} from '@api-configs/features/models/user-api-data.model';
 import { MemoryStore } from '@custom-types';
 import { ApiRequestMethod } from '@example-app/shared/data-access';
 import {
@@ -15,6 +7,14 @@ import {
   InterceptorsHandlers,
 } from '@example-app/shared/data-access';
 import { normaliseApiErrorMessage } from '@example-app/shared/util';
+import { UserApiParam, UserApiUri } from '@example-app/users/data-access';
+import {
+  CreateUserResponse,
+  GetUserResponse,
+  GetUsersResponse,
+  UpdateUserResponse,
+  UserDetails,
+} from '@example-app/users/data-access';
 
 import { UserAxiosApiService } from './user-axios-api.service';
 

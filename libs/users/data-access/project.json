@@ -1,23 +1,23 @@
 {
-  "root": "libs/api-configs",
-  "sourceRoot": "libs/api-configs/src",
+  "root": "libs/users/data-access",
+  "sourceRoot": "libs/users/data-access/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/api-configs/**/*.ts"]
+        "lintFilePatterns": ["libs/users/data-access/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/api-configs"],
+      "outputs": ["coverage/libs/users/data-access"],
       "options": {
-        "jestConfig": "libs/api-configs/jest.config.js",
+        "jestConfig": "libs/users/data-access/jest.config.js",
         "passWithNoTests": true
       }
     }
-  },
-  "tags": []
+  }
 }

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { User } from '@api-configs/features/models/user-api-data.model';
+import { User } from '@example-app/users/data-access';
 
 import { UserContext, UserContextValue } from './user.context';
 

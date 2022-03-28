@@ -17,7 +17,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@api-configs/*": ["libs/api-configs/src/lib/*"],
       "@custom-types": ["./types/index.ts"],
       "@example-app/alert/feature": ["libs/alert/feature/src/index.ts"],
       "@example-app/alert/ui": ["libs/alert/ui/src/index.ts"],
@@ -26,7 +25,8 @@
       "@example-app/shared/data-access": ["libs/shared/data-access/src/index.ts"],
       "@example-app/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@example-app/shared/util": ["libs/shared/util/src/index.ts"],
-      "@example-app/shell/ui": ["libs/shell/ui/src/index.ts"]
+      "@example-app/shell/ui": ["libs/shell/ui/src/index.ts"],
+      "@example-app/users/data-access": ["libs/users/data-access/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

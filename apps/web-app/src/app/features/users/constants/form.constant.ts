@@ -1,4 +1,4 @@
-import { UserParam } from '@api-configs/features/enums/user-api.enum';
+import { UserParam } from '@example-app/users/data-access';
 
 export const userFormLabelMap: Map<UserParam, string> = new Map([
   [UserParam.Email, 'Email'],

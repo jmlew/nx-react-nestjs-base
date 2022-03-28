@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
-import { UserParam, UserRegisterParam } from '@api-configs/features/enums/user-api.enum';
 import { FormValidationError } from '@example-app/form/feature';
+import { UserParam, UserRegisterParam } from '@example-app/users/data-access';
 
 export const userFormValidationSchema = Yup.object({
   [UserParam.FirstName]: Yup.string().required(FormValidationError.Required),

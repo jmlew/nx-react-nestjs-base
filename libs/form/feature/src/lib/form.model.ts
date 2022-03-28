@@ -1,3 +1,3 @@
-import { UserParam, UserRegisterParam } from '@api-configs/features/enums/user-api.enum';
+import { UserParam, UserRegisterParam } from '@example-app/users/data-access';
 
 export type UserFormField = UserParam | UserRegisterParam;

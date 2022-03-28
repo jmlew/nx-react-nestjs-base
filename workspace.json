@@ -3,7 +3,6 @@
   "projects": {
     "alert-feature": "libs/alert/feature",
     "alert-ui": "libs/alert/ui",
-    "api-configs": "libs/api-configs",
     "form-feature": "libs/form/feature",
     "home-feature": "libs/home/feature",
     "mock-api": "apps/mock-api",
@@ -11,6 +10,7 @@
     "shared-ui": "libs/shared/ui",
     "shared-util": "libs/shared/util",
     "shell-ui": "libs/shell/ui",
+    "users-data-access": "libs/users/data-access",
     "web-app": "apps/web-app",
     "web-app-e2e": "apps/web-app-e2e"
   }
