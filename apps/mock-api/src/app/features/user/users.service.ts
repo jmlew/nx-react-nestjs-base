@@ -6,9 +6,9 @@ import {
   User,
   UserDetails,
 } from '@api-configs/features/models/user-api-data.model';
+import * as fromUtilsLib from '@example-app/shared/util';
+import { EntitiesService, Entity } from '@example-app/shared/util';
 import { Injectable } from '@nestjs/common';
-import * as fromUtilsLib from '@shared-utils';
-import { EntitiesService, Entity } from '@shared-utils';
 
 import * as usersDb from '../../../assets/db/users.json';
 

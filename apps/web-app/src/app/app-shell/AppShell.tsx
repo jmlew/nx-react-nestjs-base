@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { ThemeProvider } from '@mui/material/styles';
 
-import { AlertProvider } from '../core/alert/containers';
+import { AlertProvider } from '../../../../../libs/alert/feature/src/lib/containers';
 import { uiTheme } from '../styles';
 import { AppContent } from './content/AppContent';
 import { AppFooter } from './footer/AppFooter';

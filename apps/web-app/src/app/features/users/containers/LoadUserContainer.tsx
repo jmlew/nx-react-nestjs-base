@@ -1,11 +1,11 @@
 import { AxiosError, AxiosResponse } from 'axios';
+import { ApiRequestType } from 'libs/shared/data-access/src/lib/enums/api-state.enum';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { GetUserResponse, User } from '@api-configs/features/models/user-api-data.model';
-import { ApiRequestType } from '@api-configs/shared/enums/api-state.enum';
+import { useApiStateManager } from '@example-app/shared/data-access';
 import { Button } from '@mui/material';
-import { useApiStateManager } from '@shared-utils';
 
 import { ErrorMessage, Loading } from '../../../shared/components';
 import { UserContextProvider } from '../context';

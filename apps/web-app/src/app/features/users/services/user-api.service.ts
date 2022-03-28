@@ -8,12 +8,14 @@ import {
   UpdateUserResponse,
   UserDetails,
 } from '@api-configs/features/models/user-api-data.model';
-import { ApiRequestMethod } from '@api-configs/shared/enums/api-state.enum';
 import { MemoryStore } from '@custom-types';
+import { ApiRequestMethod } from '@example-app/shared/data-access';
+import {
+  AxiosApiInterceptorsService,
+  InterceptorsHandlers,
+} from '@example-app/shared/data-access';
+import { normaliseApiErrorMessage } from '@example-app/shared/util';
 
-import { InterceptorsHandlers } from '../../../core/api/models/axios.model';
-import { AxiosApiInterceptorsService } from '../../../core/api/services';
-import { normaliseApiErrorMessage } from '../../../core/api/utils';
 import { UserAxiosApiService } from './user-axios-api.service';
 
 interface CacheEntry {

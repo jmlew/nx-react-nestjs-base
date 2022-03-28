@@ -1,0 +1,23 @@
+{
+  "root": "libs/alert/ui",
+  "sourceRoot": "libs/alert/ui/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/alert/ui/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/alert/ui"],
+      "options": {
+        "jestConfig": "libs/alert/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

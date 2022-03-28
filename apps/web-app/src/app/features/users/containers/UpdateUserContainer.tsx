@@ -1,4 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
+import { ApiRequestType } from 'libs/shared/data-access/src/lib/enums/api-state.enum';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,11 +7,9 @@ import {
   UpdateUserResponse,
   UserDetails,
 } from '@api-configs/features/models/user-api-data.model';
-import { ApiRequestType } from '@api-configs/shared/enums/api-state.enum';
-import { useApiStateManager } from '@shared-utils';
+import { AlertType, useAlert } from '@example-app/alert/feature';
+import { useApiStateManager } from '@example-app/shared/data-access';
 
-import { useAlert } from '../../../core/alert/context';
-import { AlertType } from '../../../core/alert/enums/alert.enum';
 import { Loading } from '../../../shared/components';
 import { UserDetailsFormFormik } from '../components';
 import { useUserContext } from '../context';
