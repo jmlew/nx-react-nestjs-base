@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
-import { AlertProvider } from '@example-app/alert/feature';
-import { uiTheme } from '@example-app/shared/ui';
+import { AlertProvider } from '@example-app/shared/feature-alert';
+import { uiTheme } from '@example-app/shared/ui-common';
 import { AppContent, AppFooter, Appheader } from '@example-app/shell/ui';
 import Box from '@mui/material/Box';
 import { ThemeProvider } from '@mui/material/styles';

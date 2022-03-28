@@ -2,11 +2,11 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAlert } from '@example-app/alert/feature';
-import { AlertType } from '@example-app/alert/ui';
 import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
-import { ErrorMessage, Loading } from '@example-app/shared/ui';
-import { objectsSortOnKey } from '@example-app/shared/util';
+import { useAlert } from '@example-app/shared/feature-alert';
+import { AlertType } from '@example-app/shared/ui-alert';
+import { ErrorMessage, Loading } from '@example-app/shared/ui-common';
+import { objectsSortOnKey } from '@example-app/shared/util-common';
 import { GetUsersResponse, User, userService } from '@example-app/users/data-access';
 import { UsersList } from '@example-app/users/ui';
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
-import { ErrorMessage, Loading } from '@example-app/shared/ui';
+import { ErrorMessage, Loading } from '@example-app/shared/ui-common';
 import { GetUserResponse, User, userService } from '@example-app/users/data-access';
 import { Button } from '@mui/material';
 

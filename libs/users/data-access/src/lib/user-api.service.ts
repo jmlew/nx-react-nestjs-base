@@ -6,7 +6,7 @@ import {
   AxiosApiInterceptorsService,
   InterceptorsHandlers,
 } from '@example-app/shared/data-access';
-import { normaliseApiErrorMessage } from '@example-app/shared/util';
+import { normaliseApiErrorMessage } from '@example-app/shared/util-common';
 import { UserApiParam, UserApiUri } from '@example-app/users/data-access';
 import {
   CreateUserResponse,

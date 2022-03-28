@@ -1,0 +1,23 @@
+{
+  "root": "libs/shared/feature-alert",
+  "sourceRoot": "libs/shared/feature-alert/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/feature-alert/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/feature-alert"],
+      "options": {
+        "jestConfig": "libs/shared/feature-alert/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import {
   formValidationSchema,
   isFieldError,
 } from '@example-app/shared/util-form';
+// TODO: ensure DDF implemmentation removes reference to feature models (users/data-access).
 import { User, UserDetails } from '@example-app/users/data-access';
 import {
   Button,
@@ -19,19 +20,21 @@ import {
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-interface UserDetailsFormFormikProps {
+// TODO: Implement form using Data Drive Forms (https://data-driven-forms.org) and move into @example-app/form/ui lib
+
+interface DataDrivenFormProps {
   user?: User;
   initialValues: UserDetails;
   onSubmit: (values: UserDetails) => void;
   onCancel: () => void;
 }
 
-export function UserDetailsFormFormik({
+export function DataDrivenForm({
   user,
   initialValues,
   onSubmit,
   onCancel,
-}: UserDetailsFormFormikProps) {
+}: DataDrivenFormProps) {
   const formik = useFormik({
     initialValues,
     validationSchema: formValidationSchema,
@@ -54,7 +57,7 @@ export function UserDetailsFormFormik({
               color="textSecondary"
               sx={{ mt: 1, ml: 0.3 }}
             >
-              Sample MUI form using Formik.
+              Sample MUI form using Data Driven Forms.
             </Typography>
             <Divider flexItem={true} sx={{ my: 3 }} />
             <TextField

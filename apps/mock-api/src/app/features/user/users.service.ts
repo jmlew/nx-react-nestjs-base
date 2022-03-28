@@ -1,5 +1,5 @@
-import * as fromUtilsLib from '@example-app/shared/util';
-import { EntitiesService, Entity } from '@example-app/shared/util';
+import * as fromUtilsLib from '@example-app/shared/util-common';
+import { EntitiesService, Entity } from '@example-app/shared/util-common';
 import {
   CreateUserResponse,
   GetUserResponse,

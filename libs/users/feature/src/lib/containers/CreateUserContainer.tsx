@@ -2,13 +2,16 @@ import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAlert } from '@example-app/alert/feature';
-import { AlertType } from '@example-app/alert/ui';
-import { DataDrivenForm } from '@example-app/form/ui';
 import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
-import { Loading } from '@example-app/shared/ui';
-import { CreateUserResponse, UserDetails } from '@example-app/users/data-access';
-import { userService } from '@example-app/users/data-access';
+import { useAlert } from '@example-app/shared/feature-alert';
+import { AlertType } from '@example-app/shared/ui-alert';
+import { Loading } from '@example-app/shared/ui-common';
+import { DataDrivenForm } from '@example-app/shared/ui-form';
+import {
+  CreateUserResponse,
+  UserDetails,
+  userService,
+} from '@example-app/users/data-access';
 import { getUserFormInitialValues } from '@example-app/users/util';
 
 export function CreateUserContainer() {

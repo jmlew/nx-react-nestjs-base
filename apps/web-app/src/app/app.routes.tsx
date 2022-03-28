@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { AppHome } from '@example-app/home/feature';
-import { Loading } from '@example-app/shared/ui';
+import { Loading } from '@example-app/shared/ui-common';
 import { PageNotFound } from '@example-app/shell/ui';
 import { UsersRoutes } from '@example-app/users/feature';
 
