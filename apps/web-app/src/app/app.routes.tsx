@@ -1,12 +1,12 @@
 import { Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { AppHome } from '@example-app/home/feature';
 import { Loading } from '@example-app/shared/ui';
+import { PageNotFound } from '@example-app/shell/ui';
 
-import { AppShell } from '../app-shell/AppShell';
-import { AppHome } from '../app-shell/home/AppHome';
-import { PageNotFound } from '../app-shell/not-found/PageNotFound';
-import UsersRoutes from '../features/users/users.routes';
+import { AppShell } from './AppShell';
+import UsersRoutes from './features/users/users.routes';
 
 export default function AppRoutes() {
   return (

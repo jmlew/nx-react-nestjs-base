@@ -1,13 +1,10 @@
 import { Outlet } from 'react-router-dom';
 
+import { AlertProvider } from '@example-app/alert/feature';
+import { uiTheme } from '@example-app/shared/ui';
+import { AppContent, AppFooter, Appheader } from '@example-app/shell/ui';
 import Box from '@mui/material/Box';
 import { ThemeProvider } from '@mui/material/styles';
-
-import { AlertProvider } from '../../../../../libs/alert/feature/src/lib/containers';
-import { uiTheme } from '../styles';
-import { AppContent } from './content/AppContent';
-import { AppFooter } from './footer/AppFooter';
-import { Appheader } from './header/AppHeader';
 
 export const styles = {
   root: {

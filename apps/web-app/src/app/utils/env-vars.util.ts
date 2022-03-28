@@ -1,7 +1,6 @@
-import { environment } from '../../../environments/environment';
-import { EnvVar } from '../enums/environment.enum';
+import { EnvVar } from '@example-app/shared/data-access';
 
-// TODO: Move to shared/data-access lib
+import { environment } from '../../environments/environment';
 
 export function getEnvVar(envVar: EnvVar): string {
   const value = process.env[envVar];

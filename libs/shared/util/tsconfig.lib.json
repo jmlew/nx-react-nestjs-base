@@ -5,6 +5,6 @@
     "declaration": true,
     "types": []
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "../../../apps/web-app/src/app/shared/utils/env-vars.util.ts"],
   "exclude": ["**/*.spec.ts"]
 }

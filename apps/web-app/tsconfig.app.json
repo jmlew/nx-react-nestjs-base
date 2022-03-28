@@ -24,6 +24,9 @@
     "**/*.jsx",
     "**/*.ts",
     "**/*.tsx",
-    "../../libs/alert/ui/src/lib/AlertMessage.tsx"
+    "../../libs/alert/ui/src/lib/AlertMessage.tsx",
+    "../../libs/home/feature/src/lib/AppHome.tsx",
+    "../../libs/shared/util/src/lib/env-vars.util.ts",
+    "../../libs/shared/data-access/src/lib/enums/environment.enum.ts"
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "root": "libs/home/ui",
+  "sourceRoot": "libs/home/ui/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/home/ui/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/home/ui"],
+      "options": {
+        "jestConfig": "libs/home/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

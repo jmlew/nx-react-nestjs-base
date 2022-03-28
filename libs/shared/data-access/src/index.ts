@@ -3,6 +3,7 @@ export * from './lib/models/axios.model';
 export * from './lib/models/api-state.model';
 /* Enums */
 export * from './lib/enums/api-state.enum';
+export * from './lib/enums/environment.enum';
 /* Services */
 export * from './lib/services/axios-api-interceptors.service';
 /* Hooks */

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import Box from '@mui/material/Box';
 
-export const styles = {
+const styles = {
   root: {
     py: 5,
     px: 2,

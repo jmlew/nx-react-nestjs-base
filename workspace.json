@@ -5,10 +5,12 @@
     "alert-ui": "libs/alert/ui",
     "api-configs": "libs/api-configs",
     "form-feature": "libs/form/feature",
+    "home-feature": "libs/home/feature",
     "mock-api": "apps/mock-api",
     "shared-data-access": "libs/shared/data-access",
     "shared-ui": "libs/shared/ui",
     "shared-util": "libs/shared/util",
+    "shell-ui": "libs/shell/ui",
     "web-app": "apps/web-app",
     "web-app-e2e": "apps/web-app-e2e"
   }

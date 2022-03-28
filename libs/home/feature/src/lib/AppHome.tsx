@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 
-export const styles = {
+const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
