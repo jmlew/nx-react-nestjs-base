@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 
 import { UserParam } from '@api-configs/features/enums/user-api.enum';
 import { User, UserDetails } from '@api-configs/features/models/user-api-data.model';
+import { isFieldError } from '@example-app/form/feature';
 import {
   Button,
   Card,
@@ -13,7 +14,6 @@ import {
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-import { isFieldError } from '../../../shared/utils';
 import {
   userFormAutocompleteMap,
   userFormLabelMap,

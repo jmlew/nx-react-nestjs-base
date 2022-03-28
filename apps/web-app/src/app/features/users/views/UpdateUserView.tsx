@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 
-import { ErrorMessage } from '../../../shared/components';
+import { ErrorMessage } from '@example-app/shared/ui';
+
 import { LoadUserContainer, UpdateUserContainer } from '../containers';
 
 export function UpdateUserView() {

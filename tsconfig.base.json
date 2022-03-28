@@ -21,7 +21,9 @@
       "@custom-types": ["./types/index.ts"],
       "@example-app/alert/feature": ["libs/alert/feature/src/index.ts"],
       "@example-app/alert/ui": ["libs/alert/ui/src/index.ts"],
+      "@example-app/form/feature": ["libs/form/feature/src/index.ts"],
       "@example-app/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@example-app/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@example-app/shared/util": ["libs/shared/util/src/index.ts"]
     }
   },

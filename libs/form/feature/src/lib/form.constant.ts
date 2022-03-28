@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 import { UserParam, UserRegisterParam } from '@api-configs/features/enums/user-api.enum';
 
-import { UserFormField } from '../models/form.model';
+import { UserFormField } from './form.model';
 
 enum ValidationError {
   EmailInvalid = 'Invalid email address',

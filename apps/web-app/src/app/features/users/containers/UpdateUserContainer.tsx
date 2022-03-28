@@ -9,8 +9,8 @@ import {
 } from '@api-configs/features/models/user-api-data.model';
 import { AlertType, useAlert } from '@example-app/alert/feature';
 import { useApiStateManager } from '@example-app/shared/data-access';
+import { Loading } from '@example-app/shared/ui';
 
-import { Loading } from '../../../shared/components';
 import { UserDetailsFormFormik } from '../components';
 import { useUserContext } from '../context';
 import { userService } from '../services';

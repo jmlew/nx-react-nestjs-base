@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { GetUserResponse, User } from '@api-configs/features/models/user-api-data.model';
 import { useApiStateManager } from '@example-app/shared/data-access';
+import { ErrorMessage, Loading } from '@example-app/shared/ui';
 import { Button } from '@mui/material';
 
-import { ErrorMessage, Loading } from '../../../shared/components';
 import { UserContextProvider } from '../context';
 import { userService } from '../services';
 
