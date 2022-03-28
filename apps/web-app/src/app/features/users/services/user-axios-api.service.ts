@@ -7,9 +7,8 @@ import {
   AxiosApiService,
   EnvVar,
 } from '@example-app/shared/data-access';
+import { getEnvVar, isDev, isUseMockInDev } from '@example-app/shared/data-access';
 import { UserApiUri } from '@example-app/users/data-access';
-
-import { getEnvVar, isDev, isUseMockInDev } from '../../../utils/env-vars.util';
 
 export class UserAxiosApiService implements AxiosApiService {
   private axiosInstance: AxiosInstance;

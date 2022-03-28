@@ -11,3 +11,6 @@ export * from './lib/hooks/useAxios.hook';
 export * from './lib/hooks/useFetch.hook';
 export * from './lib/hooks/use-api-state-manager.hook';
 export * from './lib/hooks/use-previous.hook';
+
+/* Utils */
+export * from './lib/utils/env-vars.util';

@@ -17,6 +17,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@env/*": ["apps/web-app/src/environments/*"],
+      "@app-env-vars": ["apps/web-app/src/app/utils/env-vars.ts"],
       "@custom-types": ["./types/index.ts"],
       "@example-app/alert/feature": ["libs/alert/feature/src/index.ts"],
       "@example-app/alert/ui": ["libs/alert/ui/src/index.ts"],
