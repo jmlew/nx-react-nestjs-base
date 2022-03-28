@@ -10,15 +10,3 @@ export enum UserApiUri {
 export enum UserApiParam {
   Page = 'page',
 }
-
-export enum UserParam {
-  Email = 'email',
-  FirstName = 'first_name',
-  LastName = 'last_name',
-  Avatar = 'avatar',
-}
-
-export enum UserRegisterParam {
-  Password = 'password',
-  PasswordConfirm = 'password_confirm',
-}

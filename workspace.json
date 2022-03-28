@@ -3,7 +3,8 @@
   "projects": {
     "alert-feature": "libs/alert/feature",
     "alert-ui": "libs/alert/ui",
-    "form-feature": "libs/form/feature",
+    "form-ui": "libs/form/ui",
+    "form-util": "libs/form/util",
     "home-feature": "libs/home/feature",
     "mock-api": "apps/mock-api",
     "shared-data-access": "libs/shared/data-access",

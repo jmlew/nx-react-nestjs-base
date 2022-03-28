@@ -4,9 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import { AppHome } from '@example-app/home/feature';
 import { Loading } from '@example-app/shared/ui';
 import { PageNotFound } from '@example-app/shell/ui';
+import { UsersRoutes } from '@example-app/users/feature';
 
 import { AppShell } from './AppShell';
-import UsersRoutes from './features/users/users.routes';
 
 export default function AppRoutes() {
   return (

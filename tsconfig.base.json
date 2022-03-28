@@ -17,18 +17,22 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@env/*": ["apps/web-app/src/environments/*"],
       "@app-env-vars": ["apps/web-app/src/app/utils/env-vars.ts"],
       "@custom-types": ["./types/index.ts"],
+      "@env/*": ["apps/web-app/src/environments/*"],
       "@example-app/alert/feature": ["libs/alert/feature/src/index.ts"],
       "@example-app/alert/ui": ["libs/alert/ui/src/index.ts"],
-      "@example-app/form/feature": ["libs/form/feature/src/index.ts"],
+      "@example-app/form/ui": ["libs/form/ui/src/index.ts"],
+      "@example-app/form/util": ["libs/form/util/src/index.ts"],
       "@example-app/home/feature": ["libs/home/feature/src/index.ts"],
       "@example-app/shared/data-access": ["libs/shared/data-access/src/index.ts"],
       "@example-app/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@example-app/shared/util": ["libs/shared/util/src/index.ts"],
       "@example-app/shell/ui": ["libs/shell/ui/src/index.ts"],
-      "@example-app/users/data-access": ["libs/users/data-access/src/index.ts"]
+      "@example-app/users/data-access": ["libs/users/data-access/src/index.ts"],
+      "@example-app/users/feature": ["libs/users/feature/src/index.ts"],
+      "@example-app/users/ui": ["libs/users/ui/src/index.ts"],
+      "@example-app/users/util": ["libs/users/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
