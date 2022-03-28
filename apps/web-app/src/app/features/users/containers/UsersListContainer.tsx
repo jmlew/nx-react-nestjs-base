@@ -3,7 +3,8 @@ import { ApiRequestType } from 'libs/shared/data-access/src/lib/enums/api-state.
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AlertType, useAlert } from '@example-app/alert/feature';
+import { useAlert } from '@example-app/alert/feature';
+import { AlertType } from '@example-app/alert/ui';
 import { useApiStateManager } from '@example-app/shared/data-access';
 import { ErrorMessage, Loading } from '@example-app/shared/ui';
 import { objectsSortOnKey } from '@example-app/shared/util';

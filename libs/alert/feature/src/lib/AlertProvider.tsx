@@ -1,8 +1,8 @@
 import { ReactNode, useState } from 'react';
 
-import { AlertContext } from '../context';
-import { AlertConfig } from '../models/alert.model';
-import { AlertContainer } from '.';
+import { AlertContainer } from './AlertContainer';
+import { AlertContext } from './alert.context';
+import { AlertConfig } from './alert.model';
 
 interface AlertProviderProps {
   children: ReactNode;

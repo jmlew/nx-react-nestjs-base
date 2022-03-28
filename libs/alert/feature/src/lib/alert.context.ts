@@ -1,6 +1,6 @@
 import { Context, createContext, useContext } from 'react';
 
-import { AlertConfig } from '../models/alert.model';
+import { AlertConfig } from './alert.model';
 
 export interface AlertContextValue {
   alert: AlertConfig;

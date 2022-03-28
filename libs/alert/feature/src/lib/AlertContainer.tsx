@@ -1,6 +1,6 @@
 import { AlertMessage } from '@example-app/alert/ui';
 
-import { useAlert } from '../context';
+import { useAlert } from './alert.context';
 
 export function AlertContainer() {
   const { alert, setAlert } = useAlert();
