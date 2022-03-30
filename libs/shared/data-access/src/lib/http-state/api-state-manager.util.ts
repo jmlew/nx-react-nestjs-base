@@ -1,5 +1,5 @@
-import { ApiRequestType, ApiStatus } from '../enums/api-state.enum';
-import { ApiState } from '../models/api-state.model';
+import { ApiRequestType, ApiStatus } from './api-state.enum';
+import { ApiState } from './api-state.model';
 
 /**
  * State manager which returns a new ApiState object based on certain API states.

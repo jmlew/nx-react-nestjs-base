@@ -1,12 +1,5 @@
 import { useFormik } from 'formik';
 
-import {
-  FormParamUser,
-  createValidationSchema,
-  formAutocompleteMap,
-  formLabelMap,
-  isFieldError,
-} from '@example-app/shared/util-form';
 // TODO: ensure DDF implemmentation removes reference to feature models (users/data-access).
 import { User, UserDetails } from '@example-app/users/domain';
 import {
@@ -19,6 +12,14 @@ import {
 } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
+
+import {
+  createValidationSchema,
+  formAutocompleteMap,
+  formLabelMap,
+} from '../form.constant';
+import { FormParamUser } from '../form.enum';
+import { isFieldError } from '../formik.util';
 
 // TODO: Implement form using Data Drive Forms (https://data-driven-forms.org) and move into @example-app/form/ui lib
 

@@ -1,6 +1,6 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { InterceptorsHandlers } from '../models/axios.model';
+import { InterceptorsHandlers } from './axios.model';
 
 export class AxiosApiInterceptorsService {
   private handlers: InterceptorsHandlers;

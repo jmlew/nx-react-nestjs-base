@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { ApiRequestType, ApiState, ApiStatus } from '@example-app/shared/data-access';
+import { usePrevious } from '@example-app/shared/util-common';
 
 import { ApiStateManager } from './api-state-manager.util';
-import { usePrevious } from './use-previous.hook';
 
 // Convenience methods.
 export const {

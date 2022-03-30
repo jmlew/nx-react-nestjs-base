@@ -1,4 +1,4 @@
-import { AlertAlign, AlertType } from '@example-app/shared/ui-alert';
+import { AlertAlign, AlertType } from '@example-app/shared/ui-common';
 
 export interface AlertConfig {
   isShown: boolean;

@@ -1,4 +1,4 @@
-import { AlertMessage } from '@example-app/shared/ui-alert';
+import { AlertMessage } from '@example-app/shared/ui-common';
 
 import { useAlert } from './alert.context';
 

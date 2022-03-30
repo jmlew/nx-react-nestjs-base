@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
 import { useAlert } from '@example-app/shared/feature-alert';
-import { AlertType } from '@example-app/shared/ui-alert';
-import { ErrorMessage, Loading } from '@example-app/shared/ui-common';
+import { AlertType, ErrorMessage, Loading } from '@example-app/shared/ui-common';
 import { objectsSortOnKey } from '@example-app/shared/util-common';
 import { GetUsersResponse, User, userFacade } from '@example-app/users/domain';
 

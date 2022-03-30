@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
 import { useAlert } from '@example-app/shared/feature-alert';
 import { DataDrivenForm } from '@example-app/shared/feature-form';
-import { AlertType } from '@example-app/shared/ui-alert';
-import { Loading } from '@example-app/shared/ui-common';
+import { AlertType, Loading } from '@example-app/shared/ui-common';
 import { CreateUserResponse, UserDetails, userFacade } from '@example-app/users/domain';
 import { getUserFormInitialValues } from '@example-app/users/util';
 

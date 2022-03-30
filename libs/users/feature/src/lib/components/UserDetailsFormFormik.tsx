@@ -6,7 +6,7 @@ import {
   formAutocompleteMap,
   formLabelMap,
   isFieldError,
-} from '@example-app/shared/util-form';
+} from '@example-app/shared/feature-form';
 import { User, UserDetails } from '@example-app/users/domain';
 import {
   Button,
