@@ -1,6 +1,6 @@
 {
-  "root": "libs/users/ui",
-  "sourceRoot": "libs/users/ui/src",
+  "root": "libs/shared/feature-form",
+  "sourceRoot": "libs/shared/feature-form/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -8,14 +8,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/users/ui/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/shared/feature-form/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/users/ui"],
+      "outputs": ["coverage/libs/shared/feature-form"],
       "options": {
-        "jestConfig": "libs/users/ui/jest.config.js",
+        "jestConfig": "libs/shared/feature-form/jest.config.js",
         "passWithNoTests": true
       }
     }

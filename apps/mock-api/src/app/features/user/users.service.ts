@@ -7,7 +7,7 @@ import {
   UpdateUserResponse,
   User,
   UserDetails,
-} from '@example-app/users/data-access';
+} from '@example-app/users/domain';
 import { Injectable } from '@nestjs/common';
 
 import * as usersDb from '../../../assets/db/users.json';

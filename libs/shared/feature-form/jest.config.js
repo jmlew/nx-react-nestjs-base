@@ -1,9 +1,9 @@
 module.exports = {
-  displayName: 'users-data-access',
+  displayName: 'shared-feature-form',
   preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/users/data-access',
+  coverageDirectory: '../../../coverage/libs/shared/feature-form',
 };

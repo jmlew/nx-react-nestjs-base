@@ -7,11 +7,11 @@
     "shared-feature-alert": "libs/shared/feature-alert",
     "shared-ui-alert": "libs/shared/ui-alert",
     "shared-ui-common": "libs/shared/ui-common",
-    "shared-ui-form": "libs/shared/ui-form",
+    "shared-feature-form": "libs/shared/feature-form",
     "shared-util-common": "libs/shared/util-common",
     "shared-util-form": "libs/shared/util-form",
     "shell-ui": "libs/shell/ui",
-    "users-data-access": "libs/users/data-access",
+    "users-domain": "libs/users/domain",
     "web-app": "apps/web-app",
     "web-app-e2e": "apps/web-app-e2e"
   }

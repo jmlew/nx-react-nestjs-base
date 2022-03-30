@@ -2,13 +2,13 @@ import { useFormik } from 'formik';
 
 import {
   FormParamUser,
+  createValidationSchema,
   formAutocompleteMap,
   formLabelMap,
-  formValidationSchema,
   isFieldError,
 } from '@example-app/shared/util-form';
 // TODO: ensure DDF implemmentation removes reference to feature models (users/data-access).
-import { User, UserDetails } from '@example-app/users/data-access';
+import { User, UserDetails } from '@example-app/users/domain';
 import {
   Button,
   Card,
@@ -37,11 +37,19 @@ export function DataDrivenForm({
 }: DataDrivenFormProps) {
   const formik = useFormik({
     initialValues,
-    validationSchema: formValidationSchema,
+    validationSchema: createValidationSchema([
+      FormParamUser.FirstName,
+      FormParamUser.LastName,
+      FormParamUser.Email,
+    ]),
     onSubmit: (values: UserDetails) => {
       onSubmit(values);
     },
   });
+
+  if (!formik.isValid) {
+    console.log(formik.errors);
+  }
 
   return (
     <Container maxWidth="sm">

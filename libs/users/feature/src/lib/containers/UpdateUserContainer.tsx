@@ -6,14 +6,10 @@ import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-acc
 import { useAlert } from '@example-app/shared/feature-alert';
 import { AlertType } from '@example-app/shared/ui-alert';
 import { Loading } from '@example-app/shared/ui-common';
-import {
-  UpdateUserResponse,
-  UserDetails,
-  userService,
-} from '@example-app/users/data-access';
-import { UserDetailsFormFormik } from '@example-app/users/ui';
+import { UpdateUserResponse, UserDetails, userFacade } from '@example-app/users/domain';
 import { getUserFormInitialValues } from '@example-app/users/util';
 
+import { UserDetailsFormFormik } from '../components/UserDetailsFormFormik';
 import { useUserContext } from '../context/user.context';
 
 export function UpdateUserContainer() {
@@ -34,7 +30,7 @@ export function UpdateUserContainer() {
     const userId: number = user.id;
     const request: ApiRequestType = ApiRequestType.Update;
     onPending(request);
-    userService
+    userFacade
       .updateUser(userId, values)
       .then((res: AxiosResponse<UpdateUserResponse>) => {
         onCompleted(request);

@@ -1,4 +1,4 @@
-import { User, UserDetails } from '@example-app/users/data-access';
+import { User, UserDetails } from '@example-app/users/domain';
 
 export function getUserFormInitialValues(user?: User): UserDetails {
   if (user == null) {

@@ -7,15 +7,15 @@ import {
   InterceptorsHandlers,
 } from '@example-app/shared/data-access';
 import { normaliseApiErrorMessage } from '@example-app/shared/util-common';
-import { UserApiParam, UserApiUri } from '@example-app/users/data-access';
+
 import {
   CreateUserResponse,
   GetUserResponse,
   GetUsersResponse,
   UpdateUserResponse,
   UserDetails,
-} from '@example-app/users/data-access';
-
+} from '../entities/user-data.model';
+import { UserApiParam, UserApiUri } from './user-api.enum';
 import { UserAxiosApiService } from './user-axios-api.service';
 
 interface CacheEntry {

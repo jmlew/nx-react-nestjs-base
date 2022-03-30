@@ -7,8 +7,9 @@ import { useAlert } from '@example-app/shared/feature-alert';
 import { AlertType } from '@example-app/shared/ui-alert';
 import { ErrorMessage, Loading } from '@example-app/shared/ui-common';
 import { objectsSortOnKey } from '@example-app/shared/util-common';
-import { GetUsersResponse, User, userService } from '@example-app/users/data-access';
-import { UsersList } from '@example-app/users/ui';
+import { GetUsersResponse, User, userFacade } from '@example-app/users/domain';
+
+import { UsersList } from '../components';
 
 interface UserContainerProps {
   pageIndex: number;
@@ -42,7 +43,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   function handleGetUsers() {
     const request: ApiRequestType = ApiRequestType.Read;
     onPending(request);
-    userService
+    userFacade
       .getUsers(pageIndex)
       .then((res: AxiosResponse<GetUsersResponse>) => {
         const items: User[] = objectsSortOnKey(res.data.data, 'first_name');
@@ -59,7 +60,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   function handleDeleteUser(userId: number) {
     const request: ApiRequestType = ApiRequestType.Delete;
     onPending(request);
-    userService
+    userFacade
       .deleteUser(userId)
       .then((res: AxiosResponse<number>) => {
         setAlert({

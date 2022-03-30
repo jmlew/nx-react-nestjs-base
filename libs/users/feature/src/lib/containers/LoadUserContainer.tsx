@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
 import { ErrorMessage, Loading } from '@example-app/shared/ui-common';
-import { GetUserResponse, User, userService } from '@example-app/users/data-access';
+import { GetUserResponse, User, userFacade } from '@example-app/users/domain';
 import { Button } from '@mui/material';
 
 import { UserContextProvider } from '../context/UserContextProvider';
@@ -38,7 +38,7 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
   function handleGetUser(userId: number) {
     const request: ApiRequestType = ApiRequestType.Read;
     onPending(request);
-    userService
+    userFacade
       .getUser(userId)
       .then((res: AxiosResponse<GetUserResponse>) => {
         setUserData(res.data.data);

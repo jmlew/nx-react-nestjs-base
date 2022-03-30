@@ -1,6 +1,6 @@
 {
-  "root": "libs/users/data-access",
-  "sourceRoot": "libs/users/data-access/src",
+  "root": "libs/users/domain",
+  "sourceRoot": "libs/users/domain/src",
   "projectType": "library",
   "tags": [],
   "targets": {
@@ -8,14 +8,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/users/data-access/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/users/domain/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/users/data-access"],
+      "outputs": ["coverage/libs/users/domain"],
       "options": {
-        "jestConfig": "libs/users/data-access/jest.config.js",
+        "jestConfig": "libs/users/domain/jest.config.js",
         "passWithNoTests": true
       }
     }

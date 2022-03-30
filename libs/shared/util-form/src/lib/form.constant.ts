@@ -1,29 +1,30 @@
 import * as Yup from 'yup';
 
-import { FormParamAuth, FormParamUser } from './form.enum';
+import { FormParamAuth, FormParamUser, FormValidationError } from './form.enum';
 import { FormField } from './form.model';
 
-enum ValidationError {
-  EmailInvalid = 'Invalid email address',
-  PasswordMatch = 'Passwords must match',
-  PasswordMin = 'Must be 8 or more characters',
-  Required = 'Required',
-}
-
-export const formValidationSchema = Yup.object({
-  [FormParamUser.FirstName]: Yup.string().required(ValidationError.Required),
-  [FormParamUser.LastName]: Yup.string().required(ValidationError.Required),
+const formValidationSchemaAll: Record<FormField, any> = {
+  [FormParamUser.FirstName]: Yup.string().required(FormValidationError.Required),
+  [FormParamUser.LastName]: Yup.string().required(FormValidationError.Required),
   [FormParamUser.Email]: Yup.string()
-    .email(ValidationError.EmailInvalid)
-    .required(ValidationError.Required),
+    .email(FormValidationError.EmailInvalid)
+    .required(FormValidationError.Required),
   [FormParamAuth.Password]: Yup.string()
-    .min(8, ValidationError.PasswordMin)
-    .required(ValidationError.Required),
+    .min(8, FormValidationError.PasswordMin)
+    .required(FormValidationError.Required),
   [FormParamAuth.PasswordConfirm]: Yup.string()
-    .min(8, ValidationError.PasswordMin)
-    .required(ValidationError.Required)
-    .oneOf([Yup.ref(FormParamAuth.Password)], ValidationError.PasswordMatch),
-});
+    .min(8, FormValidationError.PasswordMin)
+    .required(FormValidationError.Required)
+    .oneOf([Yup.ref(FormParamAuth.Password)], FormValidationError.PasswordMatch),
+  [FormParamUser.Avatar]: null,
+};
+
+export function createValidationSchema(fields: FormField[]) {
+  const validationSchema = fields.reduce((accum, field) => {
+    return { ...accum, [field]: formValidationSchemaAll[field] };
+  }, {});
+  return Yup.object(validationSchema);
+}
 
 export const formLabelMap: Map<FormField, string> = new Map([
   [FormParamUser.Email, 'Email'],

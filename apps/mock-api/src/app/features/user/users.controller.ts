@@ -17,7 +17,7 @@ import {
   UpdateUserResponse,
   User,
   UserDetails,
-} from '@example-app/users/data-access';
+} from '@example-app/users/domain';
 
 import { toStreamWithDelay } from '../../shared/utils';
 import { UsersService } from './users.service';

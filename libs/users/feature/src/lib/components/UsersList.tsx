@@ -1,4 +1,4 @@
-import { User } from '@example-app/users/data-access';
+import { User } from '@example-app/users/domain';
 import { Delete, Edit } from '@mui/icons-material';
 import {
   Avatar,

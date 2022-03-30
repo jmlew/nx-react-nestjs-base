@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { User } from '@example-app/users/data-access';
+import { User } from '@example-app/users/domain';
 
 import { UserContext, UserContextValue } from './user.context';
 
