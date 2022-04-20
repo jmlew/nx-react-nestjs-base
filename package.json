@@ -15,7 +15,9 @@
     "test": "nx test",
     "----- CODE --------------------": "",
     "format": "prettier --ignore-path .gitignore --write .",
-    "lint": "nx run web-app:lint"
+    "lint": "nx affected --target=lint --base=master",
+    "----- MISC --------------------": "",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -80,6 +82,7 @@
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.27.0",
     "eslint-plugin-react-hooks": "4.3.0",
+    "husky": "^7.0.4",
     "jest": "27.2.3",
     "live-server": "^1.2.1",
     "prettier": "^2.5.1",

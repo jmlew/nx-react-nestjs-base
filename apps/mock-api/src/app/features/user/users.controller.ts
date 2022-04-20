@@ -8,7 +8,6 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
 
 import {
   CreateUserResponse,
@@ -21,6 +20,7 @@ import {
 
 import { toStreamWithDelay } from '../../shared/utils';
 import { UsersService } from './users.service';
+import { Observable } from 'rxjs';
 
 enum ErrorMessage {
   NoUserMatch = 'User does not exist in the Mock DB.',

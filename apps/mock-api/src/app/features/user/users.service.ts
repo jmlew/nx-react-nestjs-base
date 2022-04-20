@@ -26,7 +26,7 @@ export class UsersService {
     this.initData();
   }
 
-  initData() {
+  public initData() {
     this.usersDb = { ...usersDb };
     const data: User[] = this.usersDb.data;
     this.userEntities = this.entityService.createEntities(data);
