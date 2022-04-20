@@ -6,7 +6,7 @@ import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-acc
 import { useAlert } from '@example-app/shared/feature-alert';
 import { AlertType, Loading } from '@example-app/shared/ui-common';
 import { UpdateUserResponse, UserDetails, userFacade } from '@example-app/users/domain';
-import { getUserFormInitialValues } from '@example-app/users/util';
+import { getUserFormParams } from '@example-app/users/util';
 
 import { UserDetailsFormFormik } from '../components/UserDetailsFormFormik';
 import { useUserContext } from '../context/user.context';
@@ -58,7 +58,7 @@ export function UpdateUserContainer() {
           user={user}
           onSubmit={handleUpdateUser}
           onCancel={goToList}
-          initialValues={getUserFormInitialValues(user)}
+          initialValues={getUserFormParams(user)}
         />
       }
     </>

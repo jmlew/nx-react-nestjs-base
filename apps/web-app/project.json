@@ -2,6 +2,7 @@
   "root": "apps/web-app",
   "sourceRoot": "apps/web-app/src",
   "projectType": "application",
+  "tags": ["type:app"],
   "targets": {
     "build": {
       "executor": "@nrwl/web:webpack",
@@ -67,6 +68,5 @@
         "passWithNoTests": true
       }
     }
-  },
-  "tags": ["type:app"]
+  }
 }

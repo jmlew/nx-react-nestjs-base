@@ -2,6 +2,8 @@
   "root": "apps/web-app-e2e",
   "sourceRoot": "apps/web-app-e2e/src",
   "projectType": "application",
+  "tags": ["type:e2e"],
+  "implicitDependencies": ["web-app"],
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
@@ -22,7 +24,5 @@
         "lintFilePatterns": ["apps/web-app-e2e/**/*.{js,ts}"]
       }
     }
-  },
-  "tags": [],
-  "implicitDependencies": ["web-app"]
+  }
 }

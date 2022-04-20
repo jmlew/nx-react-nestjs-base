@@ -2,7 +2,7 @@
   "root": "libs/shared/feature-alert",
   "sourceRoot": "libs/shared/feature-alert/src",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:feature", "scope:shared"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",

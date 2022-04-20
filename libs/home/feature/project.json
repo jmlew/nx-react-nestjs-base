@@ -1,21 +1,21 @@
 {
-  "root": "libs/home/ui",
-  "sourceRoot": "libs/home/ui/src",
+  "root": "libs/home/feature",
+  "sourceRoot": "libs/home/feature/src",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:feature", "scope:home"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/home/ui/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["libs/home/feature/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/home/ui"],
+      "outputs": ["coverage/libs/home/feature"],
       "options": {
-        "jestConfig": "libs/home/ui/jest.config.js",
+        "jestConfig": "libs/home/feature/jest.config.js",
         "passWithNoTests": true
       }
     }

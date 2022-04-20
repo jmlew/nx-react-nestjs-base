@@ -1,5 +1,6 @@
 {
   "npmScope": "example-app",
+  "defaultProject": "web-app",
   "affected": {
     "defaultBase": "main"
   },
@@ -44,6 +45,5 @@
         "linter": "eslint"
       }
     }
-  },
-  "defaultProject": "web-app"
+  }
 }

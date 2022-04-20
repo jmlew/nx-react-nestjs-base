@@ -1,4 +1,4 @@
-import { environment } from '@env/environment';
+import { environment } from '@env/environment'; // eslint-disable-line @nrwl/nx/enforce-module-boundaries
 
 import { EnvVar } from './env-var.enum';
 

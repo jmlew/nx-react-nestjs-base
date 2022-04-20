@@ -18,7 +18,7 @@ export const useAxiosGet = <T>(
       .catch((err: AxiosError) => {
         setError(err);
       });
-  }, [url]);
+  }, [url]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return [response as T, error as AxiosError];
 };
@@ -40,7 +40,7 @@ export const useAxiosPost = <T>(
       .catch((err: AxiosError) => {
         setError(err);
       });
-  }, [url]);
+  }, [url]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return [response as T, error as AxiosError];
 };

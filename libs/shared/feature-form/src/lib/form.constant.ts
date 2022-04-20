@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { FormParamAuth, FormParamUser, FormValidationError } from './form.enum';
 import { FormField } from './form.model';
 
-const formValidationSchemaAll: Record<FormField, any> = {
+const formValidationSchemaAll: Record<FormField, unknown> = {
   [FormParamUser.FirstName]: Yup.string().required(FormValidationError.Required),
   [FormParamUser.LastName]: Yup.string().required(FormValidationError.Required),
   [FormParamUser.Email]: Yup.string()

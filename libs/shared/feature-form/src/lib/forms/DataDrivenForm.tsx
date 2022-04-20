@@ -1,7 +1,5 @@
 import { useFormik } from 'formik';
 
-// TODO: ensure DDF implemmentation removes reference to feature models (users/data-access).
-import { User, UserDetails } from '@example-app/users/domain';
 import {
   Button,
   Card,
@@ -19,19 +17,20 @@ import {
   formLabelMap,
 } from '../form.constant';
 import { FormParamUser } from '../form.enum';
+import { FormParams } from '../form.model';
 import { isFieldError } from '../formik.util';
 
 // TODO: Implement form using Data Drive Forms (https://data-driven-forms.org) and move into @example-app/form/ui lib
 
 interface DataDrivenFormProps {
-  user?: User;
-  initialValues: UserDetails;
-  onSubmit: (values: UserDetails) => void;
+  isNewUser: boolean;
+  initialValues: FormParams;
+  onSubmit: (values: FormParams) => void;
   onCancel: () => void;
 }
 
 export function DataDrivenForm({
-  user,
+  isNewUser,
   initialValues,
   onSubmit,
   onCancel,
@@ -43,7 +42,7 @@ export function DataDrivenForm({
       FormParamUser.LastName,
       FormParamUser.Email,
     ]),
-    onSubmit: (values: UserDetails) => {
+    onSubmit: (values: FormParams) => {
       onSubmit(values);
     },
   });
@@ -58,7 +57,7 @@ export function DataDrivenForm({
         <form onSubmit={formik.handleSubmit}>
           <CardContent sx={{ pt: 4, pb: 2, px: 4 }}>
             <Typography variant="h4" color="textPrimary">
-              {user == null ? 'New User' : `Edit User ${user.id}`}
+              {isNewUser ? 'New User' : 'Edit User'}
             </Typography>
             <Typography
               gutterBottom

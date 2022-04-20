@@ -45,6 +45,12 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
         onCompleted(request);
       })
       .catch((error: AxiosError) => onFailed(error.message, request));
+
+    /* Testing Server sent events */
+    const eventSource = new EventSource('/api/users/test-sse');
+    eventSource.onmessage = ({ data }) => {
+      console.log('Server Sent Event message', JSON.parse(data));
+    };
   }
 
   function goToList() {

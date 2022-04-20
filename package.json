@@ -3,12 +3,19 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "----- SERVE --------------------": "",
     "start": "npm run serve:api & npm run serve:web",
     "serve:web": "nx run web-app:serve",
     "serve:api": "nx run mock-api:serve",
+    "serve:dist": "live-server dist/apps/web-app --no-browser --port=6600",
+    "----- BUILD --------------------": "",
     "build": "nx build",
+    "build:prod": "nx build --prod",
+    "----- TEST --------------------": "",
     "test": "nx test",
-    "format": "prettier --ignore-path .gitignore --write ."
+    "----- CODE --------------------": "",
+    "format": "prettier --ignore-path .gitignore --write .",
+    "lint": "nx run web-app:lint"
   },
   "private": true,
   "dependencies": {
@@ -72,8 +79,9 @@
     "eslint-plugin-import": "2.25.2",
     "eslint-plugin-jsx-a11y": "6.5.1",
     "eslint-plugin-react": "7.27.0",
-    "eslint-plugin-react-hooks": "4.2.0",
+    "eslint-plugin-react-hooks": "4.3.0",
     "jest": "27.2.3",
+    "live-server": "^1.2.1",
     "prettier": "^2.5.1",
     "react-test-renderer": "17.0.2",
     "ts-jest": "27.0.5",
