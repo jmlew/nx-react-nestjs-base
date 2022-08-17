@@ -15,13 +15,13 @@
     "test": "nx test",
     "----- CODE --------------------": "",
     "format": "prettier --ignore-path .gitignore --write .",
-    "lint": "nx affected --target=lint --base=master",
+    "lint": "nx affected --target=lint",
     "----- MISC --------------------": "",
     "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
-    "@data-driven-forms/mui-component-mapper": "^3.16.10",
+    "@data-driven-forms/mui-component-mapper": "^3.17.3",
     "@data-driven-forms/react-form-renderer": "^3.16.10",
     "@emotion/react": "11.5.0",
     "@emotion/styled": "11.3.0",

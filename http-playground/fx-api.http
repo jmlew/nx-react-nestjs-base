@@ -1,9 +1,0 @@
-# Testing API endpoints using the humao.rest-client vscode extension listed in .vscode/extensions.json
-# Api key and other global vars are defines in .vscode/settings.json "rest-client.environmentVariables"
-
-@base = AUD
-@quote = USD
-
-GET {{fxApiBase}}/latest
-?access_key={{fxApiAccessKey}}
-&symbols={{base}},{{quote}}

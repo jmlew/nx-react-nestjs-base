@@ -1,11 +1,3 @@
 {
-  "sort-imports.default-sort-style": "module-scoped",
-  "rest-client.environmentVariables": {
-    "$shared": {
-      "regressFakeApiBase": "https://reqres.in/api/",
-      "fakestoreFakeApiBase": "https://fakestoreapi.com/",
-      "fxApiAccessKey": "964f539def3546fcef66a7376bea5e0d",
-      "fxApiBase": "http://api.exchangeratesapi.io/v1/"
-    }
-  }
+  "sort-imports.default-sort-style": "module-scoped"
 }

@@ -31,6 +31,14 @@ A custom state manager class (ApiStateManager) provides an easy to use technique
 The codebase includes an HTTP Playground to test endpoint responses inside 'http-playground'.
 This uses the humao.rest-client vscode extension listed in .vscode/extensions.json with dependant global API variables defined in .vscode/settings.json 'rest-client.environmentVariables'.
 
+### NestJS Mock API app
+
+The 'mock-api' app contains a NestJS application which replicates the APIs requested to ensure development can continue in parallel to that of the Backend. This mock API can be enabled as the source of all HTTP requests within the web-app when serving in dev mode and when the environments property `useMockInDev` is set to `true` (located in `src/environments/environment.ts`).
+
+#### Serving the mock API
+
+The app serves on the port defined in a variable in the .env file (`process.env.NX_MOCK_API_PORT`) and this matches the port number defined in the web-app's proxy file (`proxy.conf.json`), which is used to ensure all API calls within the app are redirected to the mock API.
+
 ## Adding capabilities to your workspace
 
 Nx supports many plugins which add capabilities for developing different types of applications and different tools.

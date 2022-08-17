@@ -20,6 +20,7 @@ export function CreateUserContainer() {
     if (isCompleted()) {
       goToList();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiState]);
 
   function handleCreateUser(params: FormParams) {

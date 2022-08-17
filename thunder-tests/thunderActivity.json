@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "c10a1bed-7589-44c2-ae16-703b16c8e5b4",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://reqres.in/api/users?page=1",
+    "url": "https://reqres.in/api/users?page=1",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-08-17T14:01:22.512Z",
+    "modified": "2022-08-17T14:01:22.676Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "page",
+        "value": "1",
+        "isPath": false
+      }
+    ],
+    "tests": []
+  }
+]
