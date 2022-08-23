@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { AppHome } from '@example-app/home/feature';
 import { Loading } from '@example-app/shared/ui-common';
@@ -19,14 +19,6 @@ export default function AppRoutes() {
           </Suspense>
         }
       >
-        <Route
-          path="/"
-          element={
-            <Suspense fallback={<Loading />}>
-              <AppHome />
-            </Suspense>
-          }
-        ></Route>
         {/* Children routes are declared within AppShell @Code{ Outlet } directive */}
         <Route
           path="users/*"
@@ -36,6 +28,8 @@ export default function AppRoutes() {
             </Suspense>
           }
         />
+        <Route path="home" element={<AppHome />} />
+        <Route path="" element={<Navigate to="home" />} />
         <Route
           path="*"
           element={

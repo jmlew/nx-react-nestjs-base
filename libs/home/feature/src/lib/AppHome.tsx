@@ -15,7 +15,7 @@ const styles = {
 export function AppHome() {
   const navigate = useNavigate();
   const handleSampleClick = () => {
-    navigate('users');
+    navigate('/users');
   };
 
   return (
