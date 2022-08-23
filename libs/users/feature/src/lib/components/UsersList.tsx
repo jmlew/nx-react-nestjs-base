@@ -9,7 +9,7 @@ import {
   ListItemText,
 } from '@mui/material';
 
-interface UsersListProps {
+export interface UsersListProps {
   users: User[];
   onEditUser: (userId: number) => void;
   onDeleteUser: (userId: number) => void;
