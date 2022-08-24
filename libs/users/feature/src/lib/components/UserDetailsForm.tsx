@@ -19,19 +19,19 @@ import {
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
-interface UserDetailsFormFormikProps {
+interface UserDetailsFormProps {
   user?: User;
   initialValues: UserDetails;
   onSubmit: (values: UserDetails) => void;
   onCancel: () => void;
 }
 
-export function UserDetailsFormFormik({
+export function UserDetailsForm({
   user,
   initialValues,
   onSubmit,
   onCancel,
-}: UserDetailsFormFormikProps) {
+}: UserDetailsFormProps) {
   const formik = useFormik({
     initialValues,
     validationSchema: createValidationSchema([

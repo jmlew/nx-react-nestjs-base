@@ -35,17 +35,17 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
   // Handle changes in status for API load and delete requests.
   useEffect(() => {
     if (isInit()) {
-      handleGetUsers();
+      getUsers();
     }
   }, []);
 
-  function handleGetUsers() {
+  function getUsers() {
     const request: ApiRequestType = ApiRequestType.Read;
     onPending(request);
     userFacade
       .getUsers(pageIndex)
       .then((res: AxiosResponse<GetUsersResponse>) => {
-        const items: User[] = objectsSortOnKey(res.data.data, 'first_name');
+        const items: User[] = objectsSortOnKey(res.data.data, 'firstName');
         setUsersData(items);
         onCompleted(request);
       })
@@ -67,7 +67,7 @@ export function UsersListContainer({ pageIndex }: UserContainerProps) {
           message: `User ${userId} has been deleted`,
           type: AlertType.Success,
         });
-        handleGetUsers();
+        getUsers();
       })
       .catch((error: AxiosError) => {
         const { message } = error;

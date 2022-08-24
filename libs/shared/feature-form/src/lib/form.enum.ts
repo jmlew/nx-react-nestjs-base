@@ -1,7 +1,7 @@
 export enum FormParamUser {
   Email = 'email',
-  FirstName = 'first_name',
-  LastName = 'last_name',
+  FirstName = 'firstName',
+  LastName = 'lastName',
   Avatar = 'avatar',
 }
 

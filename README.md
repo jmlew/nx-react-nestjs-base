@@ -2,17 +2,18 @@
 
 A Base [ReactJS](https://reactjs.org) web app and [NestJS](https://docs.nestjs.com/) mock backend API server.
 
-Organised as a [Nx](https://nx.dev) monorepo with shared libraries containing common API models and utils.
-
-Provides a best practice starting point for developing scaleable ReactJS web apps.
+Organised as a [Nx](https://nx.dev) monorepo and composed using Domain Driven Design (DDD) principles to provides a best-practice starting point for developing modular and scaleable Angular apps.
 
 ## Architecture
 
-The app's architecture aligns with the semantics and directory structure as defined in [this guide](http://bit.ly/scaleable-apps).
+The codebase combines a number of separate 'applications' (apps) and 'libraries' (libs) within the same workspace in a [NX Monorepo](https://nx.dev). There are only two applications:
 
-### Monorepo
+1. Web-app
 
-The codebase is combined into a number of separate 'applications' (apps) and 'libraries' (libs) in a [NX Monorepo](https://nx.dev).
+   > The main client application (ReactJS) as a simplified app with all functionality linked to in libs.
+
+2. Mock-api
+   > The Mock API server application (NestJS) which mocks interaction with teh real server during offline development.
 
 ## Features
 
@@ -26,18 +27,24 @@ Simple caching is included via the [axios-cache-adapter](https://github.com/RasC
 
 A custom state manager class (ApiStateManager) provides an easy to use technique for updating and retrieving the current state of HTTP requests for use in containers which interact with APIs.
 
-### HTTP API Playground
-
-The codebase includes an HTTP Playground to test endpoint responses inside 'http-playground'.
-This uses the humao.rest-client vscode extension listed in .vscode/extensions.json with dependant global API variables defined in .vscode/settings.json 'rest-client.environmentVariables'.
-
 ### NestJS Mock API app
 
 The 'mock-api' app contains a NestJS application which replicates the APIs requested to ensure development can continue in parallel to that of the Backend. This mock API can be enabled as the source of all HTTP requests within the web-app when serving in dev mode and when the environments property `useMockInDev` is set to `true` (located in `src/environments/environment.ts`).
 
 #### Serving the mock API
 
-The app serves on the port defined in a variable in the .env file (`process.env.NX_MOCK_API_PORT`) and this matches the port number defined in the web-app's proxy file (`proxy.conf.json`), which is used to ensure all API calls within the app are redirected to the mock API.
+The app serves on the port defined in a variable in the .env file
+(`process.env.NX_MOCK_API_PORT`) and this matches the port number defined in the web-app's
+proxy file (`proxy.conf.json`), which is used to ensure all API calls within the app are
+redirected to the mock API.
+
+### Mock API testing
+
+The codebase includes a Thunder Tests directory which contains configs for testing both
+the NestJS APIs as well as some sample fake data APIs.
+This uses the [Thunder
+Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
+vscode extension listed in .vscode/extensions.json.
 
 ## Adding capabilities to your workspace
 

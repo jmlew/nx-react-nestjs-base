@@ -18,19 +18,19 @@ const sampleUsers: User[] = [
   {
     id: 1,
     first_name: 'Jason',
-    last_name: 'Lewis',
+    lastName: 'Lewis',
     email: 'jason@localhost.com',
   },
   {
     id: 2,
     first_name: 'System',
-    last_name: 'Infra',
+    lastName: 'Infra',
     email: 'system@localhost.com',
   },
   {
     id: 3,
     first_name: 'Administrator',
-    last_name: 'Main',
+    lastName: 'Main',
     email: 'admin@localhost.com',
   },
 ];

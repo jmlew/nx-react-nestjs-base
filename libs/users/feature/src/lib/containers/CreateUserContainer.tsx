@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
 import { useAlert } from '@example-app/shared/feature-alert';
-import { DataDrivenForm, FormParams } from '@example-app/shared/feature-form';
 import { AlertType, Loading } from '@example-app/shared/ui-common';
 import { CreateUserResponse, UserDetails, userFacade } from '@example-app/users/domain';
-import { getUserFormParams, getUserFormReturnValues } from '@example-app/users/util';
+import { getUserFormParams } from '@example-app/users/util';
+
+import { UserDetailsForm } from '../components';
 
 export function CreateUserContainer() {
   const navigate = useNavigate();
@@ -23,17 +24,16 @@ export function CreateUserContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [apiState]);
 
-  function handleCreateUser(params: FormParams) {
-    const user: UserDetails = getUserFormReturnValues(params);
+  function createUser(params: UserDetails) {
     const request: ApiRequestType = ApiRequestType.Create;
     onPending(request);
     userFacade
-      .createUser(user)
+      .createUser(params)
       .then((res: AxiosResponse<CreateUserResponse>) => {
         onCompleted(request);
         setAlert({
           isShown: true,
-          message: `User ${user.first_name} ${user.last_name} has been created`,
+          message: `User ${params.firstName} ${params.lastName} has been created`,
           type: AlertType.Success,
         });
       })
@@ -51,9 +51,8 @@ export function CreateUserContainer() {
   return (
     <>
       {isPending() && <Loading />}
-      <DataDrivenForm
-        isNewUser={true}
-        onSubmit={handleCreateUser}
+      <UserDetailsForm
+        onSubmit={createUser}
         onCancel={goToList}
         initialValues={getUserFormParams()}
       />

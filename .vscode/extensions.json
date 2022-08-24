@@ -4,7 +4,6 @@
     "esbenp.prettier-vscode",
     "amatiasq.sort-imports",
     "firsttris.vscode-jest-runner",
-    "humao.rest-client",
-    "nrwl.angular-console"
+    "rangav.vscode-thunder-client"
   ]
 }

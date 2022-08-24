@@ -6,18 +6,18 @@ interface UserDbItem {
 
 export interface UserDetails {
   email: string;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   avatar?: string;
 }
 
 export interface User extends UserDetails, UserDbItem {}
 
 export interface GetUsersResponse {
-  page: number;
-  per_page: number;
-  total: number;
-  total_pages: number;
+  page?: number;
+  perPage?: number;
+  total?: number;
+  totalPages?: number;
   data: User[];
 }
 
@@ -31,4 +31,9 @@ export interface CreateUserResponse extends User, UserDbItem {
 
 export interface UpdateUserResponse extends User, UserDbItem {
   updatedAt: string;
+}
+
+export interface DeleteUserResponse {
+  id: number;
+  status: string;
 }

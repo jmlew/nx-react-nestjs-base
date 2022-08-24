@@ -54,7 +54,7 @@ function UsersListItem({ user, onEdit, onDelete }: UserItemProps) {
       <ListItemAvatar>
         <Avatar src={user.avatar} />
       </ListItemAvatar>
-      <ListItemText primary={user.first_name} secondary={user.last_name || null} />
+      <ListItemText primary={user.firstName} secondary={user.lastName || null} />
     </ListItem>
   );
 }

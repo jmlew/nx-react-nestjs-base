@@ -8,7 +8,7 @@ import { AlertType, Loading } from '@example-app/shared/ui-common';
 import { UpdateUserResponse, UserDetails, userFacade } from '@example-app/users/domain';
 import { getUserFormParams } from '@example-app/users/util';
 
-import { UserDetailsFormFormik } from '../components/UserDetailsFormFormik';
+import { UserDetailsForm } from '../components/UserDetailsForm';
 import { useUserContext } from '../context/user.context';
 
 export function UpdateUserContainer() {
@@ -25,7 +25,7 @@ export function UpdateUserContainer() {
     }
   }, [apiState]);
 
-  function handleUpdateUser(values: UserDetails) {
+  function updateUser(values: UserDetails) {
     const userId: number = user.id;
     const request: ApiRequestType = ApiRequestType.Update;
     onPending(request);
@@ -54,9 +54,9 @@ export function UpdateUserContainer() {
     <>
       {isPending() && <Loading />}
       {
-        <UserDetailsFormFormik
+        <UserDetailsForm
           user={user}
-          onSubmit={handleUpdateUser}
+          onSubmit={updateUser}
           onCancel={goToList}
           initialValues={getUserFormParams(user)}
         />

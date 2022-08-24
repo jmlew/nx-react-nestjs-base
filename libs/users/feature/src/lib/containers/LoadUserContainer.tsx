@@ -32,11 +32,11 @@ export function LoadUserContainer({ userId, children }: LoadUserContainerProps) 
   } = stateManager;
 
   useEffect(() => {
-    handleGetUser(userId);
+    getUser(userId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function handleGetUser(userId: number) {
+  function getUser(userId: number) {
     const request: ApiRequestType = ApiRequestType.Read;
     onPending(request);
     userFacade
