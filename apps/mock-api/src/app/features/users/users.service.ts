@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import * as fromUtilsLib from '@example-app/shared/util-common';
 import {
   CreateUserResponse,

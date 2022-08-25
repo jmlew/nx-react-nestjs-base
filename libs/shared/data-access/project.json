@@ -2,7 +2,7 @@
   "root": "libs/shared/data-access",
   "sourceRoot": "libs/shared/data-access/src",
   "projectType": "library",
-  "tags": ["type:data-access", "scope:shared"],
+  "tags": ["type:data-access", "domain:shared"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",

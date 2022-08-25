@@ -1,9 +1,9 @@
 module.exports = {
-  displayName: 'users-feature',
+  displayName: 'shared-environments',
   preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/users/feature',
+  coverageDirectory: '../../../coverage/libs/shared/environments',
 };

@@ -18,17 +18,19 @@
     "baseUrl": ".",
     "paths": {
       "@custom-types": ["./types/index.ts"],
-      "@env/*": ["apps/web-app/src/environments/*"],
       "@example-app/form/util": ["libs/form/util/src/index.ts"],
       "@example-app/home/feature": ["libs/home/feature/src/index.ts"],
       "@example-app/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@example-app/shared/environments": ["libs/shared/environments/src/index.ts"],
       "@example-app/shared/feature-alert": ["libs/shared/feature-alert/src/index.ts"],
       "@example-app/shared/feature-form": ["libs/shared/feature-form/src/index.ts"],
       "@example-app/shared/ui-common": ["libs/shared/ui-common/src/index.ts"],
       "@example-app/shared/util-common": ["libs/shared/util-common/src/index.ts"],
       "@example-app/shell/ui": ["libs/shell/ui/src/index.ts"],
       "@example-app/users/domain": ["libs/users/domain/src/index.ts"],
-      "@example-app/users/feature": ["libs/users/feature/src/index.ts"],
+      "@example-app/users/feature/manage-users": [
+        "libs/users/feature/manage-users/src/index.ts"
+      ],
       "@example-app/users/ui": ["libs/users/ui/src/index.ts"],
       "@example-app/users/util": ["libs/users/util/src/index.ts"]
     }

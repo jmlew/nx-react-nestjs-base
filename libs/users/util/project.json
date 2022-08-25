@@ -2,7 +2,7 @@
   "root": "libs/users/util",
   "sourceRoot": "libs/users/util/src",
   "projectType": "library",
-  "tags": ["type:util", "scope:users"],
+  "tags": ["type:util", "domain:users"],
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",

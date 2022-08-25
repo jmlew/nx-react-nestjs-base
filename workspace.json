@@ -4,12 +4,14 @@
     "home-feature": "libs/home/feature",
     "mock-api": "apps/mock-api",
     "shared-data-access": "libs/shared/data-access",
+    "shared-environments": "libs/shared/environments",
     "shared-feature-alert": "libs/shared/feature-alert",
     "shared-feature-form": "libs/shared/feature-form",
     "shared-ui-common": "libs/shared/ui-common",
     "shared-util-common": "libs/shared/util-common",
     "shell-ui": "libs/shell/ui",
     "users-domain": "libs/users/domain",
+    "users-feature-manage-users": "libs/users/feature/manage-users",
     "web-app": "apps/web-app",
     "web-app-e2e": "apps/web-app-e2e"
   }

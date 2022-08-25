@@ -4,7 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { AppHome } from '@example-app/home/feature';
 import { Loading } from '@example-app/shared/ui-common';
 import { PageNotFound } from '@example-app/shell/ui';
-import { UsersRoutes } from '@example-app/users/feature';
+import { UsersRoutes } from '@example-app/users/feature/manage-users';
 
 import { AppShell } from './AppShell';
 

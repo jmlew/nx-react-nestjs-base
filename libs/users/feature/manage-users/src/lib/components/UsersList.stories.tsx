@@ -3,6 +3,27 @@ import { Meta, Story } from '@storybook/react';
 
 import { UsersList, UsersListProps } from '.';
 
+const sampleUsers: User[] = [
+  {
+    id: 1,
+    firstName: 'Jason',
+    lastName: 'Lewis',
+    email: 'jason@localhost.com',
+  },
+  {
+    id: 2,
+    firstName: 'System',
+    lastName: 'Infra',
+    email: 'system@localhost.com',
+  },
+  {
+    id: 3,
+    firstName: 'Administrator',
+    lastName: 'Main',
+    email: 'admin@localhost.com',
+  },
+];
+
 export default {
   title: 'Users/UsersList',
   component: UsersList,
@@ -13,27 +34,6 @@ export default {
 } as Meta;
 
 const Template: Story<UsersListProps> = (args) => <UsersList {...args} />;
-
-const sampleUsers: User[] = [
-  {
-    id: 1,
-    first_name: 'Jason',
-    lastName: 'Lewis',
-    email: 'jason@localhost.com',
-  },
-  {
-    id: 2,
-    first_name: 'System',
-    lastName: 'Infra',
-    email: 'system@localhost.com',
-  },
-  {
-    id: 3,
-    first_name: 'Administrator',
-    lastName: 'Main',
-    email: 'admin@localhost.com',
-  },
-];
 
 export const Primary = Template.bind({});
 Primary.args = {

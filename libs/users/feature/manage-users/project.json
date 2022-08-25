@@ -1,0 +1,23 @@
+{
+  "root": "libs/users/feature/manage-users",
+  "sourceRoot": "libs/users/feature/manage-users/src",
+  "projectType": "library",
+  "tags": ["type:feature", "domain:users"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/users/feature/manage-users/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/users/feature/manage-users"],
+      "options": {
+        "jestConfig": "libs/users/feature/manage-users/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
