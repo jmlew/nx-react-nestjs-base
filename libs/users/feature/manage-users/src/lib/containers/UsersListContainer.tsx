@@ -7,8 +7,7 @@ import { useAlert } from '@example-app/shared/feature-alert';
 import { AlertType, ErrorMessage, Loading } from '@example-app/shared/ui-common';
 import { objectsSortOnKey } from '@example-app/shared/util-common';
 import { GetUsersResponse, User, userFacade } from '@example-app/users/domain';
-
-import { UsersList } from '../components';
+import { UsersList } from '@example-app/users/ui';
 
 interface UserContainerProps {
   pageIndex: number;

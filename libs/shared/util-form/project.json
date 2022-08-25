@@ -1,0 +1,23 @@
+{
+  "root": "libs/shared/util-form",
+  "sourceRoot": "libs/shared/util-form/src",
+  "projectType": "library",
+  "tags": ["type:util", "domain:shared"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/util-form/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/util-form"],
+      "options": {
+        "jestConfig": "libs/shared/util-form/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

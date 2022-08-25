@@ -50,11 +50,11 @@ vscode extension listed in .vscode/extensions.json.
 
 Use the below convenience methods to manage the structure of the apps and libs.
 
-### Generate a React Feature library
+### Generate a React library
 
-`nx g lib <some-lib> --directory=<some-domain>/feature --tags='type:feature, domain:<some-domain>' --routing --dry-run`
+`nx g lib <some-lib> --directory=<some-domain>/<lib-type> --tags='type:<lib-type>, domain:<some-domain>' --dry-run`
 
-_Example: `nx g lib manage-users --directory=users/feature --tags='type:feature, domain:users' --routing`_
+_Example: `nx g lib manage-users --directory=users/feature --tags='type:feature, domain:users'`_
 
 ### Generate a basic React library (ui / utils / api)
 
