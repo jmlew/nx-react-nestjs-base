@@ -20,7 +20,7 @@
     "----- MISC --------------------": "",
     "storybook": "nx storybook web-app",
     "storybook:build": "nx build-storybook web-app",
-    "dep-graph": "nx dep-graph",
+    "graph": "nx graph",
     "prepare": "husky install"
   },
   "dependencies": {
