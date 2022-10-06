@@ -4,6 +4,7 @@ export * from './lib/http-api/axios-api-interceptors.service';
 export * from './lib/http-api/axios.model';
 export * from './lib/http-api/use-axios.hook';
 export * from './lib/http-api/use-fetch.hook';
+export * from './lib/http-state/api-state-reference.hook';
+export * from './lib/http-state/api-state-reference.model';
 export * from './lib/http-state/api-state.enum';
 export * from './lib/http-state/api-state.model';
-export * from './lib/http-state/use-api-state-manager.hook';

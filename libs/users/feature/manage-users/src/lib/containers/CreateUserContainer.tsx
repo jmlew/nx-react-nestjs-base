@@ -1,47 +1,30 @@
-import { AxiosError, AxiosResponse } from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
 import { useAlert } from '@example-app/shared/feature-alert';
 import { AlertType, Loading } from '@example-app/shared/ui-common';
-import { CreateUserResponse, UserDetails, userFacade } from '@example-app/users/domain';
 import { UserDetailsForm } from '@example-app/users/ui';
 import { getUserFormParams } from '@example-app/users/util';
+
+import { useUserCreator } from '../hooks/user-creator-hook';
 
 export function CreateUserContainer() {
   const navigate = useNavigate();
   const { setAlert } = useAlert();
-  const { apiState, stateManager } = useApiStateManager();
-  const { isCompleted, isPending, onCompleted, onFailed, onPending } = stateManager;
+  const { user, createUser, apiState, stateManager } = useUserCreator();
+  const { getError, isCompleted, isFailed, isPending } = stateManager;
 
-  // Handle changes in status for API load and update requests.
   useEffect(() => {
-    if (isCompleted()) {
+    if (isCompleted() && user != null) {
+      const message = `User ${user.firstName} ${user.lastName} has been created`;
+      setAlert({ isShown: true, message, type: AlertType.Success });
       goToList();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [apiState]);
-
-  function createUser(params: UserDetails) {
-    const request: ApiRequestType = ApiRequestType.Create;
-    onPending(request);
-    userFacade
-      .createUser(params)
-      .then((res: AxiosResponse<CreateUserResponse>) => {
-        onCompleted(request);
-        setAlert({
-          isShown: true,
-          message: `User ${params.firstName} ${params.lastName} has been created`,
-          type: AlertType.Success,
-        });
-      })
-      .catch((error: AxiosError) => {
-        const { message } = error;
-        onFailed(message, request);
-        setAlert({ isShown: true, message });
-      });
-  }
+    if (isFailed()) {
+      const message = getError() || 'Update failed';
+      setAlert({ isShown: true, message });
+    }
+  }, [apiState, user]);
 
   function goToList() {
     navigate(`/users`);

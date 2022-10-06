@@ -1,13 +1,11 @@
-import { AxiosError, AxiosResponse } from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ApiRequestType, useApiStateManager } from '@example-app/shared/data-access';
 import { useAlert } from '@example-app/shared/feature-alert';
 import { AlertType, ErrorMessage, Loading } from '@example-app/shared/ui-common';
-import { objectsSortOnKey } from '@example-app/shared/util-common';
-import { GetUsersResponse, User, userFacade } from '@example-app/users/domain';
 import { UsersList } from '@example-app/users/ui';
+
+import { useUserDeleter, useUsersLoader } from '../hooks';
 
 interface UserContainerProps {
   pageIndex: number;
@@ -15,84 +13,57 @@ interface UserContainerProps {
 
 export function UsersListContainer({ pageIndex }: UserContainerProps) {
   const navigate = useNavigate();
-  const [usersData, setUsersData] = useState<User[]>();
   const { setAlert } = useAlert();
-  const { stateManager } = useApiStateManager();
   const {
-    getError,
-    isCompleted,
-    isFailed,
-    isInit,
-    isPending,
-    onCompleted,
-    onFailed,
-    onPending,
-    wasPending,
-    wasCompleted,
-  } = stateManager;
+    users,
+    getUsers,
+    apiState: loadState,
+    stateManager: loadStateManager,
+  } = useUsersLoader(pageIndex);
 
-  // Handle changes in status for API load and delete requests.
+  const {
+    userId,
+    deleteUser,
+    apiState: deleteState,
+    stateManager: deleteStateManager,
+  } = useUserDeleter();
+
   useEffect(() => {
-    if (isInit()) {
+    if (loadStateManager.isInit()) {
       getUsers();
     }
-  }, []);
+    if (loadStateManager.isFailed()) {
+      const message = loadStateManager.getError() || 'Load users failed';
+      setAlert({ isShown: true, message });
+    }
+  }, [loadState]);
 
-  function getUsers() {
-    const request: ApiRequestType = ApiRequestType.Read;
-    onPending(request);
-    userFacade
-      .getUsers(pageIndex)
-      .then((res: AxiosResponse<GetUsersResponse>) => {
-        const items: User[] = objectsSortOnKey(res.data.data, 'firstName');
-        setUsersData(items);
-        onCompleted(request);
-      })
-      .catch((error: AxiosError) => {
-        const { message } = error;
-        onFailed(message, request);
-        setAlert({ isShown: true, message });
-      });
-  }
+  useEffect(() => {
+    if (deleteStateManager.isCompleted()) {
+      const message = `User ${userId} has been deleted`;
+      setAlert({ isShown: true, message, type: AlertType.Success });
+      getUsers();
+    }
+    if (deleteStateManager.isFailed()) {
+      const message = deleteStateManager.getError() || 'Delete user failed';
+      setAlert({ isShown: true, message });
+    }
+  }, [deleteState]);
 
-  function handleDeleteUser(userId: number) {
-    const request: ApiRequestType = ApiRequestType.Delete;
-    onPending(request);
-    userFacade
-      .deleteUser(userId)
-      .then((res: AxiosResponse<number>) => {
-        setAlert({
-          isShown: true,
-          message: `User ${userId} has been deleted`,
-          type: AlertType.Success,
-        });
-        getUsers();
-      })
-      .catch((error: AxiosError) => {
-        const { message } = error;
-        onFailed(message, request);
-        setAlert({ isShown: true, message });
-      });
-  }
-
-  function handleEditUser(userId: number) {
+  function editUser(userId: number) {
     navigate(`${userId}`);
   }
 
-  const isDataReady: boolean = isCompleted() && (wasPending() || wasCompleted());
-
-  if (isPending()) {
+  const { isCompleted, wasPending, wasCompleted, isFailed, getError } = loadStateManager;
+  const isReady: boolean = isCompleted() && (wasPending() || wasCompleted());
+  if (loadStateManager.isPending() || deleteStateManager.isPending()) {
     return <Loading />;
   } else {
     return (
       <>
-        {isFailed() && <ErrorMessage message={getError()!} />}
-        {isDataReady && usersData != null && (
-          <UsersList
-            users={usersData}
-            onEditUser={handleEditUser}
-            onDeleteUser={handleDeleteUser}
-          />
+        {isFailed() && <ErrorMessage>{getError()}</ErrorMessage>}
+        {isReady && users != null && (
+          <UsersList users={users} onEditUser={editUser} onDeleteUser={deleteUser} />
         )}
       </>
     );
