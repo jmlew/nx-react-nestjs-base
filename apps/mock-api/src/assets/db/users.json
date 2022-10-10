@@ -2,16 +2,16 @@
   "data": [
     {
       "id": 1,
-      "firstName": "Jason",
-      "lastName": "LastJason",
-      "email": "jason@localhost",
+      "firstName": "John",
+      "lastName": "Smith",
+      "email": "john@sampleuser.com",
       "createdAt": "2018-07-16T07:32:20.421Z"
     },
     {
       "id": 2,
-      "firstName": "System",
-      "lastName": "LastSystem",
-      "email": "system@localhost",
+      "firstName": "Fred",
+      "lastName": "Jackson",
+      "email": "fred@sampleuser.com",
       "createdAt": "2018-07-16T07:32:20.421Z"
     }
   ]

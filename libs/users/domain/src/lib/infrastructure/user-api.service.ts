@@ -67,7 +67,7 @@ export class UserApiService {
    * Sets the cache entry for a given user ID to stale. The request for getting all items
    * is set to stale when any individual item is set to stale.
    */
-  setUserCacheToStale(userId: number) {
+  private setUserCacheToStale(userId: number) {
     this.staleCacheEntry.user[userId] = true;
     this.staleCacheEntry.all = true;
   }
@@ -119,23 +119,16 @@ export class UserApiService {
       // Ensure the IDs of mutated entries are flagged as having stale data.
       onInterceptResponse: (res: AxiosResponse) => {
         const { config, data } = res;
-        switch (config.method) {
-          case ApiRequestMethod.Get:
-            res.request.fromCache && console.log('GET from cache', this.cacheStore);
-            break;
-          case ApiRequestMethod.Post:
-            this.setUserCacheToStale(data.id);
-            break;
-          case ApiRequestMethod.Put:
-            this.setUserCacheToStale(data.id);
-            break;
-          case ApiRequestMethod.Delete:
-            this.setUserCacheToStale(data);
-            break;
-          case ApiRequestMethod.Patch:
-            break;
-          default:
-            break;
+        if (config.method === ApiRequestMethod.Get) {
+          res.request.fromCache && console.log('GET from cache', this.cacheStore);
+        } else {
+          const userId: number = data.id;
+          if (userId == null) {
+            console.error(
+              'Response has not returned a valid user ID which is required for cache invalidation.'
+            );
+          }
+          this.setUserCacheToStale(userId);
         }
       },
       onInterceptResponseError: (error: AxiosError) => {

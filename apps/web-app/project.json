@@ -43,7 +43,7 @@
       "options": {
         "buildTarget": "web-app:build",
         "hmr": true,
-        "port": 4200,
+        "port": 4201,
         "proxyConfig": "apps/web-app/proxy.conf.json"
       },
       "configurations": {
