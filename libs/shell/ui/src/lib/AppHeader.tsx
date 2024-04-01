@@ -13,7 +13,7 @@ export function Appheader() {
           <Menu />
         </IconButton>
         <Typography variant="h6" color="inherit" component="div" sx={{ flexGrow: 1 }}>
-          Sample App
+          Sample React App
         </Typography>
         <Button color="inherit">Login</Button>
       </Toolbar>

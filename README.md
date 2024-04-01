@@ -9,7 +9,7 @@ Organised as a [Nx](https://nx.dev) monorepo and composed using Domain Driven De
 The architectural approach implemented here is documented under
 [Scaleable Frontend Architectures](https://luxproject.luxoft.com/confluence/display/APACUX/Scaleable+Frontend+Architectures)
 
-The codebase combines a number of separate 'applications' (apps) and 'libraries' (libs) within the same workspace in a [NX Monorepo](https://nx.dev). There are only two applications:
+The codebase combines a number of separate 'applications' (apps) which are simple shells containing several 'libraries' (libs) which provide the real functionality, all within the same workspace in a [NX Monorepo](https://nx.dev). There are only two applications:
 
 1. Web-app
 
@@ -95,7 +95,7 @@ Run `npm run serve:dist` to serve and test the built application which was gener
 
 Run `npm run graph` to see a diagram of the dependencies of your projects.
 
-## Updating React, NX, and project dependancies.
+## Updating React, NX, and project dependencies.
 
 Run `nx migrate latest` then `nx migrate --run-migrations`. See [Updating Nx](https://nx.dev/using-nx/updating-nx).
 
